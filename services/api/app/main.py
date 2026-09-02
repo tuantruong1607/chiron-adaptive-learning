@@ -658,9 +658,9 @@ async def tutor(
     history_context = ""
     if turn.history:
         history_lines = []
-        for past in turn.history[-3:]:
-            history_lines.append(f"Học viên: {past.question}")
-            history_lines.append(f"Chiron AI: {past.answer}")
+        for past in turn.history[-6:]:
+            speaker = "Học viên" if past.role == "user" else "Chiron AI"
+            history_lines.append(f"{speaker}: {past.content}")
         history_context = "LỊCH SỬ TRAO ĐỔI GẦN ĐÂY:\n" + "\n".join(history_lines) + "\n\n"
 
     effective_sensitivity = (
