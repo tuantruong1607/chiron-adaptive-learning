@@ -20,15 +20,16 @@ COPY services/worker/scripts ./scripts
 RUN pip install --no-cache-dir --no-deps . \
     && useradd --create-home --uid 10001 chiron \
     && mkdir -p /home/chiron/.cache/fastembed \
-    && chown -R chiron:chiron /home/chiron/.cache
+    && chown -R chiron:chiron /home/chiron \
+    && chown -R chiron:chiron /app
 
 USER chiron
 
 # Run both Celery worker and Celery beat in the same container
 CMD ["sh", "-c", "\
-  celery -A chiron_worker.app:celery_app worker --loglevel=INFO & \
+  celery -A chiron_worker.app:celery_app worker --loglevel=INFO --pool=threads --concurrency=2 & \
   WORKER_PID=$! && \
-  celery -A chiron_worker.app:celery_app beat --loglevel=INFO & \
+  celery -A chiron_worker.app:celery_app beat --loglevel=INFO --schedule=/tmp/celerybeat-schedule & \
   BEAT_PID=$! && \
   wait $WORKER_PID $BEAT_PID \
 "]
