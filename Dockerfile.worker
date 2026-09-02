@@ -15,7 +15,7 @@ RUN mkdir -p chiron_worker && touch chiron_worker/__init__.py \
 
 # Copy all worker source files
 COPY services/worker/chiron_worker ./chiron_worker
-COPY services/worker/scripts ./scripts 2>/dev/null || true
+COPY services/worker/scripts ./scripts
 
 RUN pip install --no-cache-dir --no-deps . \
     && useradd --create-home --uid 10001 chiron \
