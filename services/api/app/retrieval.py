@@ -89,12 +89,20 @@ def response_from_task(query: str, result: dict[str, Any]) -> RetrievalResponse:
     )
 
 
+def _normalize_redis_url(url: str) -> str:
+    if url.startswith("rediss://") and "ssl_cert_reqs" not in url:
+        sep = "&" if "?" in url else "?"
+        return f"{url}{sep}ssl_cert_reqs=none"
+    return url
+
+
 @lru_cache
 def _celery_client() -> Celery:
     settings = get_settings()
     if not settings.redis_url:
         raise RetrievalUnavailableError("REDIS_URL is required for retrieval tasks")
-    return Celery("chiron-api-retrieval", broker=settings.redis_url, backend=settings.redis_url)
+    redis_url = _normalize_redis_url(settings.redis_url)
+    return Celery("chiron-api-retrieval", broker=redis_url, backend=redis_url)
 
 
 def retrieve(
@@ -104,26 +112,27 @@ def retrieve(
     settings: Settings | None = None,
 ) -> RetrievalResponse:
     active = settings or get_settings()
-    task = _celery_client().send_task(
-        "chiron.adaptive_retrieve",
-        kwargs={
-            "query": query,
-            "tenant_id": str(principal.tenant_id),
-            "course_id": course_id,
-            "route": route_query(query),
-            "direct_candidate_limit": active.retrieval_direct_candidate_limit,
-            "direct_limit": active.retrieval_limit,
-            "multi_hop_candidate_limit": active.retrieval_multi_hop_candidate_limit,
-            "multi_hop_limit": active.retrieval_multi_hop_limit,
-            "max_subqueries": active.retrieval_max_subqueries,
-        },
-    )
     try:
+        task = _celery_client().send_task(
+            "chiron.adaptive_retrieve",
+            kwargs={
+                "query": query,
+                "tenant_id": str(principal.tenant_id),
+                "course_id": course_id,
+                "route": route_query(query),
+                "direct_candidate_limit": active.retrieval_direct_candidate_limit,
+                "direct_limit": active.retrieval_limit,
+                "multi_hop_candidate_limit": active.retrieval_multi_hop_candidate_limit,
+                "multi_hop_limit": active.retrieval_multi_hop_limit,
+                "max_subqueries": active.retrieval_max_subqueries,
+            },
+        )
         result = task.get(timeout=active.retrieval_task_timeout_seconds)
-    except (CeleryTimeoutError, CeleryError, OSError) as exc:
+    except (CeleryTimeoutError, CeleryError, OSError, ValueError) as exc:
         raise RetrievalUnavailableError("Hybrid retrieval worker is unavailable") from exc
     finally:
-        task.forget()
+        if "task" in locals():
+            task.forget()
     if not isinstance(result, dict):
         raise RetrievalUnavailableError("Hybrid retrieval returned an invalid response")
     return response_from_task(query, result)

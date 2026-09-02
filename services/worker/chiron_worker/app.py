@@ -5,10 +5,19 @@ from celery.signals import worker_ready
 
 from .metrics import start_exporter
 
+def _normalize_redis_url(url: str) -> str:
+    if url.startswith("rediss://") and "ssl_cert_reqs" not in url:
+        sep = "&" if "?" in url else "?"
+        return f"{url}{sep}ssl_cert_reqs=none"
+    return url
+
+
+_redis_url = _normalize_redis_url(os.getenv("REDIS_URL", "redis://localhost:6379/0"))
+
 celery_app = Celery(
     "chiron",
-    broker=os.getenv("REDIS_URL", "redis://localhost:6379/0"),
-    backend=os.getenv("REDIS_URL", "redis://localhost:6379/1"),
+    broker=_redis_url,
+    backend=_redis_url,
     include=["chiron_worker.tasks"],
 )
 celery_app.conf.update(
