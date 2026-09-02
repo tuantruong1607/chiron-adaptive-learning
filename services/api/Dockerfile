@@ -1,5 +1,8 @@
 FROM python:3.12-slim
 
+# Force cache invalidation: bump this value to rebuild all layers
+ARG CACHE_BUST=2
+
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1
