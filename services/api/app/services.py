@@ -13,13 +13,19 @@ from .auth import (
     Principal,
     create_access_token,
     create_refresh_token,
+    hash_password,
     parse_refresh_token,
     refresh_token_hash,
     verify_password,
 )
 from .config import get_settings
 from .db import get_session_factory, set_tenant_context
-from .persistence.repositories import CourseRepository, IdentityRepository, RefreshSessionRepository
+from .persistence.repositories import (
+    CourseRepository,
+    IdentityRepository,
+    RefreshSessionRepository,
+    UserAlreadyExistsError,
+)
 from .persistence.service import EnrollmentRequiredError, PostgresAdaptiveService
 from .schemas import (
     AccessTokenResponse,
@@ -30,6 +36,7 @@ from .schemas import (
     LabSubmission,
     LearningStateOut,
     LoginRequest,
+    RegisterRequest,
     SourceLocator,
     StudyPlan,
 )
@@ -130,6 +137,28 @@ def authenticate(payload: LoginRequest) -> Principal | None:
         record = identity.find_login(session, tenant_id, payload.email)
         if record is None or not verify_password(payload.password, record.password_hash):
             return None
+        return Principal(
+            user_id=record.user_id,
+            tenant_id=record.tenant_id,
+            role=record.role,
+        )
+
+
+def register_learner_service(payload: RegisterRequest) -> Principal:
+    settings = get_settings()
+    if not settings.database_url:
+        raise RuntimeError("DATABASE_URL is required for registration")
+    identity = IdentityRepository()
+    session_factory = get_session_factory()
+    hashed = hash_password(payload.password)
+    with session_factory() as session:
+        record = identity.register_learner(
+            session,
+            tenant_slug=payload.tenant_slug,
+            email=payload.email,
+            password_hash=hashed,
+            display_name=payload.display_name,
+        )
         return Principal(
             user_id=record.user_id,
             tenant_id=record.tenant_id,

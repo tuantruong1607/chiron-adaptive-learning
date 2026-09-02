@@ -2809,6 +2809,64 @@ button:active,
   color: var(--danger);
   font-size: 11px;
 }
+.login-form-container {
+  display: grid;
+  gap: 12px;
+}
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.auth-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.auth-tab:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface-raised) 50%, transparent);
+}
+.auth-tab.active {
+  background: var(--surface-raised);
+  color: var(--accent);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--shadow) 40%, transparent);
+}
+.auth-switch-prompt {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+.auth-link-button {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.auth-link-button:hover {
+  color: var(--text);
+}
 
 /* Lab */
 .lab-page {

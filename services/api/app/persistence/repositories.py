@@ -69,12 +69,125 @@ class PersistedState:
     state: KnowledgeState
 
 
+class UserAlreadyExistsError(ValueError):
+    """Raised when an email is already registered."""
+
+
 class IdentityRepository:
     def find_tenant(self, session: Session, tenant_slug: str) -> UUID | None:
         return session.scalar(
             select(tenants.c.id).where(
                 tenants.c.slug == tenant_slug.casefold(), tenants.c.status == "active"
             )
+        )
+
+    def register_learner(
+        self,
+        session: Session,
+        *,
+        tenant_slug: str,
+        email: str,
+        password_hash: str,
+        display_name: str | None = None,
+    ) -> IdentityRecord:
+        clean_email = email.casefold().strip()
+        clean_slug = tenant_slug.casefold().strip() or "chiron-demo"
+
+        existing_user = session.execute(
+            select(users.c.id).where(users.c.email == clean_email)
+        ).scalar_one_or_none()
+
+        if existing_user is not None:
+            raise UserAlreadyExistsError("Email này đã được đăng ký tài khoản.")
+
+        tenant_id = self.find_tenant(session, clean_slug)
+        if tenant_id is None:
+            tenant_id = uuid4()
+            session.execute(
+                pg_insert(tenants).values(
+                    id=tenant_id,
+                    slug=clean_slug,
+                    name=clean_slug.replace("-", " ").title(),
+                    status="active",
+                )
+            )
+
+        user_id = uuid4()
+        name = display_name.strip() if display_name and display_name.strip() else clean_email.split("@")[0]
+        session.execute(
+            pg_insert(users).values(
+                id=user_id,
+                email=clean_email,
+                password_hash=password_hash,
+                display_name=name,
+                status="active",
+            )
+        )
+
+        session.execute(
+            pg_insert(memberships).values(
+                id=uuid4(),
+                tenant_id=tenant_id,
+                user_id=user_id,
+                role="learner",
+                status="active",
+            )
+        )
+
+        course_id = session.scalar(
+            select(courses.c.id).where(
+                courses.c.tenant_id == tenant_id,
+                courses.c.status == "published",
+            ).order_by(courses.c.title)
+        )
+        if course_id is None:
+            course_id = session.scalar(
+                select(courses.c.id).where(courses.c.status == "published")
+            )
+
+        if course_id is not None:
+            session.execute(
+                pg_insert(course_enrollments).values(
+                    id=uuid4(),
+                    tenant_id=tenant_id,
+                    course_id=course_id,
+                    learner_id=user_id,
+                    status="active",
+                ).on_conflict_do_nothing()
+            )
+
+            concept_ids = session.scalars(
+                select(concept_nodes.c.id).where(
+                    concept_nodes.c.course_id == course_id,
+                    concept_nodes.c.node_type == "concept",
+                )
+            ).all()
+
+            for cid in concept_ids:
+                session.execute(
+                    pg_insert(mastery_states).values(
+                        id=uuid4(),
+                        tenant_id=tenant_id,
+                        learner_id=user_id,
+                        concept_id=cid,
+                        self_confidence=0.0,
+                        diagnostic_status="unassessed",
+                        mastery=0.0,
+                        evidence_confidence=0.0,
+                        confidence_gap=0.0,
+                        misconception=False,
+                        evidence_ids=[],
+                        engine_version="adaptive-v1",
+                    ).on_conflict_do_nothing()
+                )
+
+        session.commit()
+
+        return IdentityRecord(
+            user_id=user_id,
+            tenant_id=tenant_id,
+            password_hash=password_hash,
+            role="learner",
         )
 
     def find_login(self, session: Session, tenant_id: UUID, email: str) -> IdentityRecord | None:

@@ -61,18 +61,21 @@ from .schemas import (
     OnboardingStatus,
     PrincipalOut,
     RefreshTokenRequest,
+    RegisterRequest,
     RetrievalResponse,
     SourceLocator,
     StudyPlan,
     TutorAnswer,
     TutorRequest,
 )
+from .persistence.repositories import UserAlreadyExistsError
 from .seed import LABS
 from .services import (
     AdaptiveServiceDep,
     InvalidRefreshTokenError,
     authenticate,
     issue_token_pair,
+    register_learner_service,
     resolve_enrolled_course_id,
     revoke_refresh_token,
     rotate_refresh_token,
@@ -245,6 +248,33 @@ def _database_metric_lines() -> list[str]:
             for status, count in sorted(grading.items())
         ],
     ]
+
+
+@app.post(
+    "/api/v1/auth/register",
+    response_model=AccessTokenResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+def register(
+    payload: RegisterRequest,
+    user_agent: str | None = Header(default=None, alias="User-Agent"),
+) -> AccessTokenResponse:
+    if settings.auth_mode == "oidc":
+        raise HTTPException(status_code=404, detail="Local registration is disabled")
+    try:
+        principal = register_learner_service(payload)
+    except UserAlreadyExistsError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=str(exc),
+        ) from exc
+    except Exception as exc:
+        logger.exception("Failed to register learner: %s", exc)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Không thể tạo tài khoản lúc này. Vui lòng thử lại sau.",
+        ) from exc
+    return issue_token_pair(principal, user_agent)
 
 
 @app.post("/api/v1/auth/token", response_model=AccessTokenResponse)

@@ -103,6 +103,13 @@ class LoginRequest(BaseModel):
     password: Annotated[str, Field(min_length=8, max_length=256)]
 
 
+class RegisterRequest(BaseModel):
+    tenant_slug: Annotated[str, Field(min_length=2, max_length=120)] = "chiron-demo"
+    email: Annotated[str, Field(min_length=3, max_length=320)]
+    password: Annotated[str, Field(min_length=8, max_length=256)]
+    display_name: Annotated[str, Field(min_length=2, max_length=120)] | None = None
+
+
 class AccessTokenResponse(BaseModel):
     access_token: str
     refresh_token: str
