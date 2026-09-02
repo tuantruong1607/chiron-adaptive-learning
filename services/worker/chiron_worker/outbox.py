@@ -23,8 +23,11 @@ class OutboxEvent:
 class OutboxStore:
     def __init__(self, settings: WorkerSettings) -> None:
         url = settings.database_url.replace("postgresql://", "postgresql+psycopg://", 1)
+        connect_args: dict = {}
+        if "postgresql+psycopg" in url:
+            connect_args["prepare_threshold"] = None
         self.sessions = sessionmaker(
-            bind=create_engine(url, pool_pre_ping=True), expire_on_commit=False
+            bind=create_engine(url, connect_args=connect_args, pool_pre_ping=True), expire_on_commit=False
         )
         self.settings = settings
 

@@ -23,8 +23,13 @@ def get_engine() -> Engine:
     settings = get_settings()
     if not settings.database_url:
         raise RuntimeError("DATABASE_URL is required for PostgreSQL persistence")
+    normalized_url = normalize_database_url(settings.database_url)
+    connect_args: dict = {}
+    if "postgresql+psycopg" in normalized_url:
+        connect_args["prepare_threshold"] = None
     return create_engine(
-        normalize_database_url(settings.database_url),
+        normalized_url,
+        connect_args=connect_args,
         pool_pre_ping=True,
         pool_size=5,
         max_overflow=10,
