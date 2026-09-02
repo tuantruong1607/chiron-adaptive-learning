@@ -13,3 +13,10 @@ coverage/
 htmlcov/
 .DS_Store
 *.log
+
+# Large operational artifacts (Qdrant snapshots, data dumps)
+artifacts/
+data/
+*.snapshot
+*.bin
+chat-history.md
