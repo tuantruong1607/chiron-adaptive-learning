@@ -99,7 +99,7 @@ export function TutorBox() {
         </div>
       </div>
       {messages.length ? (
-        <div className="tutor-answer" aria-live="polite" style={{ maxHeight: "360px", overflowY: "auto" }}>
+        <div className="tutor-answer" aria-live="polite">
           {messages.map((message) => (
             <div
               key={message.id}

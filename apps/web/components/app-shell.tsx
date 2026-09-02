@@ -16,6 +16,8 @@ import {
   UserCircle,
   X,
   CaretRight,
+  ArrowsInSimple,
+  ArrowsOutSimple,
 } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -54,6 +56,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [tutorOpen, setTutorOpen] = useState(false);
+  const [tutorExpanded, setTutorExpanded] = useState(false);
   const [role, setRole] = useState("learner");
   const [onboarding, setOnboarding] = useState<OnboardingState | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -400,7 +403,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           />
           <aside
             id="tutor-drawer"
-            className="tutor-drawer"
+            className={`tutor-drawer ${tutorExpanded ? "is-expanded" : ""}`}
             role="dialog"
             aria-modal="true"
             aria-label="Chatbot hỗ trợ học tập"
@@ -410,15 +413,26 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <span>Trợ giảng theo nguồn</span>
                 <strong>Chiron</strong>
               </div>
-              <button
-                ref={tutorCloseRef}
-                type="button"
-                className="icon-button"
-                onClick={closeTutor}
-                aria-label="Đóng chatbot"
-              >
-                <X size={20} aria-hidden="true" />
-              </button>
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <button
+                  type="button"
+                  className="icon-button"
+                  onClick={() => setTutorExpanded((prev) => !prev)}
+                  aria-label={tutorExpanded ? "Thu gọn cửa sổ" : "Mở rộng cửa sổ"}
+                  title={tutorExpanded ? "Thu gọn (600px)" : "Mở rộng (880px)"}
+                >
+                  {tutorExpanded ? <ArrowsInSimple size={18} /> : <ArrowsOutSimple size={18} />}
+                </button>
+                <button
+                  ref={tutorCloseRef}
+                  type="button"
+                  className="icon-button"
+                  onClick={closeTutor}
+                  aria-label="Đóng chatbot"
+                >
+                  <X size={20} aria-hidden="true" />
+                </button>
+              </div>
             </div>
             <TutorBox />
           </aside>
