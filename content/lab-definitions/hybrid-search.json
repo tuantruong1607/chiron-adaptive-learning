@@ -1,0 +1,19 @@
+{
+  "id": "hybrid-search",
+  "version": "2.0.0",
+  "title": "Hybrid Search Control Room",
+  "objective": "Cấu hình fusion, rerank và tenant filter cho một retrieval pipeline an toàn.",
+  "estimated_minutes": 18,
+  "success_threshold": 75,
+  "concept_id": "reciprocal_rank_fusion",
+  "source_span_ids": ["c54b8f84-4b7c-5e47-b9c3-cab7162b9bf4"],
+  "events": ["draft_saved", "pipeline_run", "hint_opened", "submitted"],
+  "controls": [
+    {"id": "dense_weight", "kind": "range", "default": 0.5, "minimum": 0, "maximum": 1, "step": 0.05},
+    {"id": "sparse_weight", "kind": "range", "default": 0.5, "minimum": 0, "maximum": 1, "step": 0.05},
+    {"id": "rerank_depth", "kind": "range", "default": 20, "minimum": 1, "maximum": 70, "step": 1},
+    {"id": "tenant_filter", "kind": "toggle", "default": false}
+  ],
+  "transfer_prompts": ["Vì sao dùng RRF thay vì cộng raw score?"],
+  "rubric": {"tenant_filter": 30, "fusion_weights": 25, "rerank_depth": 25, "transfer_explanation": 20}
+}

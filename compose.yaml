@@ -1,0 +1,195 @@
+name: chiron
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: chiron
+      POSTGRES_USER: chiron
+      POSTGRES_PASSWORD: chiron
+    ports:
+      - "${POSTGRES_HOST_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chiron -d chiron"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  qdrant:
+    image: qdrant/qdrant:v1.15.1
+    ports:
+      - "${QDRANT_HTTP_HOST_PORT:-6333}:6333"
+      - "${QDRANT_GRPC_HOST_PORT:-6334}:6334"
+    volumes:
+      - qdrant-data:/qdrant/storage
+  redis:
+    image: redis:8-alpine
+    command: redis-server --appendonly yes
+    ports:
+      - "${REDIS_HOST_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: chiron
+      MINIO_ROOT_PASSWORD: change-me-now
+    ports:
+      - "${MINIO_API_HOST_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_HOST_PORT:-9001}:9001"
+    volumes:
+      - minio-data:/data
+  api:
+    build: ./services/api
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      APP_BASE_URL: ${WEB_BASE_URL:-http://web:3000}
+      DATABASE_URL: ${API_DATABASE_URL:-postgresql://chiron:chiron@postgres:5432/chiron}
+      DATABASE_ADMIN_URL: ${API_DATABASE_ADMIN_URL:-postgresql://chiron:chiron@postgres:5432/chiron}
+      PERSISTENCE_BACKEND: ${API_PERSISTENCE_BACKEND:-postgres}
+      QDRANT_URL: ${API_QDRANT_URL:-http://qdrant:6333}
+      REDIS_URL: redis://redis:6379/0
+      GRAPH_LITE_ENABLED: ${GRAPH_LITE_ENABLED:-false}
+      AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:-chiron-local-only-jwt-secret-change-before-production}
+      AUTH_MODE: ${AUTH_MODE:-local}
+      OIDC_ISSUER_URL: ${OIDC_ISSUER_URL:-}
+      OIDC_AUDIENCE: ${OIDC_AUDIENCE:-}
+      OIDC_JWKS_URL: ${OIDC_JWKS_URL:-}
+      OIDC_ALGORITHMS: ${OIDC_ALGORITHMS:-RS256}
+      OIDC_USER_ID_CLAIM: ${OIDC_USER_ID_CLAIM:-chiron_user_id}
+      OIDC_TENANT_ID_CLAIM: ${OIDC_TENANT_ID_CLAIM:-chiron_tenant_id}
+      OIDC_ROLE_CLAIM: ${OIDC_ROLE_CLAIM:-chiron_role}
+      WORKER_INTERNAL_TOKEN: ${WORKER_INTERNAL_TOKEN:-}
+      OPS_METRICS_TOKEN: ${OPS_METRICS_TOKEN:-}
+      ESSAY_GRADING_SLA_MINUTES: ${ESSAY_GRADING_SLA_MINUTES:-15}
+      LLM_PROVIDER: ${LLM_PROVIDER:-groq}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_BASE_URL: ${GROQ_BASE_URL:-https://api.groq.com/openai/v1}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_BASE_URL: ${OPENROUTER_BASE_URL:-https://openrouter.ai/api/v1}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL:-https://api.deepseek.com/v1}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_BASE_URL: ${GEMINI_BASE_URL:-https://generativelanguage.googleapis.com/v1beta/openai}
+      LLM_TUTOR_MODEL: ${LLM_TUTOR_MODEL:-llama-3.3-70b-versatile}
+      LLM_EXTRACTION_MODEL: ${LLM_EXTRACTION_MODEL:-llama-3.1-8b-instant}
+      LLM_GRADER_MODEL: ${LLM_GRADER_MODEL:-llama-3.3-70b-versatile}
+      LLM_RESEARCH_MODEL: ${LLM_RESEARCH_MODEL:-llama-3.3-70b-versatile}
+      LLM_GROQ_FALLBACK_MODEL: ${LLM_GROQ_FALLBACK_MODEL:-llama-3.1-8b-instant}
+      OPENAI_TUTOR_MODEL: ${OPENAI_TUTOR_MODEL:-gpt-4o-mini}
+      OPENROUTER_TUTOR_MODEL: ${OPENROUTER_TUTOR_MODEL:-meta-llama/llama-3.3-70b-instruct}
+      DEEPSEEK_TUTOR_MODEL: ${DEEPSEEK_TUTOR_MODEL:-deepseek-chat}
+      LLM_FALLBACK_ENABLED: ${LLM_FALLBACK_ENABLED:-true}
+      LLM_FALLBACK_ON_QUOTA: ${LLM_FALLBACK_ON_QUOTA:-true}
+      LLM_FALLBACK_ON_UNAVAILABLE: ${LLM_FALLBACK_ON_UNAVAILABLE:-true}
+      LLM_FALLBACK_ALLOWED_SENSITIVITIES: ${LLM_FALLBACK_ALLOWED_SENSITIVITIES:-public,synthetic,private}
+    ports:
+      - "${API_HOST_PORT:-8000}:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    environment:
+      NODE_ENV: ${WEB_NODE_ENV:-development}
+      API_BASE_URL: http://api:8000
+      WEB_BASE_URL: ${WEB_BASE_URL:-http://localhost:3000}
+      WEB_TRUSTED_ORIGINS: ${WEB_TRUSTED_ORIGINS:-}
+      AUTH_MODE: ${AUTH_MODE:-local}
+      OIDC_AUTHORIZATION_URL: ${OIDC_AUTHORIZATION_URL:-}
+      OIDC_TOKEN_URL: ${OIDC_TOKEN_URL:-}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:-}
+      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI:-http://localhost:3000/api/auth/oidc/callback}
+      OIDC_SCOPE: ${OIDC_SCOPE:-openid profile email offline_access}
+      OIDC_AUDIENCE: ${OIDC_AUDIENCE:-}
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    depends_on:
+      api:
+        condition: service_started
+  worker:
+    build: ./services/worker
+    command: >-
+      celery -A chiron_worker.app:celery_app worker --loglevel=INFO
+      --pool=threads --concurrency=2
+    environment:
+      DATABASE_URL: ${WORKER_DATABASE_URL:-postgresql://chiron:chiron@postgres:5432/chiron}
+      OPERATIONS_DATABASE_URL: ${OPS_DATABASE_URL:-postgresql://chiron:chiron@postgres:5432/chiron}
+      REDIS_URL: redis://redis:6379/0
+      QDRANT_URL: ${WORKER_QDRANT_URL:-http://qdrant:6333}
+      QDRANT_API_KEY: ${QDRANT_API_KEY:-}
+      QDRANT_COLLECTION: ${QDRANT_COLLECTION:-chiron_chunks_v1}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-intfloat/multilingual-e5-large}
+      EMBEDDING_VERSION: ${EMBEDDING_VERSION:-multilingual-e5-large-mean-batch32-v2}
+      EMBEDDING_CACHE_PATH: /home/chiron/.cache/fastembed
+      RERANK_MODEL: ${RERANK_MODEL:-BAAI/bge-reranker-v2-m3}
+      RERANK_ENABLED: ${RERANK_ENABLED:-false}
+      RETRIEVAL_CANDIDATE_LIMIT: ${RETRIEVAL_CANDIDATE_LIMIT:-24}
+      RETRIEVAL_LIMIT: ${RETRIEVAL_LIMIT:-5}
+      RETRIEVAL_DIRECT_CANDIDATE_LIMIT: ${RETRIEVAL_DIRECT_CANDIDATE_LIMIT:-16}
+      RETRIEVAL_MULTI_HOP_CANDIDATE_LIMIT: ${RETRIEVAL_MULTI_HOP_CANDIDATE_LIMIT:-12}
+      RETRIEVAL_MULTI_HOP_LIMIT: ${RETRIEVAL_MULTI_HOP_LIMIT:-8}
+      RETRIEVAL_MAX_SUBQUERIES: ${RETRIEVAL_MAX_SUBQUERIES:-1}
+      GRAPH_LITE_ENABLED: ${GRAPH_LITE_ENABLED:-false}
+      GRAPH_VERSION_STATUS: ${GRAPH_VERSION_STATUS:-active}
+      GRAPH_REVIEW_STATUS: ${GRAPH_REVIEW_STATUS:-active}
+      GRAPH_MAX_HOPS: ${GRAPH_MAX_HOPS:-2}
+      GRAPH_EXPANSION_LIMIT: ${GRAPH_EXPANSION_LIMIT:-8}
+      OUTBOX_BATCH_SIZE: ${OUTBOX_BATCH_SIZE:-1}
+      OUTBOX_MAX_ATTEMPTS: ${OUTBOX_MAX_ATTEMPTS:-8}
+      OUTBOX_POLL_SECONDS: ${OUTBOX_POLL_SECONDS:-5}
+      API_BASE_URL: ${WORKER_API_BASE_URL:-http://api:8000}
+      WORKER_INTERNAL_TOKEN: ${WORKER_INTERNAL_TOKEN:-}
+      WORKER_METRICS_PORT: ${WORKER_METRICS_PORT:-9108}
+      RETENTION_ENABLED: ${RETENTION_ENABLED:-false}
+      RETENTION_DRY_RUN: ${RETENTION_DRY_RUN:-true}
+      RETENTION_LEARNER_CONTENT_DAYS: ${RETENTION_LEARNER_CONTENT_DAYS:-90}
+      RETENTION_PROCESSED_OUTBOX_DAYS: ${RETENTION_PROCESSED_OUTBOX_DAYS:-30}
+      RETENTION_AUTH_SESSION_GRACE_DAYS: ${RETENTION_AUTH_SESSION_GRACE_DAYS:-30}
+      RETENTION_BATCH_SIZE: ${RETENTION_BATCH_SIZE:-500}
+    ports:
+      - "${WORKER_METRICS_HOST_PORT:-9108}:9108"
+    volumes:
+      - embedding-cache:/home/chiron/.cache
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+  scheduler:
+    build: ./services/worker
+    command: >-
+      celery -A chiron_worker.app:celery_app beat --loglevel=INFO
+      --schedule=/tmp/chiron-celerybeat-schedule
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      OUTBOX_POLL_SECONDS: ${OUTBOX_POLL_SECONDS:-5}
+      RETENTION_SCHEDULE_SECONDS: ${RETENTION_SCHEDULE_SECONDS:-86400}
+    depends_on:
+      redis:
+        condition: service_healthy
+volumes:
+  postgres-data:
+  qdrant-data:
+  redis-data:
+  minio-data:
+  embedding-cache:

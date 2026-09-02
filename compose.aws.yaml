@@ -1,0 +1,153 @@
+name: chiron-aws
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-chiron}
+      POSTGRES_USER: ${POSTGRES_USER:-chiron}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    mem_limit: 384m
+
+  redis:
+    image: redis:8-alpine
+    command: redis-server --save 60 1 --appendonly no --maxmemory 64mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 12
+    mem_limit: 128m
+
+  api:
+    build:
+      context: ./services/api
+      dockerfile: Dockerfile
+    environment:
+      DEPLOYMENT_PROFILE: ${DEPLOYMENT_PROFILE:-aws-free}
+      APP_ENV: production
+      APP_BASE_URL: ${WEB_BASE_URL:?Set WEB_BASE_URL}
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-chiron}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-chiron}
+      DATABASE_ADMIN_URL: postgresql+psycopg://${POSTGRES_USER:-chiron}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-chiron}
+      PERSISTENCE_BACKEND: postgres
+      REDIS_URL: redis://redis:6379/0
+      QDRANT_URL: ${QDRANT_URL:?Set QDRANT_URL to Qdrant Cloud}
+      QDRANT_API_KEY: ${QDRANT_API_KEY:?Set QDRANT_API_KEY}
+      WORKER_INTERNAL_TOKEN: ${WORKER_INTERNAL_TOKEN:?Set WORKER_INTERNAL_TOKEN}
+      OPS_METRICS_TOKEN: ${OPS_METRICS_TOKEN:?Set OPS_METRICS_TOKEN}
+      AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:?Set AUTH_JWT_SECRET}
+      AUTH_MODE: ${AUTH_MODE:-oidc}
+      OIDC_ISSUER_URL: ${OIDC_ISSUER_URL:-}
+      OIDC_AUDIENCE: ${OIDC_AUDIENCE:-}
+      OIDC_JWKS_URL: ${OIDC_JWKS_URL:-}
+      LLM_PROVIDER: ${LLM_PROVIDER:-groq}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      LLM_FALLBACK_ENABLED: ${LLM_FALLBACK_ENABLED:-true}
+      LLM_FALLBACK_ALLOWED_SENSITIVITIES: public,synthetic
+      EMBEDDING_PROVIDER: qdrant_cloud
+      OPENAI_DOCUMENT_EMBEDDING_ALLOWED: "false"
+      QDRANT_CLOUD_DOCUMENT_INFERENCE_ALLOWED: "true"
+      RETENTION_ENABLED: "true"
+      RETENTION_DRY_RUN: "false"
+      GRAPH_LITE_ENABLED: "false"
+      ESSAY_GRADING_SLA_MINUTES: ${ESSAY_GRADING_SLA_MINUTES:-15}
+    command: >-
+      sh -c 'exec uvicorn app.main:app --host 0.0.0.0
+      --port $${PORT:-8000} --workers 1 --limit-concurrency 32 --timeout-keep-alive 5'
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/readyz', timeout=3)"]
+      interval: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    mem_limit: 384m
+
+  worker:
+    build:
+      context: ./services/worker
+      dockerfile: Dockerfile.aws
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-chiron}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-chiron}
+      OPERATIONS_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-chiron}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-chiron}
+      REDIS_URL: redis://redis:6379/0
+      QDRANT_URL: ${QDRANT_URL:?Set QDRANT_URL to Qdrant Cloud}
+      QDRANT_API_KEY: ${QDRANT_API_KEY:?Set QDRANT_API_KEY}
+      QDRANT_COLLECTION: ${QDRANT_COLLECTION:-chiron_chunks_aws_free_v1}
+      EMBEDDING_PROVIDER: qdrant_cloud
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-sentence-transformers/all-MiniLM-L6-v2}
+      EMBEDDING_VERSION: ${EMBEDDING_VERSION:-qdrant-cloud-all-minilm-l6-v2-v1}
+      SPARSE_EMBEDDING_MODEL: ${SPARSE_EMBEDDING_MODEL:-qdrant/bm25}
+      QDRANT_INFERENCE_DENSE_SIZE: ${QDRANT_INFERENCE_DENSE_SIZE:-384}
+      QDRANT_CLOUD_DOCUMENT_INFERENCE_ALLOWED: "true"
+      OPENAI_DOCUMENT_EMBEDDING_ALLOWED: "false"
+      RERANK_ENABLED: "false"
+      RETRIEVAL_CANDIDATE_LIMIT: ${RETRIEVAL_CANDIDATE_LIMIT:-16}
+      RETRIEVAL_LIMIT: ${RETRIEVAL_LIMIT:-5}
+      RETRIEVAL_DIRECT_CANDIDATE_LIMIT: ${RETRIEVAL_DIRECT_CANDIDATE_LIMIT:-12}
+      RETRIEVAL_MULTI_HOP_CANDIDATE_LIMIT: ${RETRIEVAL_MULTI_HOP_CANDIDATE_LIMIT:-8}
+      RETRIEVAL_MULTI_HOP_LIMIT: ${RETRIEVAL_MULTI_HOP_LIMIT:-5}
+      RETRIEVAL_MAX_SUBQUERIES: "1"
+      GRAPH_LITE_ENABLED: "false"
+      OUTBOX_BATCH_SIZE: "1"
+      OUTBOX_MAX_ATTEMPTS: "5"
+      OUTBOX_POLL_SECONDS: ${OUTBOX_POLL_SECONDS:-15}
+      RETENTION_SCHEDULE_SECONDS: ${RETENTION_SCHEDULE_SECONDS:-86400}
+      RETENTION_ENABLED: "true"
+      RETENTION_DRY_RUN: "false"
+      RETENTION_LEARNER_CONTENT_DAYS: ${RETENTION_LEARNER_CONTENT_DAYS:-90}
+      RETENTION_PROCESSED_OUTBOX_DAYS: ${RETENTION_PROCESSED_OUTBOX_DAYS:-30}
+      RETENTION_AUTH_SESSION_GRACE_DAYS: ${RETENTION_AUTH_SESSION_GRACE_DAYS:-30}
+      RETENTION_BATCH_SIZE: ${RETENTION_BATCH_SIZE:-100}
+      WORKER_INTERNAL_TOKEN: ${WORKER_INTERNAL_TOKEN:?Set WORKER_INTERNAL_TOKEN}
+      WORKER_METRICS_PORT: ${WORKER_METRICS_PORT:-9108}
+    expose:
+      - "9108"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    mem_limit: 384m
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    environment:
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+      API_BASE_URL: http://api:8000
+      WEB_BASE_URL: ${WEB_BASE_URL:?Set WEB_BASE_URL}
+      WEB_TRUSTED_ORIGINS: ${WEB_TRUSTED_ORIGINS:?Set WEB_TRUSTED_ORIGINS}
+      AUTH_MODE: ${AUTH_MODE:-oidc}
+      OIDC_AUTHORIZATION_URL: ${OIDC_AUTHORIZATION_URL:-}
+      OIDC_TOKEN_URL: ${OIDC_TOKEN_URL:-}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:-}
+      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI:-}
+      OIDC_SCOPE: ${OIDC_SCOPE:-openid profile email offline_access}
+      OIDC_AUDIENCE: ${OIDC_AUDIENCE:-}
+    ports:
+      - "${WEB_PORT:-80}:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    mem_limit: 384m
+
+volumes:
+  postgres-data:

@@ -1,0 +1,3237 @@
+[
+  {
+    "id": "qb-001",
+    "number": 1,
+    "title": "Chunking — scenario diagnosis",
+    "topic": "chunking",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "3c68387a-4057-5152-abc8-c14dd0db8804"
+    ],
+    "kind": "objective",
+    "prompt": "Hệ thống RAG của bạn gặp hiện tượng thiếu ngữ cảnh do các chunk được chia quá nhỏ (mỗi chunk chỉ là một câu đơn lẻ). Khi tăng `top_k`, ngữ cảnh đưa vào prompt bị phân mảnh và nhiễu nghiêm trọng. Giải pháp can thiệp nào dưới đây là phù hợp nhất?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tăng overlap cố định giữa các chunk lên 50% để các câu liền kề tự động dính lại với nhau."
+      },
+      {
+        "id": "b",
+        "text": "Bổ sung cross-encoder rerank trên top-100 candidates trước khi đưa vào prompt."
+      },
+      {
+        "id": "c",
+        "text": "Chuyển sang semantic hoặc hierarchical chunking nhằm bảo toàn trọn vẹn đoạn văn cùng một mạch ý."
+      },
+      {
+        "id": "d",
+        "text": "Chuyển sang dùng embedding model có thứ hạng benchmark VN-MTEB cao hơn."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Chunk chính là đơn vị bằng chứng (unit of evidence): nếu chiến lược chunking bị hỏng thì dù embedding hay rerank có tốt đến đâu cũng không thể cứu được. Overlap 50% chỉ ghép nối câu rời rạc một cách máy móc chứ không khôi phục được ngữ cảnh đoạn."
+  },
+  {
+    "id": "qb-002",
+    "number": 2,
+    "title": "Embedding — single choice",
+    "topic": "embedding",
+    "difficulty": "easy",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "ab0d1e8b-88fe-5ffe-8c24-4dc8fbace6d4"
+    ],
+    "kind": "objective",
+    "prompt": "Vai trò cốt lõi nhất của embedding model trong kỹ thuật dense retrieval là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Mã hóa văn bản thành vector số học trong không gian nhiều chiều để so khớp mức độ tương đồng ngữ nghĩa."
+      },
+      {
+        "id": "b",
+        "text": "Chuẩn hóa điểm số (score) của BM25 và cosine similarity về cùng một thang đo đồng nhất."
+      },
+      {
+        "id": "c",
+        "text": "Đánh giá lại mức độ phù hợp của từng cặp (query, document) sau khi đã lấy được danh sách candidates."
+      },
+      {
+        "id": "d",
+        "text": "Nén dung lượng tài liệu gốc để tiết kiệm không gian lưu trữ trong vector database."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "Embedding ánh xạ văn bản thành vector để so sánh khoảng cách ngữ nghĩa. Chuẩn hóa thang đo là nhiệm vụ của rank fusion, chấm lại candidate là việc của cross-encoder rerank, còn nén dữ liệu là vai trò của quantization."
+  },
+  {
+    "id": "qb-003",
+    "number": 3,
+    "title": "Dense retrieval — scenario diagnosis",
+    "topic": "dense-vs-sparse-retrieval",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "7faebd65-90b8-5ad2-a80c-92fa71f49dc6"
+    ],
+    "kind": "objective",
+    "prompt": "Khi truy vấn câu “cơ chế giữ version code chính xác”, hệ thống không tìm thấy tài liệu chứa đúng identifier `foo_bar_v2`, dù vẫn lấy được nhiều đoạn có ý nghĩa tương tự. Nguyên nhân chính khiến dense-only retrieval bị bỏ sót là gì và nên khắc phục ra sao?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Cần fine-tune embedding model trên tập dữ liệu nội bộ để model ghi nhớ các identifier đặc thù."
+      },
+      {
+        "id": "b",
+        "text": "Tăng `top_k` lên 100 rồi áp dụng cross-encoder rerank nhằm đẩy tài liệu chính xác lên đầu."
+      },
+      {
+        "id": "c",
+        "text": "Thêm metadata filter theo trường `version` để thu hẹp không gian tìm kiếm."
+      },
+      {
+        "id": "d",
+        "text": "Kết hợp sparse retrieval (BM25) và áp dụng hybrid search; dense retrieval thường gặp điểm mù với các token hiếm hoặc từ khóa chính xác tuyệt đối."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "Dense retrieval dựa vào phân bố ngữ nghĩa chung nên dễ bỏ sót các identifier hiếm hoặc ký hiệu kỹ thuật đặc thù. Kết hợp BM25 (sparse retrieval) qua hybrid search giúp bù đắp điểm mù này. Rerank chỉ sắp xếp lại các candidate đã được lấy ra; nếu candidate chưa từng vào top thì rerank cũng không thể xử lý."
+  },
+  {
+    "id": "qb-004",
+    "number": 4,
+    "title": "BM25 — single choice",
+    "topic": "sparse-retrieval",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "648c675c-38de-53cc-bde4-b284d941c885"
+    ],
+    "kind": "objective",
+    "prompt": "Trường hợp truy vấn (query) nào dưới đây là ứng viên lý tưởng nhất để sparse retrieval (BM25) phát huy hiệu quả?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Query mô tả ý định bằng ngôn từ hoàn toàn khác biệt so với tài liệu gốc (ví dụ: “muốn lấy lại tiền”)."
+      },
+      {
+        "id": "b",
+        "text": "Query chứa mã lỗi cụ thể, tên hàm kỹ thuật hoặc từ viết tắt chuyên ngành cần khớp chính xác từng ký tự."
+      },
+      {
+        "id": "c",
+        "text": "Query phức tạp gồm nhiều mệnh đề dài, đòi hỏi tổng hợp thông tin từ nhiều đoạn phân tán."
+      },
+      {
+        "id": "d",
+        "text": "Query yêu cầu sắp xếp tài liệu theo độ mới theo thời gian thay vì độ tương đồng nội dung."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "BM25 hoạt động dựa trên tần suất từ khóa chính xác (lexical matching), do đó cực kỳ hiệu quả với mã lỗi, tên hàm, mã định danh. Với các câu hỏi dùng từ đồng nghĩa hoặc diễn đạt khác biệt, BM25 dễ trả về 0 kết quả."
+  },
+  {
+    "id": "qb-005",
+    "number": 5,
+    "title": "Hybrid + RRF — scenario diagnosis",
+    "topic": "hybrid-fusion",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "21aee365-ebec-5495-9bf1-cfa468c41533"
+    ],
+    "kind": "objective",
+    "prompt": "Trong hệ thống tìm kiếm kết hợp, nhánh dense retrieval trả về đúng đoạn giải thích ngữ nghĩa, còn nhánh BM25 trả về đúng tên hàm API. Bạn cần một cơ chế xếp hạng kết hợp mà không bị phụ thuộc vào thang điểm số thô khác biệt giữa hai mô hình. Giải pháp tối ưu là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Áp dụng Reciprocal Rank Fusion (RRF) dựa trên thứ hạng (rank) của hai danh sách với hệ số k = 60."
+      },
+      {
+        "id": "b",
+        "text": "Thực hiện min-max normalization đưa điểm số của hai bên về đoạn [0, 1] rồi cộng dồn theo trọng số cố định."
+      },
+      {
+        "id": "c",
+        "text": "Nhân điểm cosine similarity với điểm BM25 và chỉ lấy phần giao nhau của hai danh sách."
+      },
+      {
+        "id": "d",
+        "text": "Lấy top-5 của mỗi nhánh rồi đưa toàn bộ vào prompt để LLM tự chọn ra đoạn phù hợp nhất."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "RRF giải quyết triệt để bài toán thang điểm không đồng nhất bằng cách chỉ sử dụng thứ vị trí (rank) của từng tài liệu trong danh sách kết quả, không cần chuẩn hóa hay can thiệp vào điểm số thô."
+  },
+  {
+    "id": "qb-006",
+    "number": 6,
+    "title": "Reranking — single choice",
+    "topic": "reranking",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "4e75a8f4-496a-5f24-8847-ce1e26613f36"
+    ],
+    "kind": "objective",
+    "prompt": "Trong kiến trúc tìm kiếm hai giai đoạn (two-stage retrieval), thành phần reranker (cross-encoder) nên được đặt ở vị trí nào trong pipeline?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Đặt trước bước ANN search để cross-encoder thu hẹp không gian tìm kiếm ngay từ đầu."
+      },
+      {
+        "id": "b",
+        "text": "Đặt ngay sau bước chunking để chấm điểm chất lượng từng chunk trong quá trình indexing dữ liệu."
+      },
+      {
+        "id": "c",
+        "text": "Đặt sau khi ANN search trả về tập candidate, nhằm chấm điểm tương quan chi tiết cho từng cặp (query, chunk)."
+      },
+      {
+        "id": "d",
+        "text": "Đặt ở cuối cùng sau khi LLM đã sinh câu trả lời để kiểm định chất lượng phản hồi."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Cross-encoder có chi phí tính toán cao vì phải xử lý đồng thời cả query và văn bản; do đó nó chỉ được áp dụng trên tập candidate nhỏ (ví dụ top 20-50) được thu thập từ giai đoạn retrieval thứ nhất."
+  },
+  {
+    "id": "qb-007",
+    "number": 7,
+    "title": "Metadata filter — scenario diagnosis",
+    "topic": "tenant-isolation",
+    "difficulty": "hard",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "14900f34-494f-5fcf-99d6-d119a2617fa8"
+    ],
+    "kind": "objective",
+    "prompt": "Để đảm bảo cô lập dữ liệu người dùng (tenant isolation) trong hệ thống RAG đa người dùng, cơ chế kiểm soát nào đảm bảo an toàn và được đặt đúng vị trí nhất?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tạo riêng cho mỗi tenant một collection và cho phép client tự truyền tên collection khi gửi query."
+      },
+      {
+        "id": "b",
+        "text": "Thực hiện lọc loại bỏ dữ liệu khác tenant ở tầng application sau khi vector database đã trả về kết quả top-k."
+      },
+      {
+        "id": "c",
+        "text": "Áp dụng metadata pre-filter với `tenant_id` và `course_id` được trích xuất trực tiếp từ phiên xác thực (session/token) của người dùng."
+      },
+      {
+        "id": "d",
+        "text": "Bổ sung chỉ dẫn vào system prompt yêu cầu LLM không được tiết lộ thông tin của tenant khác."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Metadata pre-filter tại tầng vector database với thông tin tenant lấy từ token/session đảm bảo truy vấn không bao giờ chạm tới dữ liệu ngoài phạm vi cho phép. Post-filter làm mất recall của top-k, còn prompt chỉ mang tính định hướng chứ không phải ranh giới bảo mật."
+  },
+  {
+    "id": "qb-008",
+    "number": 8,
+    "title": "HNSW — single choice",
+    "topic": "ann-indexing",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "e7bd702b-7034-5438-990b-865e9f56d1ba"
+    ],
+    "kind": "objective",
+    "prompt": "Thuật toán đồ thị HNSW (Hierarchical Navigable Small World) tối ưu hóa tốc độ tìm kiếm láng giềng gần nhất (ANN search) dựa trên nguyên lý cốt lõi nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Xây dựng cấu trúc đồ thị nhiều tầng: các tầng trên thưa thớt để nhảy nhanh qua các vùng dữ liệu, tầng dưới cùng dày đặc để tìm kiếm chính xác."
+      },
+      {
+        "id": "b",
+        "text": "Chia không gian vector thành các cụm Voronoi độc lập và chỉ quét các cụm có tâm gần nhất."
+      },
+      {
+        "id": "c",
+        "text": "Nén các vector 1536 chiều thành các chuỗi nhị phân (binary hash) để tăng tốc độ tính khoảng cách Hamming."
+      },
+      {
+        "id": "d",
+        "text": "Sắp xếp toàn bộ vector theo thứ tự từ điển rồi áp dụng thuật toán tìm kiếm nhị phân (binary search)."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "HNSW sử dụng cấu trúc đồ thị phân tầng tương tự skip-list: các tầng trên gồm các liên kết dài giúp điều hướng nhanh chóng đến vùng lân cận, sau đó chuyển xuống các tầng dưới dày đặc để định vị điểm gần nhất."
+  },
+  {
+    "id": "qb-009",
+    "number": 9,
+    "title": "RAG pipeline — ordering",
+    "topic": "rag-offline-pipeline",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "e85b1a0d-2cca-5e1d-9865-124255c24785"
+    ],
+    "kind": "objective",
+    "prompt": "Trong quy trình chuẩn bị dữ liệu offline (offline ingestion pipeline) cho hệ thống RAG, thứ tự xử lý nào dưới đây là chuẩn xác nhất?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Clean văn bản → Parse định dạng → Embed vectors → Chia Chunk → Trích xuất Metadata → Lưu Vector Index."
+      },
+      {
+        "id": "b",
+        "text": "Parse tài liệu → Clean dữ liệu → Phân đoạn (Chunk) → Bổ sung Metadata/Provenance → Tạo Embeddings → Lưu trữ vào Vector Index."
+      },
+      {
+        "id": "c",
+        "text": "Tạo Embeddings trước toàn văn → Parse tài liệu → Chia Chunk → Lưu Vector Index."
+      },
+      {
+        "id": "d",
+        "text": "Chia Chunk → Parse tài liệu → Trích xuất Metadata → Tạo Embeddings → Lưu Vector Index."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Pipeline chuẩn phải bóc tách tài liệu (parse), làm sạch (clean), phân đoạn (chunking), gắn metadata & provenance cho từng chunk, sau đó mới tính vector embedding và lưu trữ vào chỉ mục."
+  },
+  {
+    "id": "qb-010",
+    "number": 10,
+    "title": "Context precision — scenario diagnosis",
+    "topic": "context-precision",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "f53c8dff-7c45-5b6e-a1e7-72e6b610d406"
+    ],
+    "kind": "objective",
+    "prompt": "Trong bộ tiêu chuẩn đánh giá RAGAS, chỉ số `Context Precision` đo lường khía cạnh chất lượng nào của giai đoạn retrieval?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tỷ lệ các thông tin trọng yếu cần thiết được truy xuất đầy đủ trong toàn bộ ngữ cảnh."
+      },
+      {
+        "id": "b",
+        "text": "Mức độ ưu tiên xếp các chunk thực sự liên quan và hữu ích lên những vị trí đầu tiên trong danh sách kết quả."
+      },
+      {
+        "id": "c",
+        "text": "Mức độ trung thực của câu trả lời do LLM sinh ra so với bằng chứng có trong ngữ cảnh."
+      },
+      {
+        "id": "d",
+        "text": "Mức độ bám sát của câu trả lời so với câu hỏi ban đầu của người dùng."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "Context Precision đo lường chất lượng xếp hạng (ranking quality): các chunk mang thông tin hữu ích có được đưa lên các vị trí rank cao (top) trong context hay không."
+  },
+  {
+    "id": "qb-011",
+    "number": 11,
+    "title": "Context recall — single choice",
+    "topic": "context-recall",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "29a86f69-881f-5cbe-a791-a2bd708cc9b1"
+    ],
+    "kind": "objective",
+    "prompt": "Answer thiếu một điều kiện bắt buộc vì không có chunk cần thiết trong context. Đây chủ yếu là vấn đề gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Context precision thấp."
+      },
+      {
+        "id": "b",
+        "text": "Faithfulness thấp."
+      },
+      {
+        "id": "c",
+        "text": "Answer relevancy thấp."
+      },
+      {
+        "id": "d",
+        "text": "Context recall thấp."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "Thiếu hẳn chunk chứa điều kiện bắt buộc ⇒ recall. Precision là khi chunk cần thiết có mặt nhưng lẫn rác."
+  },
+  {
+    "id": "qb-012",
+    "number": 12,
+    "title": "Faithfulness — scenario diagnosis",
+    "topic": "faithfulness",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "8536b5af-6fad-5d52-bbf1-49fb2a7dda57"
+    ],
+    "kind": "objective",
+    "prompt": "Context nói “chưa benchmark”, nhưng assistant trả lời “đã đạt 95%”. Chỉ số chất lượng bị vi phạm trực tiếp nhất?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Answer relevancy."
+      },
+      {
+        "id": "b",
+        "text": "Faithfulness."
+      },
+      {
+        "id": "c",
+        "text": "Context precision."
+      },
+      {
+        "id": "d",
+        "text": "Context recall."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Claim trong output không được context support — đúng định nghĩa faithfulness. Answer relevancy vẫn cao vì câu trả lời đúng chủ đề được hỏi."
+  },
+  {
+    "id": "qb-013",
+    "number": 13,
+    "title": "Answer relevancy — single choice",
+    "topic": "answer-relevancy",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "f7439078-7d87-5e52-aa26-f4128940df46"
+    ],
+    "kind": "objective",
+    "prompt": "Answer đúng sự thật nhưng chuyển sang giải thích fine-tuning khi user hỏi cách đánh giá retrieval. Lỗi chính là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Faithfulness thấp."
+      },
+      {
+        "id": "b",
+        "text": "Context recall thấp."
+      },
+      {
+        "id": "c",
+        "text": "Context precision thấp."
+      },
+      {
+        "id": "d",
+        "text": "Answer relevancy thấp."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "Câu trả lời đúng sự thật và bám context nên faithfulness cao; cái hỏng là nó không trả lời câu được hỏi — RAGAS bắt lỗi này bằng reverse question generation."
+  },
+  {
+    "id": "qb-014",
+    "number": 14,
+    "title": "RAG evaluation — scenario diagnosis",
+    "topic": "rag-diagnosis",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "75f5d2da-6f18-5e49-9f34-40adede15393"
+    ],
+    "kind": "objective",
+    "prompt": "RAGAS cho context recall thấp, faithfulness cao. Ưu tiên debug nào hợp lý?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Cải thiện retrieval/chunking/query trước; generator đang bám context tốt."
+      },
+      {
+        "id": "b",
+        "text": "Tighten prompt “Only use provided context” và hạ temperature xuống 0."
+      },
+      {
+        "id": "c",
+        "text": "Thêm reranking cross-encoder, giảm `top_k` và tăng similarity threshold."
+      },
+      {
+        "id": "d",
+        "text": "Đổi judge model rồi đo lại, vì RAGAS score vốn brittle theo judge."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "B là giải pháp cho faithfulness thấp — mà faithfulness đang cao. C là giải pháp cho precision thấp, không kéo recall lên được."
+  },
+  {
+    "id": "qb-015",
+    "number": 15,
+    "title": "Multi-hop — scenario diagnosis",
+    "topic": "multi-hop-retrieval",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "9d404bc1-ed69-53a9-b78c-66cc1793a687"
+    ],
+    "kind": "objective",
+    "prompt": "User hỏi quan hệ giữa service A, dependency B và policy C; không span nào chứa toàn bộ đáp án. Retrieval strategy nào phù hợp nhất?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tăng `top_k` lên 50 và nới context window để LLM tự nối các mảnh lại."
+      },
+      {
+        "id": "b",
+        "text": "HyDE: sinh một câu trả lời giả rồi embed nó để đi truy xuất lại."
+      },
+      {
+        "id": "c",
+        "text": "Hierarchical chunking: retrieve child chunk rồi trả về nguyên trang parent."
+      },
+      {
+        "id": "d",
+        "text": "Traversal nhiều hop theo quan hệ, có provenance và giới hạn số hop."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A/B/C đều vẫn là truy xuất theo độ tương đồng của từng đoạn rời; không đoạn nào chứa đủ chuỗi quan hệ A→B→C nên nới rộng bao nhiêu cũng không nối được."
+  },
+  {
+    "id": "qb-016",
+    "number": 16,
+    "title": "Agent orchestration — scenario diagnosis",
+    "topic": "agent-idempotency",
+    "difficulty": "hard",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "72a1c30d-3bba-502a-a1e2-b4d6c5ce13ec"
+    ],
+    "kind": "objective",
+    "prompt": "Một agent gọi tool thanh toán, timeout khi client retry và có nguy cơ charge hai lần. Control quan trọng nhất?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Đặt timeout dài hơn và tăng số lần retry kèm exponential backoff."
+      },
+      {
+        "id": "b",
+        "text": "Idempotency key ổn định theo intent, backend dedup bằng Redis."
+      },
+      {
+        "id": "c",
+        "text": "Hash toàn bộ tham số của tool call làm key để loại bỏ request trùng."
+      },
+      {
+        "id": "d",
+        "text": "Bọc lời gọi tool trong một transaction của database nội bộ."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "C là cái bẫy riêng của agent: LLM không sinh lại tham số y hệt cho cùng một ý định nên hash nội dung thô sẽ trượt. D không bao được side effect nằm ở provider bên ngoài."
+  },
+  {
+    "id": "qb-017",
+    "number": 17,
+    "title": "State machine — single choice",
+    "topic": "agent-state-machine",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "10429522-3dce-5ced-bbd3-f9c0f0f7c10e"
+    ],
+    "kind": "objective",
+    "prompt": "Lợi ích chính của state machine cho workflow agent là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Cho phép agent tự quyết thứ tự bước mà không cần khai báo transition."
+      },
+      {
+        "id": "b",
+        "text": "Loại bỏ nhu cầu checkpoint vì state đã được biểu diễn tường minh rồi."
+      },
+      {
+        "id": "c",
+        "text": "Giảm số token mỗi lượt gọi LLM nhờ nén lịch sử hội thoại vào state."
+      },
+      {
+        "id": "d",
+        "text": "Làm state, transition và recovery path tường minh nên debug và kiểm soát được."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A mô tả agent tự do, ngược với state machine. B sai: state tường minh vẫn phải được persist thì mới resume được."
+  },
+  {
+    "id": "qb-018",
+    "number": 18,
+    "title": "Checkpointing — scenario diagnosis",
+    "topic": "durable-checkpointing",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "77e27759-b552-53c0-9c03-a3632827e07c"
+    ],
+    "kind": "objective",
+    "prompt": "Workflow dài bị dừng sau tool thứ ba. Khi resume, hệ thống phải tránh chạy lại side effect đã commit. Thiết kế nào tốt nhất?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Đặt `interrupt()` ở đầu node, hoặc tách side effect sang node sau."
+      },
+      {
+        "id": "b",
+        "text": "Dùng `interrupt_before` tại node có side effect để dừng trước khi nó chạy."
+      },
+      {
+        "id": "c",
+        "text": "Tăng tần suất checkpoint để state được ghi lại sau mỗi dòng trong node."
+      },
+      {
+        "id": "d",
+        "text": "Dùng `InMemorySaver` để việc resume diễn ra nhanh và nhẹ hơn."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "Khi resume, toàn bộ node chứa `interrupt()` chạy lại từ dòng đầu nên C vô ích. `interrupt_before` được docs khuyến cáo chỉ dùng để debug, còn `InMemorySaver` mất sạch approval đang chờ khi restart process."
+  },
+  {
+    "id": "qb-019",
+    "number": 19,
+    "title": "HITL — scenario diagnosis",
+    "topic": "human-in-the-loop",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "ded5efd6-6f83-5d6b-9e0a-7645fcf86767"
+    ],
+    "kind": "objective",
+    "prompt": "Thiết kế cổng human approval cho agent, tiêu chí nào nên quyết định việc route sang người duyệt?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Ngưỡng confidence: model dưới 0.9 thì luôn chuyển sang người duyệt."
+      },
+      {
+        "id": "b",
+        "text": "Loại tool: mọi lời gọi tool đều qua người duyệt, kể cả tool chỉ đọc."
+      },
+      {
+        "id": "c",
+        "text": "Thâm niên người dùng: chỉ chặn learner mới, người dùng cũ cho tự chạy."
+      },
+      {
+        "id": "d",
+        "text": "Chi phí khi sai: hành động không đảo ngược hoặc quyết định rủi ro cao."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A là ngưỡng mù, vừa làm nghẽn ca vô hại vừa bỏ lọt ca rủi ro cao mà model đang tự tin; B chặn cả tool chỉ đọc nên cổng duyệt bị bão hoà rồi bị bỏ qua; C không liên quan tới mức rủi ro của hành động."
+  },
+  {
+    "id": "qb-020",
+    "number": 20,
+    "title": "Circuit breaker — scenario diagnosis",
+    "topic": "circuit-breaker",
+    "difficulty": "hard",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "94b7e7ed-87b9-52c2-90b7-0a6985d47281"
+    ],
+    "kind": "objective",
+    "prompt": "LLM provider liên tục 503. Retry của hàng nghìn request làm latency và chi phí downstream tăng. Circuit breaker cần làm gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Giữ CLOSED nhưng tăng backoff kèm jitter để giãn các lần retry ra."
+      },
+      {
+        "id": "b",
+        "text": "Mở breaker toàn cục cho mọi provider và cache layer khi phát hiện lỗi."
+      },
+      {
+        "id": "c",
+        "text": "Chuyển sang HALF-OPEN ngay khi lỗi vượt ngưỡng để tiếp tục thử gọi."
+      },
+      {
+        "id": "d",
+        "text": "Mở OPEN để fail fast/fallback, chỉ HALF-OPEN probe để hồi phục có kiểm soát."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A vẫn để mọi request đi tới provider đang hỏng. B vi phạm nguyên tắc breaker theo từng provider: provider A open không được kéo provider B và cache layer sập theo."
+  },
+  {
+    "id": "qb-021",
+    "number": 21,
+    "title": "Fallback chain — single choice",
+    "topic": "fallback-policy",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "a98ec66f-8457-527e-9d22-57e8c1c20ada"
+    ],
+    "kind": "objective",
+    "prompt": "Thứ tự recovery hợp lý nhất sau một lỗi transient là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Fallback ngay từ lần lỗi đầu tiên để giữ latency, không retry lần nào."
+      },
+      {
+        "id": "b",
+        "text": "Retry → dead-letter → người review rồi mới quyết định có fallback hay không."
+      },
+      {
+        "id": "c",
+        "text": "Fallback trước → retry trên nhánh fallback → trả lỗi thẳng về cho user."
+      },
+      {
+        "id": "d",
+        "text": "Bounded retry có backoff → fallback model/tool → dead-letter nếu vẫn fail."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "Lỗi transient thường tự hết trong vài trăm ms nên bỏ hẳn retry là trả giá không cần thiết; còn đẩy vào dead-letter trước khi thử fallback thì kéo dài downtime nhìn từ phía user."
+  },
+  {
+    "id": "qb-022",
+    "number": 22,
+    "title": "Observability — scenario diagnosis",
+    "topic": "agent-observability",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "722ede24-2792-515b-a6c5-62229a302b85",
+      "eea0c815-cf23-5e99-a5c9-ab699ffd4383"
+    ],
+    "kind": "objective",
+    "prompt": "Latency tốt nhưng user satisfaction giảm dần. Bộ telemetry nào thiếu nhất để xác định quality drift?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Thêm log chi tiết kèm timestamp ở từng bước để tra lại khi có sự cố."
+      },
+      {
+        "id": "b",
+        "text": "Trace nối input→retrieval→tool→model→output, gắn quality feedback và version."
+      },
+      {
+        "id": "c",
+        "text": "Tăng sampling p99 latency và bổ sung metric CPU/GPU cho từng node."
+      },
+      {
+        "id": "d",
+        "text": "Alert ngay khi error rate vượt ngưỡng SLO đã cam kết với khách hàng."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Log cho biết cái gì xảy ra ở từng bước; chỉ trace mới cho biết hành trình của một request và cho phép so chất lượng theo version. C và D đều đang là tín hiệu bình thường trong tình huống này."
+  },
+  {
+    "id": "qb-023",
+    "number": 23,
+    "title": "SLI/SLO — single choice",
+    "topic": "sli-slo",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "467d9070-1c0c-57ce-b925-6a39729d33c4"
+    ],
+    "kind": "objective",
+    "prompt": "Phát biểu đúng nhất là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "SLI là chỉ số đo được; SLO là mục tiêu đặt trên SLI; error budget = 1 − SLO."
+      },
+      {
+        "id": "b",
+        "text": "SLI là mục tiêu cần đạt tới; SLO là chỉ số quan sát được từ hệ thống."
+      },
+      {
+        "id": "c",
+        "text": "Error budget chính là SLO; tiêu hết budget thì nâng SLO lên cho vừa."
+      },
+      {
+        "id": "d",
+        "text": "SLO là cam kết hợp đồng với khách hàng, vi phạm thì phải bồi thường."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "D là định nghĩa của SLA, không phải SLO. Error budget là phần sai lệch được phép (1 − SLO), dùng để quyết định dừng release chứ không phải để nới mục tiêu."
+  },
+  {
+    "id": "qb-024",
+    "number": 24,
+    "title": "Short-term memory — single choice",
+    "topic": "short-term-memory",
+    "difficulty": "easy",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "0f53dc45-7218-52e4-b05d-697721a1793b"
+    ],
+    "kind": "objective",
+    "prompt": "Trong tutor chat, memory nào nên giữ các turn gần nhất để hiểu “ý trên” mà không trở thành profile vĩnh viễn?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Episodic memory lưu tuple (task, trajectory, outcome, reflection)."
+      },
+      {
+        "id": "b",
+        "text": "Semantic memory trong vector store, truy xuất theo cosine similarity."
+      },
+      {
+        "id": "c",
+        "text": "Long-term memory ngoài context, kèm retrieval strategy và permission model."
+      },
+      {
+        "id": "d",
+        "text": "Short-term memory nằm trong context window, phục vụ task đang làm."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "Đề bài yêu cầu giữ vài lượt gần nhất và không trở thành profile vĩnh viễn — đúng phạm vi short-term. C ghi ra ngoài context nên tồn tại lâu dài."
+  },
+  {
+    "id": "qb-025",
+    "number": 25,
+    "title": "Episodic memory — single choice",
+    "topic": "episodic-memory",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "ada4ee10-2a74-59f2-90ce-16eb2e10db9e"
+    ],
+    "kind": "objective",
+    "prompt": "Record “đã thử tool X, tool timeout, user đổi mục tiêu” có bản chất gần nhất với loại memory nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Semantic memory — kiến thức domain ổn định, truy xuất theo similarity."
+      },
+      {
+        "id": "b",
+        "text": "Episodic memory — lưu lại diễn biến và kết quả của một lần thực thi."
+      },
+      {
+        "id": "c",
+        "text": "Skill library kiểu Voyager — chiến lược tái sử dụng đã được chắt lọc."
+      },
+      {
+        "id": "d",
+        "text": "Short-term memory — các lượt hội thoại gần nhất trong context window."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "C được trích xuất RA TỪ nhiều episode sau bước consolidation, không phải bản ghi thô của một lần thử như trong đề."
+  },
+  {
+    "id": "qb-026",
+    "number": 26,
+    "title": "Semantic memory — scenario diagnosis",
+    "topic": "semantic-memory",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "769fd77f-eec2-519b-99c0-f84e60f4b61a"
+    ],
+    "kind": "objective",
+    "prompt": "Agent cần retrieve kiến thức ổn định về chính sách/sản phẩm qua nhiều session. Lựa chọn phù hợp nhất?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Episodic memory, lưu lại từng lần agent đã trả lời về chính sách đó."
+      },
+      {
+        "id": "b",
+        "text": "Nhét toàn bộ policy vào system prompt và trông vào prefix/KV cache."
+      },
+      {
+        "id": "c",
+        "text": "Semantic memory có retrieval (vector store) kèm governance và versioning."
+      },
+      {
+        "id": "d",
+        "text": "Online feature store dạng key-value, tra cứu dưới 10ms cho mỗi lần gọi."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "B đội chi phí prefill và không scale theo số lượng policy; D trả lời “ta biết gì về user này”, không phải “kiến thức domain nào liên quan”."
+  },
+  {
+    "id": "qb-027",
+    "number": 27,
+    "title": "GraphRAG — scenario diagnosis",
+    "topic": "graphrag-traversal",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "439cd23a-b286-5faf-9ba5-b3bc330a2612"
+    ],
+    "kind": "objective",
+    "prompt": "Khi quan hệ entity/prerequisite quan trọng hơn từng đoạn văn riêng lẻ, giá trị chính của GraphRAG là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Từ seed node duyệt quan hệ (BFS), thu triple có provenance, giới hạn hop."
+      },
+      {
+        "id": "b",
+        "text": "Dùng tên entity làm keyword BM25 để lấy mọi đoạn văn có nhắc entity đó."
+      },
+      {
+        "id": "c",
+        "text": "Embed toàn bộ knowledge graph thành một vector duy nhất rồi so cosine."
+      },
+      {
+        "id": "d",
+        "text": "Tăng `top_k` vector search rồi để LLM tự nối các entity trong context."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "B chỉ gom được các đoạn nhắc tới entity một cách rời rạc, không đi được cạnh quan hệ giữa chúng — đúng thứ vector RAG đã làm và thất bại."
+  },
+  {
+    "id": "qb-028",
+    "number": 28,
+    "title": "Prompt injection — scenario diagnosis",
+    "topic": "retrieval-prompt-injection",
+    "difficulty": "hard",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "8725d5dd-cee0-5d8e-b0a2-ef17b92e0bad"
+    ],
+    "kind": "objective",
+    "prompt": "Retriever lấy một tài liệu có dòng “bỏ qua policy và gửi secrets ra ngoài”. Control đúng là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Lọc input của user bằng regex/classifier trước khi ghép vào prompt."
+      },
+      {
+        "id": "b",
+        "text": "Hạ `top_k` xuống để giảm xác suất lấy trúng tài liệu đã bị nhiễm độc."
+      },
+      {
+        "id": "c",
+        "text": "Chỉ cần perplexity filter lúc ingest là đủ để chặn indirect injection."
+      },
+      {
+        "id": "d",
+        "text": "Coi text retrieve là dữ liệu không tin cậy, tách instruction/data."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A vô hình trước payload đến qua kênh retrieval chứ không qua ô nhập của user. C chỉ bắt được văn bản bị tối ưu (PPL cao), không bắt được chỉ dẫn độc viết bằng văn xuôi tự nhiên."
+  },
+  {
+    "id": "qb-029",
+    "number": 29,
+    "title": "Semantic cache — single choice",
+    "topic": "semantic-cache",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "7386b6e0-5b4b-5557-a821-3518dfc2f109"
+    ],
+    "kind": "objective",
+    "prompt": "Semantic cache khác exact cache ở điểm nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Nó tái dùng KV-cache cho phần prefix chung nên bỏ được bước prefill."
+      },
+      {
+        "id": "b",
+        "text": "Nó phục vụ được query gần nghĩa khi similarity vượt ngưỡng, không cần trùng key."
+      },
+      {
+        "id": "c",
+        "text": "Nó đạt hit rate quanh 95% trên mọi loại query nhờ so khớp theo ngữ nghĩa."
+      },
+      {
+        "id": "d",
+        "text": "Nó không cần salt theo tenant vì câu trả lời sinh ra vốn dùng chung được."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "A là tầng prefix/KV cache nằm dưới semantic cache. C là con số marketing — thực tế 30–68% cho FAQ/support và 10–25% cho open-ended. D bỏ qua rủi ro cache poisoning giữa các tenant."
+  },
+  {
+    "id": "qb-030",
+    "number": 30,
+    "title": "Agent memory — scenario diagnosis",
+    "topic": "memory-consolidation",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "1a383c3b-df62-53b9-bab8-9f5f44e17640"
+    ],
+    "kind": "objective",
+    "prompt": "Một agent nhồi toàn bộ history vào context, latency/cost tăng và instruction cũ gây nhiễu. Bước cải thiện đầu tiên hợp lý là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Bật semantic cache để cắt chi phí cho những câu hỏi lặp lại nhiều lần."
+      },
+      {
+        "id": "b",
+        "text": "Cắt bỏ mọi lượt cũ hơn 10 message để giữ cho context window luôn gọn."
+      },
+      {
+        "id": "c",
+        "text": "Chia memory theo tầng, consolidation/summary và retrieval chọn lọc theo task."
+      },
+      {
+        "id": "d",
+        "text": "Đổi sang model có context window 1M token để chứa hết lịch sử hội thoại."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "A không đụng tới việc context bị nhồi; B làm mất fact quan trọng lẫn với instruction cũ; D đắt hơn mà vẫn giữ nguyên nhiễu từ instruction cũ."
+  },
+  {
+    "id": "qb-031",
+    "number": 31,
+    "title": "HITL anti-pattern — scenario diagnosis",
+    "topic": "hitl-gating",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "ecd98cfc-e747-5961-8939-7a76606c9558"
+    ],
+    "kind": "objective",
+    "prompt": "Đội đặt cổng duyệt cho mọi tool call của agent. Người duyệt thấy đầy đủ context từng request, nhưng sau hai tuần tỉ lệ approve là 98% và họ bắt đầu bấm duyệt không đọc. Vấn đề cốt lõi là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Cổng duyệt đặt quá rộng nên bão hoà, biến review thành rubber stamp."
+      },
+      {
+        "id": "b",
+        "text": "Người duyệt thiếu context nên không đánh giá được từng request một."
+      },
+      {
+        "id": "c",
+        "text": "Chưa có feedback loop nên agent không cải thiện được theo thời gian."
+      },
+      {
+        "id": "d",
+        "text": "Chưa đo tỉ lệ approve/reject nên không biết cổng đang hoạt động ra sao."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "B bị đề bài loại trừ vì người duyệt đã có đủ context. C và D là anti-pattern thật nhưng không giải thích được vì sao 98% request lọt qua: nguyên nhân là cổng chặn cả những ca vô hại."
+  },
+  {
+    "id": "qb-032",
+    "number": 32,
+    "title": "Confidence gating — scenario diagnosis",
+    "topic": "confidence-calibration",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "fcb73a48-a31c-5d2b-9992-13ad52cd4acd"
+    ],
+    "kind": "objective",
+    "prompt": "Một thiết kế HITL route sang người khi model báo `confidence < 0.7`. Vì sao đây là cổng yếu?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Ngưỡng 0.7 quá thấp; nâng lên 0.9 sẽ bắt được nhiều ca rủi ro hơn hẳn."
+      },
+      {
+        "id": "b",
+        "text": "Confidence model tự nói thường lệch cao; nên route theo loại hành động."
+      },
+      {
+        "id": "c",
+        "text": "Nên lấy trung bình confidence của ba lần chạy để giảm phương sai đi."
+      },
+      {
+        "id": "d",
+        "text": "Nên bỏ hẳn HITL vì confidence không bao giờ đo được một cách đáng tin."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Verbalized confidence có xu hướng lệch cao — model nói “95% chắc chắn” cho cả câu trả lời sai — nên A chỉ dời một con số vốn đã không đáng tin. C giảm phương sai chứ không sửa được bias. Chưa đo calibration thì mọi ngưỡng đều là con số bịa cho có vẻ khoa học."
+  },
+  {
+    "id": "qb-033",
+    "number": 33,
+    "title": "Tool permission — single choice",
+    "topic": "tool-permission",
+    "difficulty": "hard",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "08203f6e-0435-5e6f-83ce-5e60baf561e0"
+    ],
+    "kind": "objective",
+    "prompt": "Agent đang chạy ở chế độ `bypassPermissions`. Cấu hình nào thực sự chặn cứng được một tool nguy hiểm?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Bỏ tool đó khỏi `allowed_tools` để nó không còn được cấp quyền nữa."
+      },
+      {
+        "id": "b",
+        "text": "Đặt permission mode chặt hơn ngay tại thời điểm gọi tool đó."
+      },
+      {
+        "id": "c",
+        "text": "Khai tool đó trong `disallowed_tools`, hoặc chặn bằng PreToolUse hook."
+      },
+      {
+        "id": "d",
+        "text": "Thêm allow rule hẹp hơn, vì allow rules chạy sau permission mode."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "`allowed_tools` không ràng buộc được `bypassPermissions` — tool không nằm trong danh sách vẫn lọt theo mode, nên A và D đều vô hiệu. Riêng PreToolUse hook chặn được kể cả khi `bypassPermissions` đang bật."
+  },
+  {
+    "id": "qb-034",
+    "number": 34,
+    "title": "MCP OAuth — single choice",
+    "topic": "mcp-oauth",
+    "difficulty": "hard",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "eaacc828-fb95-5f81-8c24-4d7602342f99"
+    ],
+    "kind": "objective",
+    "prompt": "Spec MCP cấm server nhận token không được cấp riêng cho nó. Tác hại chính của token passthrough là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Làm token hết hạn sớm hơn dự kiến ở service phía sau proxy."
+      },
+      {
+        "id": "b",
+        "text": "Buộc client phải đăng ký lại theo Dynamic Client Registration."
+      },
+      {
+        "id": "c",
+        "text": "Khiến discovery phải fallback về `.well-known` thay vì dùng header."
+      },
+      {
+        "id": "d",
+        "text": "Vô hiệu hoá rate limiting và audit trail ở service phía sau."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "B và C đều là chi tiết có thật của spec OAuth cho MCP nhưng thuộc bẫy khác: DCR đang bị khai tử, còn thay đổi discovery là hệ quả của RFC 9728. Không cái nào là lý do spec dùng chữ MUST NOT."
+  },
+  {
+    "id": "qb-035",
+    "number": 35,
+    "title": "Confused deputy — scenario diagnosis",
+    "topic": "mcp-oauth",
+    "difficulty": "hard",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "eaacc828-fb95-5f81-8c24-4d7602342f99"
+    ],
+    "kind": "objective",
+    "prompt": "Một MCP proxy xác thực đúng user rồi chuyển tiếp mọi `client_id` nhận được. Lỗ hổng ở đây là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Token của user bị chuyển tiếp nguyên vẹn sang service phía sau."
+      },
+      {
+        "id": "b",
+        "text": "Discovery không còn dùng `WWW-Authenticate` theo RFC 9728 nữa."
+      },
+      {
+        "id": "c",
+        "text": "Thiếu khai `application_type` tại thời điểm đăng ký client mới."
+      },
+      {
+        "id": "d",
+        "text": "Xác thực đúng user không đồng nghĩa uỷ quyền cho client đó."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "Proxy phải giữ registry `client_id` đã duyệt theo từng user và kiểm tra trước mỗi flow. A mô tả bẫy token passthrough, một lỗi khác; B và C là chi tiết discovery và đăng ký, không liên quan tới việc client chưa được uỷ quyền."
+  },
+  {
+    "id": "qb-036",
+    "number": 36,
+    "title": "Health probe — scenario diagnosis",
+    "topic": "health-probes",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "6660a2f8-4825-5f55-8d5c-a89e323c90e2"
+    ],
+    "kind": "objective",
+    "prompt": "Container agent bị restart liên tục dù process vẫn phục vụ được; chỉ có vector store đang chậm. Sai cấu hình nằm ở đâu?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Đưa kiểm tra dependency vào liveness thay vì vào readiness probe."
+      },
+      {
+        "id": "b",
+        "text": "Đặt startup probe gate hai probe còn lại khi container boot chậm."
+      },
+      {
+        "id": "c",
+        "text": "Trả về `status: degraded` thay vì `ok` trong health endpoint."
+      },
+      {
+        "id": "d",
+        "text": "Thiếu trường `uptime`, `version` và `dependencies` trong payload health."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "Liveness fail thì restart container, readiness fail chỉ gỡ khỏi load balancer — nhầm hai cái tạo restart loop vô ích. B là cấu hình đúng cho boot chậm; C và D không gây restart."
+  },
+  {
+    "id": "qb-037",
+    "number": 37,
+    "title": "Durable execution — single choice",
+    "topic": "durable-execution",
+    "difficulty": "hard",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "6d327e5f-4376-51c0-96b4-e025f931548c"
+    ],
+    "kind": "objective",
+    "prompt": "Agent crash ở bước 7 sau khi đã gọi 4 tool. Durable execution tránh trả tiền LLM lần nữa bằng cách nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Giảm nhiệt độ về 0 để lần chạy lại cho ra kết quả giống hệt lần đầu."
+      },
+      {
+        "id": "b",
+        "text": "Ghi output LLM vào journal; khi replay thì đọc lại, không gọi model."
+      },
+      {
+        "id": "c",
+        "text": "Lưu checkpoint ở mức node để node đã xong không phải chạy lại nữa."
+      },
+      {
+        "id": "d",
+        "text": "Bọc toàn bộ workflow trong một transaction có khả năng rollback."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "C là cơ chế có thật của LangGraph nhưng giải bài toán khác: checkpoint ở mức node, nên node chưa xong vẫn gọi lại cả LLM call. A làm output ổn định hơn nhưng vẫn tốn tiền gọi model."
+  },
+  {
+    "id": "qb-038",
+    "number": 38,
+    "title": "Checkpoint vs durable — scenario diagnosis",
+    "topic": "durable-execution",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "6d327e5f-4376-51c0-96b4-e025f931548c"
+    ],
+    "kind": "objective",
+    "prompt": "Vì sao “checkpoint” của LangGraph không tương đương durable execution?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vì checkpoint chỉ ghi state vào bộ nhớ chứ không ghi xuống đĩa."
+      },
+      {
+        "id": "b",
+        "text": "Vì checkpoint không lưu được kết quả của tool call ra hệ thống ngoài."
+      },
+      {
+        "id": "c",
+        "text": "Vì checkpoint ở mức node: node chưa xong sẽ gọi lại cả LLM call."
+      },
+      {
+        "id": "d",
+        "text": "Vì checkpoint không hỗ trợ resume sau khi process bị restart lại."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "A sai vì production dùng PostgresSaver ghi xuống đĩa; D sai vì resume chính là mục đích của checkpoint. Điểm khác biệt nằm ở độ hạt: journal ghi từng call, checkpoint ghi từng node."
+  },
+  {
+    "id": "qb-039",
+    "number": 39,
+    "title": "Session lifetime — scenario diagnosis",
+    "topic": "session-lifetime",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "eb7ecd35-3d78-5ae1-9321-763a454380f2"
+    ],
+    "kind": "objective",
+    "prompt": "Agent trên AgentCore chờ human approval 20 phút; quay lại thì mất sạch state. Nguyên nhân và cách tránh?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Session chạm trần 8 giờ; nên chia workflow thành nhiều session ngắn."
+      },
+      {
+        "id": "b",
+        "text": "MicroVM bị huỷ khi deploy bản mới; nên khoá deploy trong giờ cao điểm."
+      },
+      {
+        "id": "c",
+        "text": "Timeout mặc định của Modal là 5 phút; nên khai `timeout=` lớn hơn."
+      },
+      {
+        "id": "d",
+        "text": "Session chết vì idle 15 phút; phải externalize state ra ngoài runtime."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A nhầm trần tổng với idle timeout — 20 phút chưa chạm 8 giờ. C là con số có thật nhưng của Modal Sandbox, không phải AgentCore. State nằm ngoài runtime thì trần nào cũng vượt được."
+  },
+  {
+    "id": "qb-040",
+    "number": 40,
+    "title": "Framework vs runtime — single choice",
+    "topic": "framework-vs-runtime",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "2ece7f49-59ee-55cd-a0fd-bd668aaf1697"
+    ],
+    "kind": "objective",
+    "prompt": "Vì sao tài liệu vendor hay bị so sánh nhầm tầng khi chọn nền tảng agent?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vì mọi hãng đều đặt tên hai tầng giống hệt nhau nên rất khó phân biệt."
+      },
+      {
+        "id": "b",
+        "text": "Vì tầng framework luôn đóng nguồn còn tầng runtime thì luôn mở nguồn."
+      },
+      {
+        "id": "c",
+        "text": "Vì đổi framework và đổi runtime tốn công như nhau nên không cần tách."
+      },
+      {
+        "id": "d",
+        "text": "Vì framework quyết định code bạn viết, runtime quyết định ai trực sự cố."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "B sai ngay với ví dụ trong bảng: Strands Agents và deepagents đều mở nguồn ở tầng framework. C sai vì đổi framework là refactor còn đổi runtime chỉ là re-deploy — chi phí khác hẳn nhau."
+  },
+  {
+    "id": "qb-041",
+    "number": 41,
+    "title": "Memory lifecycle — single choice",
+    "topic": "memory-lifecycle",
+    "difficulty": "easy",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "cf63e42e-9e92-53a5-943f-58d50e5c60b3"
+    ],
+    "kind": "objective",
+    "prompt": "Theo khung Capture–Filter–Store–Retrieve, thứ nào KHÔNG tự động trở thành memory?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Toàn bộ chat history được giữ lại theo kiểu “lưu cho chắc”."
+      },
+      {
+        "id": "b",
+        "text": "Sự kiện đã qua bước filter về PII, chất lượng và relevance."
+      },
+      {
+        "id": "c",
+        "text": "Profile người dùng được truy lại khi có ích cho câu hỏi hiện tại."
+      },
+      {
+        "id": "d",
+        "text": "Trạng thái người dùng được giữ liên tục qua nhiều phiên làm việc."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "Prompt dài hơn, file PDF upload một lần không truy lại có chủ đích, và toàn bộ chat history đều tạo nhiễu nhiều hơn là hữu ích. B, C, D đều đã đi qua đủ ba thành phần data + policy + retrieval."
+  },
+  {
+    "id": "qb-042",
+    "number": 42,
+    "title": "Memory vs retrieval — scenario diagnosis",
+    "topic": "memory-vs-retrieval",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "cf63e42e-9e92-53a5-943f-58d50e5c60b3"
+    ],
+    "kind": "objective",
+    "prompt": "Agent “quên” mất context vừa retrieve ở lượt kế tiếp. Nhầm lẫn khái niệm nào gây ra chuyện này?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Nhầm working memory với episodic memory trong vocab chuẩn."
+      },
+      {
+        "id": "b",
+        "text": "Nhầm retrieval — context cho câu hỏi này — với memory giữ trạng thái."
+      },
+      {
+        "id": "c",
+        "text": "Nhầm bước Capture với bước Filter nên sự kiện không được lưu lại."
+      },
+      {
+        "id": "d",
+        "text": "Nhầm semantic memory với procedural memory lúc thiết kế store."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Retrieval tìm context cho câu hỏi hiện tại; memory giữ trạng thái người dùng qua thời gian. A và D là nhầm lẫn trong nội bộ vocab memory, không giải thích được vì sao context biến mất sau một lượt."
+  },
+  {
+    "id": "qb-043",
+    "number": 43,
+    "title": "Multi-agent — single choice",
+    "topic": "multi-agent-design",
+    "difficulty": "easy",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "92f6a307-eb7d-5e02-add8-2bc5302e2461"
+    ],
+    "kind": "objective",
+    "prompt": "Phát biểu nào đúng về việc tăng số lượng agent trong một hệ thống?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Nhiều agent giúp context được quản lý tự động ở từng worker."
+      },
+      {
+        "id": "b",
+        "text": "Nhiều agent luôn cho kết quả tốt hơn một agent đơn lẻ."
+      },
+      {
+        "id": "c",
+        "text": "Nhiều agent đồng nghĩa nhiều phức tạp, chỉ dùng khi thật cần."
+      },
+      {
+        "id": "d",
+        "text": "Nhiều agent cho phép supervisor dùng model nhỏ hơn hẳn."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "A là hiểu lầm phổ biến: context vẫn phải được quản lý cẩn thận ở từng worker. B đảo ngược đánh đổi thực tế. D trộn hai chuyện khác nhau — cỡ model của supervisor không phụ thuộc số worker."
+  },
+  {
+    "id": "qb-044",
+    "number": 44,
+    "title": "MCP vs A2A — single choice",
+    "topic": "mcp-vs-a2a",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "92f6a307-eb7d-5e02-add8-2bc5302e2461"
+    ],
+    "kind": "objective",
+    "prompt": "MCP và A2A khác nhau ở điểm nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "MCP dành cho agent nội bộ, A2A dành cho agent của bên thứ ba."
+      },
+      {
+        "id": "b",
+        "text": "MCP là chuẩn mở, còn A2A là giao thức riêng của một hãng."
+      },
+      {
+        "id": "c",
+        "text": "MCP chạy trên stdio, còn A2A bắt buộc phải chạy trên HTTP."
+      },
+      {
+        "id": "d",
+        "text": "MCP là tích hợp tool, còn A2A là uỷ quyền giữa các agent."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A và B chia theo ranh giới tổ chức và giấy phép, không phải theo chức năng. C lấy một chi tiết transport có thật của MCP rồi suy diễn thành ranh giới giữa hai giao thức."
+  },
+  {
+    "id": "qb-045",
+    "number": 45,
+    "title": "Supervisor sizing — scenario diagnosis",
+    "topic": "supervisor-routing",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "92f6a307-eb7d-5e02-add8-2bc5302e2461"
+    ],
+    "kind": "objective",
+    "prompt": "Chọn model cho supervisor trong một hệ multi-agent, nguyên tắc nào đúng?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Supervisor phải là model lớn nhất vì nó chịu trách nhiệm cuối cùng."
+      },
+      {
+        "id": "b",
+        "text": "Supervisor nên dùng chung model với mọi worker cho thật nhất quán."
+      },
+      {
+        "id": "c",
+        "text": "Supervisor chỉ cần đủ năng lực để route đúng sang worker phù hợp."
+      },
+      {
+        "id": "d",
+        "text": "Supervisor nên là model rẻ nhất vì nó không trực tiếp sinh nội dung."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "A là hiểu lầm mà bài gọi tên. D đúng hướng tiết kiệm nhưng lật sang cực ngược lại: rẻ nhất mà route sai thì cả hệ hỏng. Tiêu chí là đủ để route đúng, không phải lớn nhất hay rẻ nhất."
+  },
+  {
+    "id": "qb-046",
+    "number": 46,
+    "title": "Hai kiểu sai — scenario diagnosis",
+    "topic": "error-types",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "61ae3e8c-b1e1-5679-b774-cda7dfc88c2b"
+    ],
+    "kind": "objective",
+    "prompt": "Hệ kiểm duyệt nội dung của bạn chặn nhầm nhiều bài hợp lệ. Đây là kiểu sai nào và thiệt hại chính?",
+    "options": [
+      {
+        "id": "a",
+        "text": "False positive: tạo việc thừa và làm người dùng mất niềm tin."
+      },
+      {
+        "id": "b",
+        "text": "False negative: để lọt nội dung độc hại khỏi tầm kiểm soát."
+      },
+      {
+        "id": "c",
+        "text": "False positive: làm giảm recall nên bỏ sót ca thật sự cần bắt."
+      },
+      {
+        "id": "d",
+        "text": "False negative: khiến precision tụt vì báo nhầm quá nhiều lần."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "C gọi đúng tên kiểu sai nhưng gán nhầm hệ quả: báo nhầm ảnh hưởng precision, không phải recall. B và D mô tả kiểu sai ngược lại với triệu chứng đề bài."
+  },
+  {
+    "id": "qb-047",
+    "number": 47,
+    "title": "Precision & recall — single choice",
+    "topic": "precision-recall",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "154b4f78-509e-5e5a-8966-365196dda5ea"
+    ],
+    "kind": "objective",
+    "prompt": "AI quét 1.000 giao dịch, báo “đáng ngờ” 40 lần và đúng 30 lần. Thực tế có 50 giao dịch xấu. Precision và recall là bao nhiêu?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Precision 60%, recall 75%."
+      },
+      {
+        "id": "b",
+        "text": "Precision 75%, recall 60%."
+      },
+      {
+        "id": "c",
+        "text": "Precision 30%, recall 50%."
+      },
+      {
+        "id": "d",
+        "text": "Precision 40%, recall 30%."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Precision = 30/40 = 75% (số báo đúng chia tổng số lần báo “có”); recall = 30/50 = 60% (số bắt được chia tổng số ca thật sự cần bắt). A hoán đổi hai chỉ số — đây là lỗi phổ biến nhất."
+  },
+  {
+    "id": "qb-048",
+    "number": 48,
+    "title": "Output variance — single choice",
+    "topic": "nondeterminism",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "894e7ed1-438c-5a73-bc2c-237f0eba9572"
+    ],
+    "kind": "objective",
+    "prompt": "Cùng một input, hai lần chạy cho hai output khác nhau. Nên coi đây là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Một bug cần sửa bằng cách khoá seed và nhiệt độ của model."
+      },
+      {
+        "id": "b",
+        "text": "Một edge case hiếm, chỉ cần xử lý khi có user phàn nàn."
+      },
+      {
+        "id": "c",
+        "text": "Hành vi mặc định của hệ probabilistic, cần thiết kế quanh nó."
+      },
+      {
+        "id": "d",
+        "text": "Dấu hiệu behavioral drift do model vừa được nhà cung cấp cập nhật."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Nondeterminism là constraint để thiết kế vòng tránh, giống latency, chứ không phải bug để sửa. D là loại failure khác: drift là lệch dần theo thời gian, không phải khác nhau giữa hai lần chạy liền kề."
+  },
+  {
+    "id": "qb-049",
+    "number": 49,
+    "title": "Behavioral drift — scenario diagnosis",
+    "topic": "nondeterminism",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "894e7ed1-438c-5a73-bc2c-237f0eba9572"
+    ],
+    "kind": "objective",
+    "prompt": "Release thì đúng, vài tuần sau lệch, và đội chỉ biết chuyện đó qua complaint của user. Sai lầm thiết kế nào lộ ra ở đây?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Acceptance criteria nhị phân: vài test case xanh đã coi là đủ để ship."
+      },
+      {
+        "id": "b",
+        "text": "Giấu variance: không có nút regenerate và không framing confidence."
+      },
+      {
+        "id": "c",
+        "text": "Fallback là ý sau cùng: spec chỉ có một dòng hiện thông báo lỗi."
+      },
+      {
+        "id": "d",
+        "text": "Reasoning-level failure: các bước đều đúng nhưng tổ hợp ra kết quả sai."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "Vài test case là demo chứ không phải distribution, nên chúng giấu mất messy input và drift. B và C là hai sai lầm thiết kế khác trong cùng bài, còn D là một loại failure chứ không phải sai lầm thiết kế."
+  },
+  {
+    "id": "qb-050",
+    "number": 50,
+    "title": "Reasoning-level failure — scenario diagnosis",
+    "topic": "nondeterminism",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "894e7ed1-438c-5a73-bc2c-237f0eba9572"
+    ],
+    "kind": "objective",
+    "prompt": "Retrieval đúng, tool call đúng, dashboard toàn xanh, nhưng người dùng vẫn nhận câu trả lời sai. Đây là loại failure nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Output variance: hai lần chạy cho ra hai kết quả khác nhau."
+      },
+      {
+        "id": "b",
+        "text": "Reasoning-level failure: từng bước đúng nhưng tổ hợp ra kết quả sai."
+      },
+      {
+        "id": "c",
+        "text": "Behavioral drift: chất lượng lệch dần sau vài tuần chạy trong production."
+      },
+      {
+        "id": "d",
+        "text": "Fallback thiếu: hệ chỉ hiện một dòng thông báo lỗi khi gặp sự cố."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Đúng câu “monitoring shows all green, but the product fails”. A và C đều là loại failure có thật nhưng để lại dấu vết khác: variance lộ khi chạy lại, drift lộ khi so theo thời gian. D không phải loại failure mà là thiếu sót ở đường phục hồi."
+  },
+  {
+    "id": "qb-051",
+    "number": 51,
+    "title": "Ba loại evaluation — single choice",
+    "topic": "evaluation-types",
+    "difficulty": "easy",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "df0c48dd-5a3f-569d-b2da-e8a5b7e4334f"
+    ],
+    "kind": "objective",
+    "prompt": "Loại evaluation nào chạy liên tục trên traffic thật của production, không phải trên golden dataset?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Offline evaluation."
+      },
+      {
+        "id": "b",
+        "text": "Human evaluation."
+      },
+      {
+        "id": "c",
+        "text": "Online evaluation."
+      },
+      {
+        "id": "d",
+        "text": "A/B testing evaluation."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Offline chạy batch trên golden dataset mỗi release; human evaluation là expert review theo mẫu hàng tuần. Chỉ online mới theo dõi continuous trên real traffic."
+  },
+  {
+    "id": "qb-052",
+    "number": 52,
+    "title": "Chỉ dùng một loại eval — scenario diagnosis",
+    "topic": "evaluation-types",
+    "difficulty": "medium",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "df0c48dd-5a3f-569d-b2da-e8a5b7e4334f"
+    ],
+    "kind": "objective",
+    "prompt": "Một team chỉ chạy offline evaluation trên golden dataset trước mỗi release, không có gì khác. Rủi ro chính là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Golden dataset sẽ nhanh chóng bị data contamination do dùng lại nhiều lần."
+      },
+      {
+        "id": "b",
+        "text": "Không biết được chất lượng thực tế đang diễn ra trên production."
+      },
+      {
+        "id": "c",
+        "text": "RAGAS không tương thích với việc chạy offline theo batch."
+      },
+      {
+        "id": "d",
+        "text": "Human reviewer sẽ không còn việc gì để làm trong quy trình."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "A là rủi ro thật của golden dataset nhưng không phải hệ quả của việc thiếu online eval. Chỉ offline eval không cho biết chất lượng đang trôi dạt thế nào khi gặp traffic thật, đó là lý do bài học yêu cầu kết hợp cả ba loại."
+  },
+  {
+    "id": "qb-053",
+    "number": 53,
+    "title": "Công thức faithfulness — single choice",
+    "topic": "faithfulness-formula",
+    "difficulty": "easy",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "9b80c195-80d5-542e-9322-9a0aeb2d5e94"
+    ],
+    "kind": "objective",
+    "prompt": "Faithfulness được tính bằng công thức nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Số claims trong answer được context support, chia tổng số claims trong answer."
+      },
+      {
+        "id": "b",
+        "text": "Số chunks relevant trong top-k, chia tổng số chunk đã retrieve."
+      },
+      {
+        "id": "c",
+        "text": "Cosine similarity trung bình giữa câu hỏi gốc và các câu hỏi reverse."
+      },
+      {
+        "id": "d",
+        "text": "Số claims trong ground truth có mặt trong context, chia tổng claims ground truth."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "B mô tả context precision, C mô tả answer relevancy, D mô tả context recall — cả ba đều là công thức thật trong cùng bài nhưng của metric khác."
+  },
+  {
+    "id": "qb-054",
+    "number": 54,
+    "title": "Faithfulness không đo gì — scenario diagnosis",
+    "topic": "faithfulness-formula",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "9b80c195-80d5-542e-9322-9a0aeb2d5e94"
+    ],
+    "kind": "objective",
+    "prompt": "Context của một RAG chứa thông tin sai từ nguồn gốc, nhưng answer bám sát đúng context đó. Faithfulness score sẽ ra sao?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Faithfulness vẫn cao, vì nó chỉ đo grounded vào context, không đo sự thật."
+      },
+      {
+        "id": "b",
+        "text": "Faithfulness thấp, vì claim sai sẽ luôn bị đánh dấu không được support."
+      },
+      {
+        "id": "c",
+        "text": "Faithfulness không tính được vì context bị sai ngay từ khi ingest."
+      },
+      {
+        "id": "d",
+        "text": "Faithfulness sẽ tự động cộng thêm điểm context precision để bù trừ."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "Faithfulness chỉ kiểm claim có được context support hay không, không kiểm context đó đúng sự thật hay chưa — nên context sai mà answer bám sát vẫn cho faithfulness cao. Đây là giới hạn của metric, không phải lỗi tính toán."
+  },
+  {
+    "id": "qb-055",
+    "number": 55,
+    "title": "Answer relevancy — công thức — single choice",
+    "topic": "answer-relevancy-formula",
+    "difficulty": "medium",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "1993b471-cb06-52da-b98e-35720b07f5dc"
+    ],
+    "kind": "objective",
+    "prompt": "RAGAS tính Answer Relevancy bằng cách nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Đếm claim trong answer có mặt trong context, chia tổng số claim đó."
+      },
+      {
+        "id": "b",
+        "text": "Cho LLM sinh nhiều câu hỏi ngược từ answer, đo cosine với câu hỏi gốc."
+      },
+      {
+        "id": "c",
+        "text": "Đếm số chunk liên quan trong top-k rồi chia đều cho k."
+      },
+      {
+        "id": "d",
+        "text": "Cho hai LLM chấm điểm answer song song rồi lấy trung bình."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "A là công thức context recall, C là context precision — cùng nằm trong bộ bốn metric RAGAS nhưng đo thứ khác. Answer relevancy dùng reverse question generation rồi so cosine với câu hỏi gốc."
+  },
+  {
+    "id": "qb-056",
+    "number": 56,
+    "title": "Golden dataset — single choice",
+    "topic": "golden-dataset",
+    "difficulty": "easy",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "5dbe408a-509c-5a17-b34a-cd694d2d5dac"
+    ],
+    "kind": "objective",
+    "prompt": "Theo hướng dẫn xây golden dataset cho production, cỡ tối thiểu hợp lý là bao nhiêu?",
+    "options": [
+      {
+        "id": "a",
+        "text": "5–10 cặp câu hỏi, miễn có đủ expert review kỹ."
+      },
+      {
+        "id": "b",
+        "text": "20 cặp câu hỏi, dùng chung cho lab và production."
+      },
+      {
+        "id": "c",
+        "text": "50–100 cặp câu hỏi, expert viết, ít nhất hai người review."
+      },
+      {
+        "id": "d",
+        "text": "Càng nhiều càng tốt, không có ngưỡng dưới tối thiểu."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Dưới 20 test case được nói rõ là quá ít để kết luận có ý nghĩa thống kê; 20 chỉ đủ cho lab, còn production cần 50–100 với rule ít nhất hai expert review mỗi câu."
+  },
+  {
+    "id": "qb-057",
+    "number": 57,
+    "title": "LLM-as-Judge bias — scenario diagnosis",
+    "topic": "llm-judge-bias",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "a82a5bcf-4030-5b08-86d0-784423f24fac"
+    ],
+    "kind": "objective",
+    "prompt": "Một judge dựa trên GPT-4 liên tục chấm output của chính GPT-4 cao hơn output tương đương của model khác. Đây là bias nào và cách fix đúng?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Verbosity bias; fix bằng cách thêm rubric yêu cầu câu trả lời ngắn gọn."
+      },
+      {
+        "id": "b",
+        "text": "Position bias; fix bằng cách đảo ngẫu nhiên thứ tự hai câu trả lời."
+      },
+      {
+        "id": "c",
+        "text": "Self-preference bias; fix bằng cách dùng judge khác family model."
+      },
+      {
+        "id": "d",
+        "text": "Authority bias; fix bằng cách bỏ khung “Expert said” khỏi câu trả lời."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "A, B, D đều là bias thật trong cùng danh sách nhưng mô tả triệu chứng khác: dài hơn được điểm cao (verbosity), ưu tiên câu trả lời xuất hiện trước (position), bị ấn tượng bởi khung uy quyền (authority). Judge thiên vị output từ cùng họ model là self-preference."
+  },
+  {
+    "id": "qb-058",
+    "number": 58,
+    "title": "Vì sao cần chunking — single choice",
+    "topic": "chunking-rationale",
+    "difficulty": "easy",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "47619d4d-8fc1-52f4-9843-dc09b49bd1fd"
+    ],
+    "kind": "objective",
+    "prompt": "Dù model đã hỗ trợ context window vài triệu token, vì sao vẫn cần chunking tài liệu trước khi đưa vào vector search?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vì context window dài vẫn luôn rẻ hơn khi nhét nguyên văn bản vào prompt."
+      },
+      {
+        "id": "b",
+        "text": "Vì nhúng cả một chương vào một vector làm loãng ý chính, khó khớp câu hỏi cụ thể."
+      },
+      {
+        "id": "c",
+        "text": "Vì hầu hết vector database từ chối nhận input dài hơn một ngưỡng cố định."
+      },
+      {
+        "id": "d",
+        "text": "Vì LLM sẽ tự động bỏ qua phần văn bản nằm ngoài 4.000 token đầu tiên."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "A ngược với lý do thật: nhét nguyên văn bản vào prompt đắt và chậm hơn, không rẻ hơn. Chunking giải quyết bài toán mật độ ý nghĩa của vector search, không phải giới hạn kỹ thuật của DB hay của model."
+  },
+  {
+    "id": "qb-059",
+    "number": 59,
+    "title": "Overlap giữa các chunk — single choice",
+    "topic": "chunk-overlap",
+    "difficulty": "easy",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "bafd4302-ec2a-5f52-abd9-fc45c26799dc"
+    ],
+    "kind": "objective",
+    "prompt": "Overlap giữa hai chunk liền kề giải quyết vấn đề gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Giảm tổng số chunk cần lưu trữ trong vector database."
+      },
+      {
+        "id": "b",
+        "text": "Tăng tốc độ embedding vì chunk có phần trùng nhau xử lý nhanh hơn."
+      },
+      {
+        "id": "c",
+        "text": "Giữ mạch ngữ cảnh cho một ý bị cắt ngang qua ranh giới hai chunk."
+      },
+      {
+        "id": "d",
+        "text": "Cho phép reranker so sánh trực tiếp hai chunk liền kề với nhau."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Một ý quan trọng có thể vô tình bị chia làm hai mảnh nằm ở mép của hai chunk; overlap cho đoạn cuối chunk trước lặp lại ở đầu chunk sau, hoạt động như chất keo giữ mạch ngữ cảnh. Nó không giảm số chunk hay đổi tốc độ embedding."
+  },
+  {
+    "id": "qb-060",
+    "number": 60,
+    "title": "Vấn đề của top-K — scenario diagnosis",
+    "topic": "top-k-limitation",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "df099fed-7427-5f92-ac2f-fbfb17aef822"
+    ],
+    "kind": "objective",
+    "prompt": "Query \"thủ tục xin visa\" trả về top-8 kết quả, nhưng đoạn chứa đúng các bước thủ tục nằm ở vị trí thứ 8 chứ không phải thứ 1. Đây là biểu hiện của vấn đề gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Retriever quét thô và rộng nên tài liệu đúng có thể chìm sâu."
+      },
+      {
+        "id": "b",
+        "text": "Chunking sai nên tài liệu đúng bị cắt rời khỏi phần chứa từ khoá \"visa\"."
+      },
+      {
+        "id": "c",
+        "text": "Embedding model chưa fine-tune trên domain hành chính công."
+      },
+      {
+        "id": "d",
+        "text": "Overlap giữa chunk quá thấp nên chunk thứ 8 bị lạc chủ đề."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "Retriever được thiết kế để đánh giá liên quan một cách thô và rộng trên hàng triệu tài liệu, nên tài liệu đúng nhất có thể nằm ở top-10 chứ không phải top-1 — đây là đặc tính vốn có, không phải lỗi chunking hay embedding."
+  },
+  {
+    "id": "qb-061",
+    "number": 61,
+    "title": "MMR — single choice",
+    "topic": "mmr-diversity",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "76d94cb2-d8fd-5dc3-8451-3d506b3cc82f"
+    ],
+    "kind": "objective",
+    "prompt": "MMR (Maximum Marginal Relevance) tối ưu hoá điều gì khi chọn chunk?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Chỉ tối đa hoá độ liên quan với query, bỏ qua các chunk đã chọn trước đó."
+      },
+      {
+        "id": "b",
+        "text": "Tối đa hoá liên quan với query, đồng thời phạt nặng sự trùng lặp với chunk đã chọn."
+      },
+      {
+        "id": "c",
+        "text": "Tối thiểu hoá khoảng cách vector giữa các chunk được chọn với nhau."
+      },
+      {
+        "id": "d",
+        "text": "Chọn ngẫu nhiên trong top-K sau khi đã lọc theo ngưỡng similarity."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "A mô tả retrieval thường, chưa phải MMR. Công thức MMR trừ đi một penalty tỉ lệ với similarity giữa candidate và các chunk đã chọn, nên nó chủ động đẩy các chunk được chọn ra xa nhau — ngược với C."
+  },
+  {
+    "id": "qb-062",
+    "number": 62,
+    "title": "HNSW vs IVF vs DiskANN — scenario diagnosis",
+    "topic": "ann-index-choice",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "34814a5b-3709-52a7-b847-d635496d34a1"
+    ],
+    "kind": "objective",
+    "prompt": "Một hệ thống cần index hơn 100 triệu vector, ưu tiên chi phí thấp hơn latency cực nhỏ. Lựa chọn ANN index nào phù hợp nhất?",
+    "options": [
+      {
+        "id": "a",
+        "text": "HNSW, vì recall 95%+ ở khoảng 10ms là mức tốt nhất có thể đạt."
+      },
+      {
+        "id": "b",
+        "text": "IVF, vì cluster-based index luôn rẻ hơn graph-based index ở mọi quy mô."
+      },
+      {
+        "id": "c",
+        "text": "DiskANN, vì rẻ hơn HNSW 10–50 lần ở quy mô lớn nhờ chạy trên SSD."
+      },
+      {
+        "id": "d",
+        "text": "Không index nào phù hợp; phải chuyển sang brute-force full scan."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "HNSW là lựa chọn tốt nhưng bị giới hạn bởi RAM ở quy mô dưới 10M vector, không phù hợp với 100M+. B khẳng định sai — IVF chỉ tốt hơn cho batch-mode và corpus tĩnh, không phải \"mọi quy mô\". DiskANN được thiết kế đúng cho billion-scale với chi phí thấp hơn nhiều."
+  },
+  {
+    "id": "qb-063",
+    "number": 63,
+    "title": "Quantization — scenario diagnosis",
+    "topic": "vector-quantization",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "9dc2a872-5857-5c0f-9195-889453df8218"
+    ],
+    "kind": "objective",
+    "prompt": "Một team cần giảm RAM lưu vector nhiều nhất có thể và chấp nhận đánh đổi một phần recall. Nên chọn hướng nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Binary quantization, giảm RAM 32 lần, chấp nhận recall còn 95–98%."
+      },
+      {
+        "id": "b",
+        "text": "int8 scalar quantization, vì đây là lựa chọn tiết kiệm RAM nhiều nhất."
+      },
+      {
+        "id": "c",
+        "text": "Giữ nguyên float32, chỉ giảm số chiều embedding để tiết kiệm RAM."
+      },
+      {
+        "id": "d",
+        "text": "Asymmetric quantization, vì nó luôn rẻ hơn binary quantization thuần."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "B chỉ tiết kiệm 4 lần, ít hơn nhiều so với binary. D mô tả sai: asymmetric là \"best of both\" giữa lưu trữ rẻ và query chính xác, không hẳn rẻ hơn binary thuần — nó đánh đổi khác, không phải luôn thắng về chi phí lưu trữ."
+  },
+  {
+    "id": "qb-064",
+    "number": 64,
+    "title": "Filtered search — scenario diagnosis",
+    "topic": "filtered-search",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "539e30fa-539e-5578-8e68-7449fa7c0eb5"
+    ],
+    "kind": "objective",
+    "prompt": "Một hệ RAG áp metadata filter khớp khoảng 1% corpus. Sau khi lọc, recall sập mạnh mà không có lỗi nào được log. Nguyên nhân nhiều khả năng nhất là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Metadata field sai kiểu dữ liệu nên filter không khớp gì cả."
+      },
+      {
+        "id": "b",
+        "text": "Đang dùng post-filter: ANN lấy top-100 rồi mới lọc, lọc chặt còn rất ít."
+      },
+      {
+        "id": "c",
+        "text": "Vector database đang quá tải nên trả về kết quả không đầy đủ."
+      },
+      {
+        "id": "d",
+        "text": "Threshold similarity đặt quá cao nên kết quả bị loại trước khi lọc."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Post-filter xin top-100 rồi lọc sau; filter khớp 1% có thể chỉ còn 1 kết quả từ 100, và càng lọc chặt càng tệ — đúng cơ chế \"recall sập không báo lỗi\". Filtered-ANN đúng cách sẽ để index tự biết filter, tránh chính vấn đề này."
+  },
+  {
+    "id": "qb-065",
+    "number": 65,
+    "title": "Cosine similarity — myth — single choice",
+    "topic": "cosine-similarity-myth",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "cff3bf02-c83e-5fa7-b334-727f58378cc5"
+    ],
+    "kind": "objective",
+    "prompt": "Nghiên cứu Steck, Ekanadham & Kallus (WWW 2024) kết luận gì về cosine similarity của embedding đã học?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Cosine similarity luôn là lựa chọn tối ưu cho mọi embedding model hiện đại."
+      },
+      {
+        "id": "b",
+        "text": "Cosine similarity có thể cho kết quả tuỳ tiện và vô nghĩa với linear model regularized."
+      },
+      {
+        "id": "c",
+        "text": "Cosine similarity chỉ sai khi dùng cho văn bản tiếng Việt chưa chuẩn hoá."
+      },
+      {
+        "id": "d",
+        "text": "Cosine similarity luôn tốt hơn dot product chưa chuẩn hoá trong mọi trường hợp."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Cosine là một convention hiệu quả, không phải sự thật về ý nghĩa — nghiên cứu chỉ ra một số trường hợp cosine còn tệ hơn dot product chưa chuẩn hoá, ngược hẳn với D."
+  },
+  {
+    "id": "qb-066",
+    "number": 66,
+    "title": "Asymmetric search — scenario diagnosis",
+    "topic": "asymmetric-search",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "57af8aed-6f00-5c8f-aab7-30c7d7a71bf7"
+    ],
+    "kind": "objective",
+    "prompt": "Một hệ RAG dùng E5 embedding nhưng không thêm prefix `query:` / `passage:` khi encode. Hệ quả là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Model sẽ báo lỗi ngay lập tức vì thiếu tham số bắt buộc."
+      },
+      {
+        "id": "b",
+        "text": "Không có gì thay đổi vì prefix chỉ ảnh hưởng tốc độ encode."
+      },
+      {
+        "id": "c",
+        "text": "Embedding lệch calibration âm thầm, khiến xếp hạng sai mà không báo lỗi."
+      },
+      {
+        "id": "d",
+        "text": "Retrieval sẽ chuyển tự động sang chế độ symmetric search."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Bỏ prefix không báo lỗi — nó âm thầm tạo ra embedding lệch calibration và xếp hạng sai. Model không tự chuyển chế độ hay báo lỗi; nó vẫn chạy nhưng cho kết quả tệ hơn."
+  },
+  {
+    "id": "qb-067",
+    "number": 67,
+    "title": "Chunking bảng biểu — single choice",
+    "topic": "table-chunking",
+    "difficulty": "easy",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "453e8f31-ffea-56e9-8db5-f33d22b9029a"
+    ],
+    "kind": "objective",
+    "prompt": "Khi chunker cắt một bảng theo ký tự thông thường, chuyện gì xảy ra với quan hệ hàng–cột?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Header và giá trị có thể rơi vào hai chunk khác nhau, khó ghép lại đúng."
+      },
+      {
+        "id": "b",
+        "text": "Quan hệ hàng–cột được giữ nguyên nhờ Unicode table markers."
+      },
+      {
+        "id": "c",
+        "text": "Bảng tự động được chuyển thành Markdown table trước khi chunk."
+      },
+      {
+        "id": "d",
+        "text": "Chunker sẽ từ chối cắt bảng và giữ nguyên toàn bộ trong một chunk."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "Đây là \"điểm hỏng im lặng số một\": header \"Doanh thu Q2 2026\" có thể rơi vào chunk này, giá trị \"4,2 tỷ\" rơi vào chunk khác — mất quan hệ mà không có cách nào ở tầng retrieval khôi phục lại."
+  },
+  {
+    "id": "qb-068",
+    "number": 68,
+    "title": "Chunk quá to hay quá nhỏ — single choice",
+    "topic": "chunk-size-tradeoff",
+    "difficulty": "easy",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "216858ca-ab76-5147-841a-83b8e4703841"
+    ],
+    "kind": "objective",
+    "prompt": "Chunk dưới 50 token thường gây hậu quả gì khi retrieve?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Mất ngữ cảnh, phải retrieve nhiều mảnh rời rạc mới đủ thông tin."
+      },
+      {
+        "id": "b",
+        "text": "Retrieve trúng nhưng context bị nhiễu vì dính nhiều chủ đề."
+      },
+      {
+        "id": "c",
+        "text": "Chunk quá nhỏ khiến vector database từ chối index hoàn toàn."
+      },
+      {
+        "id": "d",
+        "text": "Không ảnh hưởng gì vì chunk nhỏ luôn tăng precision của retrieval."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "B là hệ quả của chunk quá to (>1000 token), không phải quá nhỏ. Chunk quá nhỏ làm mất ngữ cảnh và bắt hệ thống phải ghép nhiều mảnh rời rạc mới ra câu trả lời đầy đủ."
+  },
+  {
+    "id": "qb-069",
+    "number": 69,
+    "title": "Vì sao 512 token — single choice",
+    "topic": "chunk-size-512",
+    "difficulty": "easy",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "d84631a2-96f0-5da5-9ba4-40c76fbca01c"
+    ],
+    "kind": "objective",
+    "prompt": "Con số \"512 token\" từng phổ biến trong tutorial RAG có nguồn gốc từ đâu?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Giới hạn cứng của bảng positional embedding trong kiến trúc BERT năm 2018."
+      },
+      {
+        "id": "b",
+        "text": "Kết quả benchmark tối ưu trên tập dữ liệu retrieval đa ngôn ngữ BEIR."
+      },
+      {
+        "id": "c",
+        "text": "Khuyến nghị chính thức từ tài liệu kỹ thuật của OpenAI cho mọi embedding model."
+      },
+      {
+        "id": "d",
+        "text": "Giới hạn băng thông mạng khi truyền vector qua API vector database."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "Đây là giới hạn kiến trúc của một model cụ thể ra đời 2018, không phải một quy luật retrieval — nó sống sót qua vô số tutorial như một \"default\" lâu hơn hẳn lý do kỹ thuật ban đầu, dù embedder hiện đại đã vượt xa con số này."
+  },
+  {
+    "id": "qb-070",
+    "number": 70,
+    "title": "Filter làm sập recall — scenario diagnosis",
+    "topic": "filter-recall-collapse",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "1a3da951-5e82-5cb5-9565-cadc14194465"
+    ],
+    "kind": "objective",
+    "prompt": "Trên pgvector, một truy vấn xin 15 nearest neighbour có filter per-tenant chỉ trả về 11 dòng, không có exception, không có log lỗi. Cơ chế nào giải thích đúng nhất?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Post-filter chạy ANN trên toàn corpus rồi loại bỏ chunk không khớp, có thể mất recall âm thầm."
+      },
+      {
+        "id": "b",
+        "text": "Pre-filter thu hẹp tập con trước rồi mới search, luôn cho kết quả chính xác tuyệt đối."
+      },
+      {
+        "id": "c",
+        "text": "In-algorithm traversal đã tự nhận biết filter nên không thể xảy ra tình huống này."
+      },
+      {
+        "id": "d",
+        "text": "Đây là bug của riêng pgvector, các vector database khác không gặp vấn đề này."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "B mô tả đúng pre-filter nhưng nó cho kết quả đúng (dù suy biến hiệu năng), không giải thích được triệu chứng thiếu dòng không báo lỗi. Cơ chế `hnsw.iterative_scan` tồn tại để vá lỗi post-filter này nhưng mặc định đang tắt — đây không phải bug riêng của một DB."
+  },
+  {
+    "id": "qb-071",
+    "number": 71,
+    "title": "RRF — single choice",
+    "topic": "rrf-formula",
+    "difficulty": "easy",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "bfb2240d-e03f-5eb2-bbbf-62947ef4d6c2"
+    ],
+    "kind": "objective",
+    "prompt": "RRF (Reciprocal Rank Fusion) hợp nhất kết quả của các retriever dựa trên đại lượng nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Điểm số thô (raw score) đã được chuẩn hoá về cùng một thang đo."
+      },
+      {
+        "id": "b",
+        "text": "Trung bình cộng của cosine similarity và điểm BM25."
+      },
+      {
+        "id": "c",
+        "text": "Thứ hạng (rank) của tài liệu trong từng danh sách kết quả."
+      },
+      {
+        "id": "d",
+        "text": "Số lần một tài liệu xuất hiện trong top-1 của mỗi retriever."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "RRF fuse theo vị trí rank, không theo score thô — chính vì vậy nó né được bài toán chuẩn hoá score chéo hệ giữa BM25 và cosine, thứ mà A và B đều đòi hỏi phải giải quyết trước."
+  },
+  {
+    "id": "qb-072",
+    "number": 72,
+    "title": "PII trước khi embed — single choice",
+    "topic": "pii-masking",
+    "difficulty": "easy",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "100b1e8e-2a8b-5317-a825-da3e65b24f78"
+    ],
+    "kind": "objective",
+    "prompt": "Vì sao cần mask PII trước khi embed, thay vì mask sau khi đã lưu vào vector store?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vì vector database không cho phép xoá hoặc sửa dữ liệu sau khi đã index."
+      },
+      {
+        "id": "b",
+        "text": "Vì việc mask sau khi embed sẽ làm tăng đáng kể độ trễ truy vấn."
+      },
+      {
+        "id": "c",
+        "text": "Embedding có thể bị đảo ngược gần đúng, nên vector không phải dữ liệu ẩn danh."
+      },
+      {
+        "id": "d",
+        "text": "Vì các quy định pháp lý chỉ áp dụng cho dữ liệu ở dạng văn bản thô."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Nghiên cứu được trích dẫn (Morris et al., EMNLP 2023) cho thấy embedding không phải dữ liệu đã ẩn danh — nó có thể bị đảo ngược gần đúng nguyên văn, nên PII phải bị mask từ trước khi embed, không phải xử lý sau."
+  },
+  {
+    "id": "qb-073",
+    "number": 73,
+    "title": "ETL vs ELT — single choice",
+    "topic": "etl-vs-elt",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "e6ac0ab6-bc2a-54f2-ac11-46d8ac48229b"
+    ],
+    "kind": "objective",
+    "prompt": "Theo xu hướng pipeline hiện đại trên cloud lakehouse, mô hình nào là mặc định và vì sao?",
+    "options": [
+      {
+        "id": "a",
+        "text": "ETL, vì transform trước khi load luôn an toàn hơn cho dữ liệu nhạy cảm."
+      },
+      {
+        "id": "b",
+        "text": "EtLT, vì đây là chuẩn duy nhất được các nhà cung cấp cloud khuyến nghị."
+      },
+      {
+        "id": "c",
+        "text": "ELT, vì compute trên lakehouse rẻ nên transform thực hiện tại chỗ sau khi load raw."
+      },
+      {
+        "id": "d",
+        "text": "Không có mặc định cố định; lựa chọn hoàn toàn tuỳ ý theo sở thích riêng của đội ngũ."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "ETL vẫn có chỗ đứng cho việc mask PII trước khi load hoặc khi compute yếu, nhưng đó là ngoại lệ chứ không phải mặc định. Thực tế phần lớn pipeline là EtLT — extract-time transform nhẹ rồi heavy transform trong warehouse — chứ không phải một chuẩn cứng nhắc."
+  },
+  {
+    "id": "qb-074",
+    "number": 74,
+    "title": "CDC — single choice",
+    "topic": "change-data-capture",
+    "difficulty": "easy",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "425c3062-836d-560e-bb48-4a6540708fff"
+    ],
+    "kind": "objective",
+    "prompt": "CDC (Change Data Capture) log-based hoạt động bằng cách nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Query định kỳ toàn bộ bảng rồi so sánh khác biệt với lần trước."
+      },
+      {
+        "id": "b",
+        "text": "Chỉ theo dõi cột `updated_at` để lọc bản ghi mới thay đổi."
+      },
+      {
+        "id": "c",
+        "text": "Yêu cầu ứng dụng gọi webhook mỗi khi có thay đổi dữ liệu."
+      },
+      {
+        "id": "d",
+        "text": "Đọc transaction log của database để stream mọi insert/update/delete."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "B mô tả cursor-based incremental extract, một pattern khác nhẹ hơn nhưng không bắt được delete. CDC log-based đọc trực tiếp transaction log nên bắt được cả delete, độ trễ thấp và không tải nặng DB nguồn."
+  },
+  {
+    "id": "qb-075",
+    "number": 75,
+    "title": "Dead-letter queue — scenario diagnosis",
+    "topic": "dlq-triage",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "b7f32b8d-30cb-5d4c-9e75-24b6d8e87fe3"
+    ],
+    "kind": "objective",
+    "prompt": "Một bản ghi vào pipeline bị thiếu trường bắt buộc do lỗi schema ở nguồn, cần kỹ sư sửa tay rồi mới xử lý lại được. Bản ghi này thuộc nhóm DLQ nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Retriable — hệ thống sẽ tự động replay sau một khoảng thời gian ngắn."
+      },
+      {
+        "id": "b",
+        "text": "Không thuộc nhóm nào vì lỗi schema không đi qua validation gate."
+      },
+      {
+        "id": "c",
+        "text": "Poison — không bao giờ được xử lý, chỉ archive và gửi alert."
+      },
+      {
+        "id": "d",
+        "text": "Fixable — cần kỹ sư sửa schema hoặc dữ liệu thiếu rồi mới replay lại."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "Retriable dành cho lỗi transient tự hết; Poison dành cho bản ghi không bao giờ qua được, chỉ archive. Lỗi schema thiếu trường cần con người can thiệp sửa rồi mới replay được, đúng định nghĩa Fixable."
+  },
+  {
+    "id": "qb-076",
+    "number": 76,
+    "title": "Idempotency trong pipeline — single choice",
+    "topic": "pipeline-idempotency",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "7b5a93ce-00a1-59b8-955f-dd4b8bd6b847"
+    ],
+    "kind": "objective",
+    "prompt": "Một pipeline batch cần an toàn khi bị chạy lại nhiều lần mà không nhân đôi dữ liệu. Pattern idempotent phù hợp là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Append thêm dữ liệu mới vào cuối bảng ở mỗi lần chạy."
+      },
+      {
+        "id": "b",
+        "text": "Chỉ ghi log mà không thực sự ghi dữ liệu khi phát hiện trùng lặp."
+      },
+      {
+        "id": "c",
+        "text": "Tăng tần suất chạy pipeline để giảm khối lượng mỗi lần ghi."
+      },
+      {
+        "id": "d",
+        "text": "Overwrite-partition: ghi đè cửa sổ dữ liệu thay vì append thêm."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A chính là cách gây nhân đôi rows khi replay — ngược hẳn với yêu cầu idempotent. Overwrite-partition ghi đè toàn bộ cửa sổ đang reprocess, nên chạy lại bao nhiêu lần cũng không nhân đôi dữ liệu."
+  },
+  {
+    "id": "qb-077",
+    "number": 77,
+    "title": "temperature=0 — scenario diagnosis",
+    "topic": "temperature-zero-myth",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "f1d2a967-29ca-59be-a43a-2610b56200ab"
+    ],
+    "kind": "objective",
+    "prompt": "Một team đặt `temperature=0` và tin rằng output sẽ giống hệt nhau mỗi lần chạy, nhưng vẫn thấy khác biệt khi đổi batch size. Nguyên nhân là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "`temperature=0` chỉ hoạt động đúng khi kèm theo một seed cố định."
+      },
+      {
+        "id": "b",
+        "text": "Đổi batch size làm đổi thứ tự cộng floating-point, cho kết quả khác nhau."
+      },
+      {
+        "id": "c",
+        "text": "Đây là lỗi triển khai riêng của một provider, không phải đặc tính chung."
+      },
+      {
+        "id": "d",
+        "text": "`temperature=0` chỉ áp dụng cho request đơn lẻ, không áp dụng khi chạy song song."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Đây không phải lỗi seed — bạn không \"sửa\" được từ phía application. Vì vậy đội ops nên gate trên \"% pass ≥ ngưỡng\" kèm khoảng tin cậy, không gate trên so khớp chuỗi chính xác."
+  },
+  {
+    "id": "qb-078",
+    "number": 78,
+    "title": "Prompt cache invalidation — scenario diagnosis",
+    "topic": "prompt-cache-invalidation",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "67fdbbf2-d41e-5a00-b89e-c76b8a00a5fe"
+    ],
+    "kind": "objective",
+    "prompt": "Một agent chỉ đổi nội dung của message hiện tại (không đổi tool definitions, system prompt hay model). Điều gì xảy ra với cache?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Toàn bộ cache bị huỷ, kể cả phần cache cho tools và system message."
+      },
+      {
+        "id": "b",
+        "text": "Cache cho tools và system message vẫn giữ nguyên; chỉ phần cache mới nhất bị huỷ."
+      },
+      {
+        "id": "c",
+        "text": "Không phần cache nào bị ảnh hưởng vì message không nằm trong phạm vi cache."
+      },
+      {
+        "id": "d",
+        "text": "Cache tự động được rebuild lại hoàn toàn từ đầu, bất kể thay đổi lớn hay nhỏ ra sao."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "Theo thứ bậc huỷ cache: đổi model hoặc tool definitions mới huỷ toàn bộ như A mô tả. Nội dung message chỉ huỷ phần cache liên quan tới message, còn tools và system message vẫn giữ nguyên."
+  },
+  {
+    "id": "qb-079",
+    "number": 79,
+    "title": "Online vs offline evaluation — single choice",
+    "topic": "online-offline-eval",
+    "difficulty": "easy",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "4cdcb3ba-d32b-55b4-85c9-61388476118f"
+    ],
+    "kind": "objective",
+    "prompt": "Offline evaluation chạy khi nào và trên dữ liệu gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Trước khi deploy, mỗi PR, trên dataset cố định."
+      },
+      {
+        "id": "b",
+        "text": "Sau deploy, continuous, trên mẫu traffic thật của production."
+      },
+      {
+        "id": "c",
+        "text": "Chỉ chạy một lần duy nhất khi mới ra mắt sản phẩm."
+      },
+      {
+        "id": "d",
+        "text": "Chạy song song với online eval trên cùng tập traffic."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "B mô tả đúng online evaluation — chạy sau deploy, liên tục, trên mẫu traffic thật. Offline eval dùng làm CI gate và regression detection trước mỗi lần đổi code, trên một dataset cố định chứ không phải traffic sống."
+  },
+  {
+    "id": "qb-080",
+    "number": 80,
+    "title": "Position bias của judge — scenario diagnosis",
+    "topic": "judge-position-bias",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "fa9f7207-9516-54a5-8b35-a0087edf243b"
+    ],
+    "kind": "objective",
+    "prompt": "Một golden eval set (n=100) dùng GPT-4 làm judge so sánh cặp câu trả lời A/B. Cách giảm position bias hiệu quả nhất cho tập golden này là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Đánh giá cả hai chiều (A,B) và (B,A) rồi lấy trung bình điểm."
+      },
+      {
+        "id": "b",
+        "text": "Cho phép judge trả lời \"tie\" để giảm buộc phải chọn một bên."
+      },
+      {
+        "id": "c",
+        "text": "Random hoá thứ tự mỗi lần gọi eval và gộp qua nhiều lần chạy."
+      },
+      {
+        "id": "d",
+        "text": "Chỉ dùng một chiều cố định (A,B) để tiết kiệm chi phí gọi API."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "C là lựa chọn hợp lý cho continuous monitoring vì rẻ hơn, nhưng với tập golden cố định (n=100) thì swap-and-average loại bỏ hoàn toàn bias dù tốn gấp đôi chi phí — đây là khuyến nghị riêng cho golden eval, không phải cho theo dõi liên tục."
+  },
+  {
+    "id": "qb-081",
+    "number": 81,
+    "title": "Prompt injection trực tiếp vs gián tiếp — single choice",
+    "topic": "prompt-injection-types",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "49d90e88-5904-52d0-ab4f-d1408a2f716d"
+    ],
+    "kind": "objective",
+    "prompt": "Vì sao indirect prompt injection được coi là nguy hiểm hơn direct injection?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vì indirect injection dùng payload dài hơn nên khó bị input validator chặn."
+      },
+      {
+        "id": "b",
+        "text": "Vì indirect injection chỉ xảy ra khi hệ thống không có RAG."
+      },
+      {
+        "id": "c",
+        "text": "Vì user không thấy được attack, và agent có thể âm thầm rò rỉ dữ liệu."
+      },
+      {
+        "id": "d",
+        "text": "Vì indirect injection luôn nhắm vào system prompt thay vì dữ liệu."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Direct injection nằm trong input của chính user nên còn nhìn thấy được; indirect injection nằm trong tài liệu hoặc kết quả tool mà agent retrieve, nên vô hình với user trong khi agent vẫn \"obey\" theo nội dung độc."
+  },
+  {
+    "id": "qb-082",
+    "number": 82,
+    "title": "OWASP LLM Top 10 — single choice",
+    "topic": "owasp-llm-top10",
+    "difficulty": "easy",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "111e552a-5b8e-59db-80be-4a07024775db"
+    ],
+    "kind": "objective",
+    "prompt": "Theo danh sách OWASP LLM Top 10 (2025), \"Excessive Agency\" thuộc rủi ro nào và mitigation chính là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "LLM03 Supply Chain; mitigation là pin phiên bản model và audit vendor."
+      },
+      {
+        "id": "b",
+        "text": "LLM01 Prompt Injection; mitigation là input filter theo chiều sâu."
+      },
+      {
+        "id": "c",
+        "text": "LLM09 Misinformation; mitigation là faithfulness check và citation."
+      },
+      {
+        "id": "d",
+        "text": "LLM06 Excessive Agency; mitigation là giới hạn quyền của tool và thêm HITL."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A, B, C đều là rủi ro thật trong cùng danh sách OWASP nhưng ứng với mã và mitigation khác — mỗi rủi ro trong bảng có mã và cách chống riêng, không thể hoán đổi."
+  },
+  {
+    "id": "qb-083",
+    "number": 83,
+    "title": "Over-filtering trap — scenario diagnosis",
+    "topic": "over-filtering-trap",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "52c04a6e-389c-508a-9962-58fc67a2bd00"
+    ],
+    "kind": "objective",
+    "prompt": "Một chatbot có refuse rate vượt 10%, người dùng bắt đầu học cách viết lại câu hỏi để né guardrail. Đây là dấu hiệu của vấn đề gì và hướng fix đúng?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Guardrail đang hoạt động đúng như thiết kế; refuse rate cao là chấp nhận được."
+      },
+      {
+        "id": "b",
+        "text": "Đây là lỗi của model nền tảng, cần đổi sang model khác để giảm refuse rate."
+      },
+      {
+        "id": "c",
+        "text": "Cần bổ sung thêm một lớp guardrail nữa để chặn chặt hơn các câu hỏi né tránh."
+      },
+      {
+        "id": "d",
+        "text": "Topic scope hoặc safety classifier quá nhạy; nên đo refuse rate và target về dưới khoảng 3%."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A sai vì refuse rate cao gây trải nghiệm tệ và khiến user bỏ sang đối thủ — \"guardrail mạnh\" không đồng nghĩa \"guardrail tốt\". C càng làm trầm trọng hơn triệu chứng, ngược hướng cần thiết là đo và siết lại ngưỡng, không phải chặn chặt thêm."
+  },
+  {
+    "id": "qb-084",
+    "number": 84,
+    "title": "Giới hạn của single-agent — single choice",
+    "topic": "single-agent-limits",
+    "difficulty": "easy",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "3c437620-ad5a-54a2-9627-2225c8c75482"
+    ],
+    "kind": "objective",
+    "prompt": "Khi một agent phải giữ quá nhiều mục tiêu, tool output và state trong cùng một lần suy luận, giới hạn nào của single-agent đang bộc lộ?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Specialization trade-off — agent ôm nhiều vai thì khó giỏi đều."
+      },
+      {
+        "id": "b",
+        "text": "Reliability yếu — lỗi ở đầu luồng kéo lệch toàn bộ hệ thống."
+      },
+      {
+        "id": "c",
+        "text": "Parallelism hạn chế — agent chạy tuần tự nên latency tăng."
+      },
+      {
+        "id": "d",
+        "text": "Context bottleneck — context window có giới hạn cứng."
+      }
+    ],
+    "answerKey": "d",
+    "explanation": "A, B, C đều là giới hạn thật của single-agent nhưng mô tả triệu chứng khác: A là về việc ôm nhiều vai trong prompt, C là về việc chạy tuần tự, B là về lan truyền lỗi. Triệu chứng \"giữ quá nhiều thứ trong một lần suy luận\" khớp đúng với giới hạn context window."
+  },
+  {
+    "id": "qb-085",
+    "number": 85,
+    "title": "MCP vs A2A — scenario diagnosis",
+    "topic": "mcp-vs-a2a-boundary",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "a10a0f77-7957-5e63-a9cf-1115a7207f6b"
+    ],
+    "kind": "objective",
+    "prompt": "Một hệ thống cần một agent giao việc cho agent khác, để agent kia tự quyết định cách thực hiện. Nên thiết kế theo giao thức nào?",
+    "options": [
+      {
+        "id": "a",
+        "text": "MCP, vì MCP kết nối agent với mọi loại năng lực bên ngoài."
+      },
+      {
+        "id": "b",
+        "text": "A2A, vì phía nhận việc có thể tự quyết định, không chỉ thực thi."
+      },
+      {
+        "id": "c",
+        "text": "MCP, vì MCP có trọng tâm là message contract rõ ràng giữa hai bên."
+      },
+      {
+        "id": "d",
+        "text": "Cả hai đều tương đương nên chọn giao thức nào cũng được."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "MCP trả lời câu hỏi \"agent lấy năng lực ở đâu\" — phía tool không có agency, chỉ thực thi. A2A trả lời câu hỏi \"agent giao việc cho ai\" — phía nhận việc có thể ra quyết định, đúng với yêu cầu của tình huống."
+  },
+  {
+    "id": "qb-086",
+    "number": 86,
+    "title": "Routing pattern — scenario diagnosis",
+    "topic": "routing-pattern-cost",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "a1828386-30ee-591e-a794-b0b6a4c6123f"
+    ],
+    "kind": "objective",
+    "prompt": "Một hệ thống có 70% câu hỏi đơn giản và 30% câu hỏi phức tạp. Routing pattern tiết kiệm chi phí bằng cách nào, và rủi ro chính là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Luôn dùng model lớn cho mọi câu hỏi để đảm bảo chất lượng đồng đều."
+      },
+      {
+        "id": "b",
+        "text": "Phân loại câu hỏi, gửi easy sang model nhỏ và hard sang model lớn để tối ưu chi phí."
+      },
+      {
+        "id": "c",
+        "text": "Chia đôi ngẫu nhiên số câu hỏi cho hai model bất kể độ khó thật sự."
+      },
+      {
+        "id": "d",
+        "text": "Dùng model lớn phân loại rồi vẫn xử lý toàn bộ bằng chính model lớn đó."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "A không tiết kiệm được chi phí — đó chính là vấn đề routing giải quyết. Routing chỉ hiệu quả khi phân loại chính xác; phân loại sai nghĩa là câu hard bị gửi cho model nhỏ, kết quả kém — đây là rủi ro thật được nêu rõ trong bài."
+  },
+  {
+    "id": "qb-087",
+    "number": 87,
+    "title": "Supervisor pattern — single choice",
+    "topic": "supervisor-hub-spoke",
+    "difficulty": "easy",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "d411e20a-b17f-557e-a7c8-ab6ffbfd46cc"
+    ],
+    "kind": "objective",
+    "prompt": "Trong kiến trúc Supervisor hub-spoke, vai trò của supervisor là gì?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Thực thi trực tiếp mọi tác vụ thay vì các worker chuyên biệt."
+      },
+      {
+        "id": "b",
+        "text": "Chỉ lưu trữ shared state, không tham gia quyết định điều phối."
+      },
+      {
+        "id": "c",
+        "text": "Nhận task, decompose, route đến worker phù hợp và aggregate kết quả."
+      },
+      {
+        "id": "d",
+        "text": "Là một worker có tool riêng giống hệt các worker khác."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "Supervisor là một LLM router — nó không tự làm việc của worker như A, không chỉ lưu state thụ động như B, và không phải một worker ngang hàng như D. Nó quyết định gọi ai, theo thứ tự nào, rồi tổng hợp kết quả."
+  },
+  {
+    "id": "qb-088",
+    "number": 88,
+    "title": "SFT vs Alignment — single choice",
+    "topic": "sft-vs-alignment",
+    "difficulty": "easy",
+    "cognitiveLevel": "recall",
+    "reviewDecision": "revise",
+    "evidenceIds": [
+      "03808a6f-c5a5-5a34-bcf3-27a56d22d210"
+    ],
+    "kind": "objective",
+    "prompt": "Theo pipeline post-training hiện đại, SFT và alignment (DPO/ORPO) dạy model những gì khác nhau?",
+    "options": [
+      {
+        "id": "a",
+        "text": "SFT dạy model format câu trả lời; alignment dạy model phân biệt tốt/xấu."
+      },
+      {
+        "id": "b",
+        "text": "SFT dạy model an toàn; alignment dạy model đúng ngữ pháp."
+      },
+      {
+        "id": "c",
+        "text": "SFT và alignment dạy đúng một thứ, chỉ khác nhau về thuật toán tối ưu."
+      },
+      {
+        "id": "d",
+        "text": "SFT dạy model phân biệt tốt/xấu; alignment dạy model format câu trả lời."
+      }
+    ],
+    "answerKey": "a",
+    "explanation": "D đảo ngược đúng thứ tự thật của pipeline. SFT dạy model \"nói gì\" theo đúng format, còn alignment dạy model \"nói như thế nào\" — chọn câu trả lời tốt hơn giữa các lựa chọn khả dĩ."
+  },
+  {
+    "id": "qb-089",
+    "number": 89,
+    "title": "Preference data vs demonstration data — single choice",
+    "topic": "preference-vs-demonstration",
+    "difficulty": "medium",
+    "cognitiveLevel": "understand",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "917dad4a-eee0-592e-93ea-08343c42cb2c"
+    ],
+    "kind": "objective",
+    "prompt": "Vì sao preference data (dùng cho DPO) mang tín hiệu thông tin mạnh hơn demonstration data (dùng cho SFT)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Vì preference data có kích thước lớn hơn demonstration data."
+      },
+      {
+        "id": "b",
+        "text": "Vì preference data rẻ hơn để thu thập từ người dùng thật."
+      },
+      {
+        "id": "c",
+        "text": "Vì preference cho biết cái gì KHÔNG nên nói, điều SFT không biểu lộ."
+      },
+      {
+        "id": "d",
+        "text": "Vì preference data không cần con người gán nhãn như demonstration data."
+      }
+    ],
+    "answerKey": "c",
+    "explanation": "SFT chỉ thấy ví dụ \"good\" nên không biết good hơn bad bao nhiêu; một cặp preference (yw, yl) trực tiếp dạy model margin giữa câu tốt và câu tệ — đây là tín hiệu SFT không thể biểu lộ, không liên quan gì tới kích thước tập dữ liệu hay chi phí thu thập."
+  },
+  {
+    "id": "qb-090",
+    "number": 90,
+    "title": "SimPO vs KTO — scenario diagnosis",
+    "topic": "simpo-vs-kto",
+    "difficulty": "medium",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "7503feaa-7285-5cf3-9293-64c730681016"
+    ],
+    "kind": "objective",
+    "prompt": "Một team chỉ có dữ liệu thumbs-up/thumbs-down từ production logs, không có annotator xếp hạng theo cặp. Phương pháp alignment nào phù hợp hơn?",
+    "options": [
+      {
+        "id": "a",
+        "text": "SimPO, vì nó reference-free nên không cần bất kỳ nhãn nào từ dữ liệu."
+      },
+      {
+        "id": "b",
+        "text": "KTO, vì nó chỉ cần label good/bad cho từng example, không cần preference pairs."
+      },
+      {
+        "id": "c",
+        "text": "DPO chuẩn, vì nó luôn cho kết quả tốt hơn cả SimPO lẫn KTO trong mọi trường hợp."
+      },
+      {
+        "id": "d",
+        "text": "SimPO, vì VRAM hạn chế luôn là ràng buộc quan trọng hơn định dạng nhãn."
+      }
+    ],
+    "answerKey": "b",
+    "explanation": "A hiểu sai \"reference-free\" — SimPO vẫn cần preference pairs, chỉ là không cần policy tham chiếu πref. KTO được thiết kế đúng cho dữ liệu single-signal dạng +1/−1, khớp với tín hiệu thumbs-up/down từ production mà đề bài mô tả."
+  },
+  {
+    "id": "qb-091",
+    "number": 91,
+    "title": "Monitoring AI Agent — system design (10 điểm)",
+    "topic": "agent-observability",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "eea0c815-cf23-5e99-a5c9-ab699ffd4383",
+      "467d9070-1c0c-57ce-b925-6a39729d33c4"
+    ],
+    "kind": "constructed",
+    "prompt": "Thiết kế observability cho AI agent để phát hiện quality customer support giảm theo thời gian, dù latency/SLO vẫn tốt. Nêu telemetry, trace correlation, quality metrics, baseline/drift detection, alerting và quy trình điều tra.",
+    "rubric": "trace end-to-end 2đ; metric retrieval/model/tool/user feedback 2đ; baseline+drift 2đ; SLI/SLO/alert actionability 2đ; privacy/versioning 2đ.",
+    "referenceAnswer": ""
+  },
+  {
+    "id": "qb-092",
+    "number": 92,
+    "title": "Bảo mật RAG — system design (10 điểm)",
+    "topic": "rag-security",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "14900f34-494f-5fcf-99d6-d119a2617fa8",
+      "8725d5dd-cee0-5d8e-b0a2-ef17b92e0bad"
+    ],
+    "kind": "constructed",
+    "prompt": "Khách hàng yêu cầu tài liệu private không được lộ chéo tenant và chống indirect prompt injection từ tài liệu retrieve. Thiết kế data flow, authorization boundary, retrieval filter, tool policy, logging/redaction và incident handling.",
+    "rubric": "tenant enforcement 2đ; metadata filter/RLS 2đ; untrusted retrieved content + tool allowlist 2đ; secrets/logging/redaction 2đ; test/incident response 2đ.",
+    "referenceAnswer": ""
+  },
+  {
+    "id": "qb-093",
+    "number": 93,
+    "title": "Agent workflow reliability — system design (10 điểm)",
+    "topic": "agent-reliability",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "72a1c30d-3bba-502a-a1e2-b4d6c5ce13ec",
+      "a98ec66f-8457-527e-9d22-57e8c1c20ada"
+    ],
+    "kind": "constructed",
+    "prompt": "Thiết kế workflow agent tạo ticket và gọi payment provider. Hãy mô tả state machine, idempotency key, checkpoint/resume, retry/backoff, circuit breaker, fallback và dead-letter/audit.",
+    "rubric": "state/transition 2đ; idempotency 2đ; checkpoint 2đ; bounded recovery/circuit 2đ; audit/DLQ 2đ.",
+    "referenceAnswer": ""
+  },
+  {
+    "id": "qb-094",
+    "number": 94,
+    "title": "Pseudocode retrieval router (10 điểm)",
+    "topic": "retrieval-router",
+    "difficulty": "hard",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "21aee365-ebec-5495-9bf1-cfa468c41533",
+      "9d404bc1-ed69-53a9-b78c-66cc1793a687"
+    ],
+    "kind": "constructed",
+    "prompt": "Viết pseudocode cho router: direct query dùng hybrid; query prerequisite/multi-hop mới được tối đa 2 hop graph expansion; luôn tenant/course filter; dedupe theo `source_span_id`; nếu dense encoder unavailable thì BM25-only degraded response có citation.",
+    "rubric": "route decision 2đ; scope enforcement 2đ; graph limit 2đ; dedupe/fusion 2đ; degraded+citation 2đ.",
+    "referenceAnswer": ""
+  },
+  {
+    "id": "qb-095",
+    "number": 95,
+    "title": "Guardrail incident — reasoning (10 điểm)",
+    "topic": "fallback-governance",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "a98ec66f-8457-527e-9d22-57e8c1c20ada",
+      "94b7e7ed-87b9-52c2-90b7-0a6985d47281"
+    ],
+    "kind": "constructed",
+    "prompt": "Provider chính quota, fallback khả dụng nhưng policy cấm gửi dữ liệu private sang provider đó. Hãy nêu quyết định runtime, thông báo user, telemetry cần ghi và điều kiện hồi phục. Giải thích vì sao “cứ fallback” là không đủ.",
+    "rubric": "data classification 2đ; fail-safe decision 2đ; fallback/circuit/probe 2đ; user experience 2đ; observability/audit 2đ.",
+    "referenceAnswer": ""
+  },
+  {
+    "id": "qb-096",
+    "number": 96,
+    "title": "Memory strategy — design (10 điểm)",
+    "topic": "memory-architecture",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "reject",
+    "evidenceIds": [
+      "0f53dc45-7218-52e4-b05d-697721a1793b",
+      "ada4ee10-2a74-59f2-90ce-16eb2e10db9e",
+      "769fd77f-eec2-519b-99c0-f84e60f4b61a"
+    ],
+    "kind": "constructed",
+    "prompt": "Thiết kế memory cho tutor đa session: short-term conversation, episodic events và semantic knowledge. Nêu retention, consent/PII, consolidation, retrieval policy và cách tránh memory cũ làm sai follow-up.",
+    "rubric": "phân loại memory 3đ; privacy/retention 2đ; consolidation 2đ; retrieval/relevance 2đ; failure mode/mitigation 1đ.",
+    "referenceAnswer": ""
+  },
+  {
+    "id": "qb-097",
+    "number": 97,
+    "title": "Pseudocode retry an toàn cho agent — code_or_pseudocode (10 điểm)",
+    "topic": "agent-safe-retry",
+    "difficulty": "hard",
+    "cognitiveLevel": "apply",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "338383ec-ba0a-5879-a76a-a4d8f6f8bf99",
+      "b8542100-8cd3-500c-9d4d-bbe67efa0494"
+    ],
+    "kind": "constructed",
+    "prompt": "Một agent gọi tool `charge_card(order_id, amount)` để trừ tiền. Timeout không phân biệt được \"request thất bại\" với \"request thành công nhưng reply chậm\" — retry mù có thể trừ tiền hai lần. Viết pseudocode cho một action executor bọc quanh lời gọi tool có side effect, đảm bảo an toàn khi retry, khi resume sau crash, và khi gặp một hành động không thể hoàn tác (ví dụ gửi vé, gửi email).",
+    "rubric": "idempotency key ổn định theo ý định (không theo tham số thô) 2đ; kiểm tra kết quả đã ghi trước khi thực thi lại (at-least-once + consumer idempotent) 2đ; phân biệt bước có compensation (undo) với bước pivot không thể hoàn tác 2đ; đặt pivot ở cuối chuỗi và gate bằng human approval trước khi vượt qua pivot 2đ; audit log ghi lại quyết định retry/resume 2đ.",
+    "referenceAnswer": "idempotency key theo ý định (ví dụ `order_id` cố định, không hash tham số) tra trong bảng kết quả đã ghi trước khi gọi tool; mỗi bước có compensation ghi cặp (action, undo); bước pivot được đánh dấu và chỉ chạy sau khi có approval ghi trong audit log; resume đọc lại state đã ghi, không gọi lại các bước đã completed."
+  },
+  {
+    "id": "qb-098",
+    "number": 98,
+    "title": "Deploy an toàn cho agent service — system_design (10 điểm)",
+    "topic": "agent-deployment-pipeline",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "4d8e2999-2155-57ea-97bc-fee25295af4b",
+      "6d179860-0103-5f99-8f39-ea56cd77e15a",
+      "c0d22d23-fa0f-5b77-83ef-89b1c9ecf9ce"
+    ],
+    "kind": "constructed",
+    "prompt": "Agent là hệ thống stateful chạy gần như liên tục — một lượt agent có thể kéo dài, và cắt ngang giữa chừng làm hỏng trải nghiệm. Thiết kế pipeline deploy một bản cập nhật cho agent service từ lúc merge code tới khi phục vụ 100% traffic. Nêu rõ: cách tránh cắt ngang request đang chạy dở, thứ tự ramp traffic, gate chất lượng trước khi tăng traffic, và cách xử lý khi bản mới có tool call gây side effect thật.",
+    "rubric": "graceful shutdown/rolling: `terminationGracePeriodSeconds` lớn hơn worst-case agent turn, không cắt ngang request đang chạy 2đ; ramp theo thứ tự shadow (mirror, bỏ output) → canary (% nhỏ, output thật) → 100%, không nhảy thẳng lên canary lớn 2đ; eval gate so với baseline của nhánh (không phải ngưỡng tuyệt đối), chặn merge/promote khi dưới ngưỡng 2đ; kiểm soát side effect khi shadow — chặn tool call có side effect thật của version mới trong pha shadow, nếu không \"không trả output\" vẫn tốn tiền/trừ tiền thật 2đ; auto-rollback dựa trên metric (ví dụ AnalysisRun theo dõi Prometheus) thay vì chỉ theo dõi thủ công 2đ.",
+    "referenceAnswer": ""
+  },
+  {
+    "id": "qb-099",
+    "number": 99,
+    "title": "Chẩn đoán sự cố latency qua trace — tracing_and_monitoring_diagnosis (10 điểm)",
+    "topic": "incident-latency-diagnosis",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "6186099a-2b90-57b0-ad13-86353228a572",
+      "367274c2-e95e-5a5f-be49-e066c99057cb"
+    ],
+    "kind": "constructed",
+    "prompt": "9h sáng, user báo agent phản hồi chậm gấp đôi bình thường. Không có deploy nào rõ ràng gần đây. Bạn có quyền truy cập metric, log và trace. Mô tả quy trình điều tra từ lúc nhận báo cáo tới lúc xác định root cause, và giải thích vì sao thứ tự đó — không phải thứ tự khác — là đúng. Trace của một request chậm hôm nay trông như sau: ``` invoke_agent ecommerce-agent 5100ms (trước: 2500ms) |- chat claude-sonnet-4-6 (plan) 400ms |- execute_tool rag_retrieve 2800ms (trước: 600ms) |- chat claude-sonnet-4-6 (plan) 300ms '- chat claude-sonnet-4-6 (synthesize) 1400ms ```",
+    "rubric": "thứ tự điều tra đúng metric (khoanh vùng \"có gì đó chậm, từ khi nào\") → log (lọc theo correlation_id, tìm \"request nào\") → trace (tìm \"chậm ở bước nào\"), giải thích được vì sao đảo thứ tự — ví dụ lao thẳng vào đọc log thô hàng nghìn request — là sai lầm thường gặp 3đ; đọc đúng trace mẫu và chỉ ra `rag_retrieve` là root cause (chậm 4.6× so với trước, còn các bước LLM vẫn bình thường) 3đ; đề xuất bước điều tra tiếp theo hợp lý sau khi khoanh vùng vào `rag_retrieve` (ví dụ kiểm tra vector store, index, hoặc downstream dependency của bước retrieve) 2đ; nêu được vì sao không có trace thì phải đoán mò giữa LLM/network/tool, còn có trace thì xác định trong thời gian ngắn 2đ.",
+    "referenceAnswer": "Metric trả lời \"có gì đó chậm, từ khi nào\"; log trả lời \"request nào\"; trace trả lời \"chậm ở bước nào\" — ba tầng bổ sung cho nhau nên phải đi theo đúng thứ tự từ khoanh vùng rộng tới hẹp. Với trace mẫu, `execute_tool rag_retrieve` là root cause rõ ràng: 2800ms so với baseline 600ms (chậm 4.6 lần), trong khi ba bước `chat` vẫn ở mức bình thường — nên bước điều tra tiếp theo phải đi vào vector store/index, không phải nghi ngờ model."
+  },
+  {
+    "id": "qb-100",
+    "number": 100,
+    "title": "PII trong observability xuyên biên giới — security_and_data_governance (10 điểm)",
+    "topic": "observability-pii-governance",
+    "difficulty": "hard",
+    "cognitiveLevel": "analyze",
+    "reviewDecision": "accept",
+    "evidenceIds": [
+      "078d5052-24c1-57a6-9b1f-6e3c10a2efe6",
+      "a5d3995f-9d05-5fe5-b9c4-f244abad1cc2",
+      "8728c7b9-4504-5fc8-9ac2-2c0c591de395",
+      "9f37fb60-67ab-57bf-a4c7-32b6effd22a5"
+    ],
+    "kind": "constructed",
+    "prompt": "Sản phẩm của bạn phục vụ người dùng Việt Nam, agent nhận input tự do (có thể chứa tên, SĐT, CCCD, thông tin tài chính), và team dùng một nền tảng observability SaaS đặt ở nước ngoài để lưu trace/log. Thiết kế chính sách logging/tracing cho hệ thống này: những gì được capture, cách xử lý PII, thời hạn lưu trữ, kiểm soát truy cập, và nghĩa vụ pháp lý khi dữ liệu rời khỏi Việt Nam.",
+    "rubric": "capture có chọn lọc — mặc định KHÔNG capture raw prompt/completion, chỉ opt-in khi thật cần; dùng template id thay vì log nguyên văn khi có thể 2đ; kỹ thuật xử lý PII cụ thể — redact/mask tại điểm phát sinh, allowlist field được log, hash định danh thay vì lưu gốc (không chỉ nói chung chung \"ẩn danh hoá\") 2đ; retention có chủ đích theo loại dữ liệu — trace chi tiết lưu ngắn (ví dụ 7–30 ngày), metric tổng hợp lưu dài hơn, gắn với lý do chi phí và rủi ro pháp lý 2đ; kiểm soát truy cập và audit — RBAC chỉ cấp khi cần, ghi lại ai đã xem trace chứa dữ liệu người dùng, hỗ trợ quyền xoá/truy cập của user 2đ; nhận diện đúng nghĩa vụ pháp lý khi chuyển dữ liệu PII sang SaaS nước ngoài — cần hồ sơ đánh giá tác động khi chuyển xuyên biên giới, báo cáo vi phạm dữ liệu trong khung thời gian luật định, và nêu được rủi ro nếu bỏ qua 2đ.",
+    "referenceAnswer": ""
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "graph_version": "course-knowledge-v2",
+  "quality_gate": {
+    "required_node_count_range": [73, 73],
+    "required_edge_count_minimum": 75,
+    "minimum_node_confidence": 0.72,
+    "minimum_edge_confidence": 0.50,
+    "allowed_relation_types": [
+      "prerequisite_of",
+      "part_of",
+      "contrasts_with",
+      "applies_to",
+      "causes"
+    ]
+  }
+}

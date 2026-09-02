@@ -1,0 +1,22 @@
+{
+  "id": "rag-evaluation",
+  "version": "1.0.0",
+  "title": "RAG Evaluation Diagnosis",
+  "objective": "Biến retrieval và citation failures thành regression cases.",
+  "estimated_minutes": 22,
+  "success_threshold": 75,
+  "concept_id": "rag_evaluation",
+  "source_span_ids": ["6bc653d6-19b4-5f79-ba52-646751098ca7"],
+  "events": ["draft_saved", "pipeline_run", "hint_opened", "submitted"],
+  "controls": [
+    {"id": "faithfulness_gate", "kind": "range", "default": 0.7, "minimum": 0, "maximum": 1, "step": 0.05},
+    {"id": "context_recall_gate", "kind": "range", "default": 0.7, "minimum": 0, "maximum": 1, "step": 0.05},
+    {"id": "verify_citations", "kind": "toggle", "default": false},
+    {"id": "persist_regression", "kind": "toggle", "default": false}
+  ],
+  "transfer_prompts": [
+    "Làm sao tách lỗi retrieval khỏi lỗi generation/faithfulness?",
+    "Release gate cần so sánh với baseline nào?"
+  ],
+  "rubric": {"faithfulness_gate": 20, "context_recall_gate": 20, "citation_verification": 20, "regression_case": 15, "diagnosis": 15, "release_gate": 10}
+}

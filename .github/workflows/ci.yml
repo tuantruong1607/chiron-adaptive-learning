@@ -1,0 +1,73 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm build
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --project services/api --extra dev
+      - run: uv run --project services/api ruff check services/api
+      - run: uv run --project services/api pytest services/api/tests
+  api-integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: chiron
+          POSTGRES_USER: chiron
+          POSTGRES_PASSWORD: chiron
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U chiron -d chiron"
+          --health-interval=5s
+          --health-timeout=3s
+          --health-retries=20
+    env:
+      DATABASE_ADMIN_URL: postgresql://chiron:chiron@localhost:5432/chiron
+      DATABASE_URL: postgresql://chiron:chiron@localhost:5432/chiron
+      DATABASE_RUNTIME_USER: chiron_runtime
+      DATABASE_RUNTIME_PASSWORD: chiron_runtime
+      CHIRON_INTEGRATION_DATABASE_URL: postgresql://chiron_runtime:chiron_runtime@localhost:5432/chiron
+      PERSISTENCE_BACKEND: postgres
+      APP_ENV: development
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --project services/api --extra dev
+      - run: uv run alembic upgrade head
+        working-directory: services/api
+      - run: uv run python scripts/provision_runtime_role.py
+        working-directory: services/api
+      - run: uv run python scripts/seed_demo.py --tenant chiron-demo --email learner@chiron.local
+        working-directory: services/api
+      - run: uv run pytest tests/test_persistence_contract.py tests/test_runtime_security.py
+        working-directory: services/api
+  worker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --project services/worker --extra dev
+      - run: uv run --project services/worker ruff check services/worker
+      - run: uv run --project services/worker pytest services/worker/tests

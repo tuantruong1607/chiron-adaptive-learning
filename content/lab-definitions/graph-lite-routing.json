@@ -1,0 +1,22 @@
+{
+  "id": "graph-lite-routing",
+  "version": "1.0.0",
+  "title": "Graph-lite Routing",
+  "objective": "Dùng bounded graph expansion cho prerequisite hoặc multi-hop intent.",
+  "estimated_minutes": 20,
+  "success_threshold": 75,
+  "concept_id": "multi_hop_retrieval",
+  "source_span_ids": ["bb1a06df-b5ce-55a1-9c2b-0a2e69a61ea1", "a26b72c3-30d7-5675-9a2d-6ee59554281f"],
+  "events": ["draft_saved", "pipeline_run", "hint_opened", "submitted"],
+  "controls": [
+    {"id": "routing", "kind": "select", "default": "always-graph", "options": ["always-graph", "adaptive", "hybrid-only"]},
+    {"id": "max_hops", "kind": "range", "default": 2, "minimum": 1, "maximum": 4, "step": 1},
+    {"id": "expansion_limit", "kind": "range", "default": 8, "minimum": 2, "maximum": 20, "step": 1},
+    {"id": "direct_fallback", "kind": "toggle", "default": true}
+  ],
+  "transfer_prompts": [
+    "Query intent nào cần prerequisite hoặc multi-hop routing?",
+    "Gate nào bảo vệ direct facts khỏi regression?"
+  ],
+  "rubric": {"adaptive_routing": 20, "bounded_hops": 20, "expansion_limit": 15, "direct_fallback": 20, "intent_transfer": 15, "regression_gate": 10}
+}

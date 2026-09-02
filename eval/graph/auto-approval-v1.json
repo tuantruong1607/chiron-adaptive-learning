@@ -1,0 +1,27 @@
+{
+  "graph_version": "graph-lite-candidates-v1",
+  "approved_at": "2026-08-31T00:00:00+07:00",
+  "approval_mode": "product-owner-authorized automated quality gate",
+  "scope": "Approve all remaining taxonomy candidates; do not activate the graph version or Graph-lite retrieval.",
+  "quality_gate": {
+    "required_node_count_range": [20, 40],
+    "required_edge_count_minimum": 20,
+    "minimum_node_confidence": 0.7,
+    "minimum_edge_confidence": 0.58,
+    "allowed_relation_types": [
+      "prerequisite_of",
+      "part_of",
+      "contrasts_with",
+      "causes",
+      "applies_to"
+    ],
+    "requires_source_provenance": true,
+    "requires_tenant_course_provenance_scope": true,
+    "requires_acyclic_prerequisite_graph": true
+  },
+  "activation": {
+    "graph_version_status": "draft",
+    "graph_lite_enabled": false,
+    "reason": "Candidate Graph-lite evaluation has multi-hop recall delta -0.033 versus hybrid baseline."
+  }
+}

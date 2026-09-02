@@ -1,0 +1,1561 @@
+{
+  "generated_at": "2026-09-01T21:34:10.975140+00:00",
+  "dataset": "eval/rag/golden-local.jsonl",
+  "split": "holdout",
+  "split_manifest": "eval/rag/splits/local-v1.json",
+  "expected_coverage": {
+    "total": 15,
+    "by_class": {
+      "direct": 5,
+      "prerequisite": 5,
+      "multi_hop": 5
+    }
+  },
+  "dataset_coverage": {
+    "total": 15,
+    "by_class": {
+      "direct": 5,
+      "prerequisite": 5,
+      "multi_hop": 5
+    },
+    "by_interaction_type": {
+      "user_question": 15
+    }
+  },
+  "review_status": {
+    "approved": 15
+  },
+  "embedding_model": "intfloat/multilingual-e5-large",
+  "embedding_version": "multilingual-e5-large-mean-batch32-v2",
+  "collection": "chiron_chunks_v1_full",
+  "ragas_version": "0.4.3",
+  "python_version": "3.12.14",
+  "ragas_reference_policy": {
+    "precision": "required + acceptable source spans",
+    "recall": "required source spans only"
+  },
+  "top_k": 10,
+  "candidate_limit": 24,
+  "latency_repetitions": 1,
+  "graph_policy": {
+    "version_status": "draft",
+    "review_statuses": [
+      "approved"
+    ],
+    "max_hops": 2,
+    "expansion_limit": 8
+  },
+  "warmup_policy": {
+    "excluded_from_metrics": true,
+    "case_ids": [
+      "ret-001",
+      "ret-009",
+      "ret-016"
+    ],
+    "reason": "warm long-lived encoder, Qdrant and graph read paths"
+  },
+  "embedding_latency_p50_ms": 149.53509399856557,
+  "modes": {
+    "hybrid": {
+      "overall": {
+        "cases": 15,
+        "hit_at_k": 0.4666666666666667,
+        "required_recall_at_k": 0.16666666666666666,
+        "mrr_at_k": 0.24841269841269842,
+        "ndcg_at_k": 0.19881688741304177,
+        "source_precision_at_k": 0.08666666666666667,
+        "ragas_id_context_precision": 0.08666666666666667,
+        "ragas_id_context_recall": 0.16666666666666666,
+        "retrieval_latency_p50_ms": 120.6516600032046,
+        "retrieval_latency_p95_ms": 161.6933510013041,
+        "end_to_end_latency_p50_ms": 266.7561390007904,
+        "end_to_end_latency_p95_ms": 335.365257000376
+      },
+      "by_class": {
+        "direct": {
+          "cases": 5,
+          "hit_at_k": 0.6,
+          "required_recall_at_k": 0.2,
+          "mrr_at_k": 0.2833333333333333,
+          "ndcg_at_k": 0.2552827278865514,
+          "source_precision_at_k": 0.1,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.2,
+          "retrieval_latency_p50_ms": 121.86596600076882,
+          "retrieval_latency_p95_ms": 185.03505900298478,
+          "end_to_end_latency_p50_ms": 281.50620700398576,
+          "end_to_end_latency_p95_ms": 392.264021003939
+        },
+        "prerequisite": {
+          "cases": 5,
+          "hit_at_k": 0.2,
+          "required_recall_at_k": 0.1,
+          "mrr_at_k": 0.02857142857142857,
+          "ndcg_at_k": 0.05841564308800664,
+          "source_precision_at_k": 0.04,
+          "ragas_id_context_precision": 0.04,
+          "ragas_id_context_recall": 0.1,
+          "retrieval_latency_p50_ms": 108.04750199895352,
+          "retrieval_latency_p95_ms": 161.6933510013041,
+          "end_to_end_latency_p50_ms": 257.5825959975191,
+          "end_to_end_latency_p95_ms": 308.96483399919816
+        },
+        "multi_hop": {
+          "cases": 5,
+          "hit_at_k": 0.6,
+          "required_recall_at_k": 0.2,
+          "mrr_at_k": 0.4333333333333333,
+          "ndcg_at_k": 0.28275229126456736,
+          "source_precision_at_k": 0.12,
+          "ragas_id_context_precision": 0.12,
+          "ragas_id_context_recall": 0.2,
+          "retrieval_latency_p50_ms": 124.15745699763647,
+          "retrieval_latency_p95_ms": 143.39727399783442,
+          "end_to_end_latency_p50_ms": 290.29414799879305,
+          "end_to_end_latency_p95_ms": 319.9714499969559
+        }
+      },
+      "cases": [
+        {
+          "id": "ret-001",
+          "query": "Vì sao RRF gộp thứ hạng thay vì cộng trực tiếp raw score của BM25 và dense retrieval?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "12ae687b-864a-544d-885a-ceb1583457f4"
+          ],
+          "acceptable_source_span_ids": [
+            "64409c3a-addb-58f4-b8bc-3874647b4c6a",
+            "5874d50d-b8e3-5e09-9580-e367eecbee4d"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.16666666666666666,
+          "ndcg_at_k": 0.16716045496620227,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 6,
+          "retrieved_source_span_ids": [
+            "dfd1af46-abc2-5afb-981c-815f6b0dedfb",
+            "e2cea364-f731-5dad-9a91-c8ecd26346c1",
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "711e564d-14fa-51fe-b56d-66ab8b8632c1",
+            "196d7f1f-56f1-5416-8a32-b4513bf90ee1",
+            "64409c3a-addb-58f4-b8bc-3874647b4c6a",
+            "c54b8f84-4b7c-5e47-b9c3-cab7162b9bf4",
+            "56266bb0-f630-582b-b713-466ecb01ca18",
+            "ab1cbf3e-42a6-53ac-8df5-9a077ea27bd9",
+            "151a5add-14ed-579c-b52a-75d4984c6af6"
+          ],
+          "embedding_latency_ms": 237.68180399929406,
+          "retrieval_latency_ms": 97.68345300108194,
+          "end_to_end_latency_ms": 335.365257000376,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-007",
+          "query": "Context Recall thấp cho biết retriever đang gặp vấn đề gì?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "80cd6dde-bdf8-5afb-a313-bcd30b9c5403"
+          ],
+          "acceptable_source_span_ids": [
+            "a715fda9-515d-5cae-a3bd-1b03a70403ed",
+            "e616b892-38db-5ea9-9b29-0ac6ca1f3cec"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.8451850618939637,
+          "source_precision_at_k": 0.3,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "80cd6dde-bdf8-5afb-a313-bcd30b9c5403",
+            "69476186-af5c-5d83-8b55-0a849d40e8c4",
+            "e616b892-38db-5ea9-9b29-0ac6ca1f3cec",
+            "f71126c1-8bef-5ca3-9a88-e13436d9cb25",
+            "bc3ccb04-f41d-54e8-81bb-1958f44d5a01",
+            "18438e91-32b6-5ee6-a19d-c90c9c845b7f",
+            "a0c83a2c-e7c9-5e6b-a099-3019c6cf57b3",
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "a715fda9-515d-5cae-a3bd-1b03a70403ed",
+            "2fe459ae-d130-5237-af5a-899aead05e37"
+          ],
+          "embedding_latency_ms": 137.42663800076116,
+          "retrieval_latency_ms": 123.64207399878069,
+          "end_to_end_latency_ms": 261.06871199954185,
+          "ragas_id_context_precision": 0.3,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-009",
+          "query": "Cần hiểu những thành phần retrieval nào trước khi học công thức RRF?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "156dd3dc-7d49-5fd5-a265-5866c21c6131",
+            "12ae687b-864a-544d-885a-ceb1583457f4"
+          ],
+          "acceptable_source_span_ids": [
+            "7c038496-2887-5717-ace4-b305697ee246"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "8bceb440-ad91-5b10-9d98-742000d1f77a",
+            "639d8042-390e-5685-9bee-c9fbec23106f",
+            "2fe459ae-d130-5237-af5a-899aead05e37",
+            "51baf090-11e9-5a34-83ed-0b6674095dba",
+            "db9822f4-5863-59da-a3d6-1d797683bc60",
+            "80cd6dde-bdf8-5afb-a313-bcd30b9c5403",
+            "196d7f1f-56f1-5416-8a32-b4513bf90ee1",
+            "7e5b360f-64d7-586d-8b15-5fccf6453611",
+            "bf0ca938-9995-537f-9bf3-9273441b94b6",
+            "50f13e5e-cba4-5e07-85b3-f00789b30346"
+          ],
+          "embedding_latency_ms": 133.91662199865095,
+          "retrieval_latency_ms": 106.9149959985225,
+          "end_to_end_latency_ms": 240.83161799717345,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-014",
+          "query": "Vì sao phải sửa chunking và candidate retrieval trước khi thêm reranker?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "0cef80c8-9356-5a62-9fd7-f020030a9c49",
+            "e19857c8-3111-5197-a94f-57b1006722b5"
+          ],
+          "acceptable_source_span_ids": [
+            "c7bff788-d0be-5fb0-9978-ecbf66dae8a4",
+            "52275ecd-b8ac-5a27-8974-d53e43d8ec4f"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "48a43aa9-69eb-5f8d-8842-6d127f78fd57",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "62faf079-1e5a-5db7-b012-7563beabe56f",
+            "5e923eb5-c013-513a-987c-5898e390e454",
+            "665c3a8f-0f2e-522d-9c23-d619701877b4",
+            "6d992504-d413-58df-a903-3dcabd64c76d",
+            "cd6600e0-1f7f-5eea-9d8b-35e0af06bc8e",
+            "c313aee0-62cf-541f-a95e-4500b736a897",
+            "c08f7d06-438f-5b36-852d-f45e93ed0f33"
+          ],
+          "embedding_latency_ms": 147.27148299789405,
+          "retrieval_latency_ms": 161.6933510013041,
+          "end_to_end_latency_ms": 308.96483399919816,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-016",
+          "query": "Citation UX, strict grounding và RAG evaluation phối hợp thế nào để người học kiểm chứng câu trả lời?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "f5461031-4984-5dd2-a497-c2d28a93be42",
+            "88d9b904-3ebf-564e-86cf-84f01ee72fcd",
+            "e616b892-38db-5ea9-9b29-0ac6ca1f3cec"
+          ],
+          "acceptable_source_span_ids": [
+            "8c28fa19-cf5c-565c-98f9-b1c30fec8c56",
+            "34f77842-b9c2-5783-81c4-923a6ac5f897"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "ccd3c1db-8c20-5b00-a236-a72ba0f290f3",
+            "333ad80e-5cfe-556f-bf48-82629fb2c2f6",
+            "f4225677-bafb-54e9-ab61-5043c37cdaaf",
+            "7b53a478-de32-546b-a186-1bdaf80ae149",
+            "aceac01b-3531-55f8-9be9-310d081bf7d6",
+            "3d979105-6237-5099-838d-b4187e7a48e3",
+            "e5fff57e-2bb6-517b-8af6-5b9ae4c62009",
+            "6eaa2ab3-a1b0-598f-913a-aaffa9303c19",
+            "c7f11e79-c58f-5f24-ad5c-48547a847abf",
+            "7e2ffde3-3579-5b21-bf8d-ec4b09ca0ec5"
+          ],
+          "embedding_latency_ms": 138.88574500015238,
+          "retrieval_latency_ms": 127.87039400063804,
+          "end_to_end_latency_ms": 266.7561390007904,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-020",
+          "query": "Vì sao vector RAG gặp khó với câu hỏi quan hệ nhiều bước, còn GraphRAG cần nodes, edges và triples để giải quyết?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "48ee7bc1-e3e4-54d8-9b96-f6497ef1d0c5",
+            "f62efc80-1b8e-5b99-98e4-fcd6b3ce95bd",
+            "ffd44b9e-f468-5502-8678-762eb52dff2d"
+          ],
+          "acceptable_source_span_ids": [
+            "7c24ed09-58db-50e0-8c8f-dcd9b4d8eeff"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.3333333333333333,
+          "mrr_at_k": 0.16666666666666666,
+          "ndcg_at_k": 0.2691828628414762,
+          "source_precision_at_k": 0.2,
+          "first_relevant_rank": 6,
+          "retrieved_source_span_ids": [
+            "af0f1602-fa18-5e3c-affd-ab0f12ac3ce8",
+            "c81c1cac-c853-573e-bec9-33332b12a66a",
+            "5e85930e-0b84-51d7-9717-d162705b0031",
+            "bb1a06df-b5ce-55a1-9c2b-0a2e69a61ea1",
+            "6f495b2a-001f-5aca-aa0e-4958508ebd76",
+            "48ee7bc1-e3e4-54d8-9b96-f6497ef1d0c5",
+            "7c24ed09-58db-50e0-8c8f-dcd9b4d8eeff",
+            "063478b1-68d6-5c6f-ac45-93e55a2c888d",
+            "8abf63ca-7c8b-5f4e-af86-498f272514a8",
+            "f20f15b8-f30a-569c-ba7c-8f4f36e0ca25"
+          ],
+          "embedding_latency_ms": 186.08256399966194,
+          "retrieval_latency_ms": 104.21158399913111,
+          "end_to_end_latency_ms": 290.29414799879305,
+          "ragas_id_context_precision": 0.2,
+          "ragas_id_context_recall": 0.3333333333333333
+        },
+        {
+          "id": "ret-026",
+          "query": "FAISS thiếu những khả năng database nào dù tìm vector rất nhanh?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "ad7b3bce-82bd-528b-92e1-293284464be8"
+          ],
+          "acceptable_source_span_ids": [
+            "f2a7648b-e29d-54bf-84df-46360022945a"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "8ce0f4a4-c85e-5b57-ae43-c1feada38568",
+            "a917bb80-2595-5982-8ec7-79ff54bfa3d6",
+            "bfbe31ba-abd5-5ca8-b3c6-2ee2cf03cff5",
+            "8125d3e7-8165-5ea2-ab41-729ecfaa28ac",
+            "f1d2ab97-e268-5002-90cf-11cb45d84cb2",
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "d33a06de-186c-5e7b-9689-182f29960789",
+            "b2ac59d8-7e6f-5286-b4ed-0c5654e2ff67",
+            "d6d1db65-2f32-578b-adf5-a009ea5c5bb8",
+            "489939f4-08e7-5a74-8882-4f8abd6fdc23"
+          ],
+          "embedding_latency_ms": 138.78834400020423,
+          "retrieval_latency_ms": 121.86596600076882,
+          "end_to_end_latency_ms": 260.65431000097306,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-027",
+          "query": "Corpus poisoning và indirect prompt injection tấn công hệ RAG qua retrieval như thế nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "23cc397e-8173-5726-b3ca-5c68bf2eaa34"
+          ],
+          "acceptable_source_span_ids": [
+            "54f5bbf8-ad86-50fd-832c-7c249ff1bfc4"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "dc86c2f3-feed-52af-aa0c-cb6cefca9064",
+            "f1d2ab97-e268-5002-90cf-11cb45d84cb2",
+            "328c6e95-e086-5840-8996-ade7a5692815",
+            "33529846-471e-5537-9dd0-3fbcbd6a8a02",
+            "140ec0d2-2628-5544-af91-9aee48476843",
+            "010fd20e-a3a7-5e87-8cf2-84d8c6df2756",
+            "521554b8-d9d5-5f77-9ca1-9be6feca3490",
+            "178a511b-b3b3-57d9-91f6-05be3fa5dee6",
+            "e914f3c5-e4ae-54f6-93db-5d544df802e0",
+            "20d8501c-2935-543d-97f6-e0442b93fd3d"
+          ],
+          "embedding_latency_ms": 207.2289620009542,
+          "retrieval_latency_ms": 185.03505900298478,
+          "end_to_end_latency_ms": 392.264021003939,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-028",
+          "query": "Trace và span khác nhau thế nào trong một request RAG end-to-end?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "80a86af3-4a7d-5bbb-8fd7-7d2bd0ebef39"
+          ],
+          "acceptable_source_span_ids": [
+            "dc6f69a5-aae1-56a0-b005-726610380510"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.25,
+          "ndcg_at_k": 0.2640681225725909,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 4,
+          "retrieved_source_span_ids": [
+            "6a1c573d-f613-5558-b332-dabbc9b14cac",
+            "b78cfb55-4ec2-5313-8431-2b102898285c",
+            "3d6afda4-ffe0-5922-b9b1-bc75da1d3f14",
+            "dc6f69a5-aae1-56a0-b005-726610380510",
+            "0a35221a-c2f3-5823-b004-9c074006439a",
+            "2dd5d9fd-a954-554c-bbc6-8ecd84726e72",
+            "010fd20e-a3a7-5e87-8cf2-84d8c6df2756",
+            "70f24f30-ea2e-50c4-9ad5-c0d62a24a79a",
+            "865e150a-df30-576b-ac51-a2fbef64bd02",
+            "eea03801-a1db-5c6a-ae57-20d6df3623a3"
+          ],
+          "embedding_latency_ms": 160.85454700078117,
+          "retrieval_latency_ms": 120.6516600032046,
+          "end_to_end_latency_ms": 281.50620700398576,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-034",
+          "query": "Muốn xây memory consolidation, trước hết phải phân biệt episodic memory và semantic memory ở loại dữ liệu nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "c59733bd-fb17-52a0-b78d-74505e03c861",
+            "191f1df2-e547-53fc-aa41-5e8af2531d68"
+          ],
+          "acceptable_source_span_ids": [
+            "965dc7d2-bc55-54df-974c-966274b8a969"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 0.14285714285714285,
+          "ndcg_at_k": 0.2920782154400332,
+          "source_precision_at_k": 0.2,
+          "first_relevant_rank": 7,
+          "retrieved_source_span_ids": [
+            "89ac7cce-6751-5726-b5b8-21bd23771eeb",
+            "55f2d9bb-7e77-5535-84e8-f412a2e3c61c",
+            "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+            "688c883c-2d8b-5c00-af1c-8aad1a82df19",
+            "e014deb0-6c3e-5354-8d4a-45fff0db2369",
+            "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+            "c59733bd-fb17-52a0-b78d-74505e03c861",
+            "25629367-6382-5f73-8b20-419d8621434e",
+            "7d6dcbad-76ba-5f20-b23c-583f7b58e8c6",
+            "965dc7d2-bc55-54df-974c-966274b8a969"
+          ],
+          "embedding_latency_ms": 149.53509399856557,
+          "retrieval_latency_ms": 108.04750199895352,
+          "end_to_end_latency_ms": 257.5825959975191,
+          "ragas_id_context_precision": 0.2,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-035",
+          "query": "Trước khi tune ef và M của HNSW, vì sao phải đo Flat baseline và ANN recall?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "4a694fde-c3ae-56e5-b8ce-46375bd93b2f",
+            "c0efcc4c-48a3-5ca0-a719-8bf2631376b8"
+          ],
+          "acceptable_source_span_ids": [
+            "4f6a01f2-f015-56f5-a89c-0c41a4dd4e53"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "e39d7d42-04d4-585d-b2e0-f809e044fb6e",
+            "3d045669-87e9-5a3d-8726-44e3752d7894",
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "436ccf53-ce54-58b4-ab15-8038154b31a0",
+            "492f7f0d-c7cc-501f-bb50-0e12661a0ba4",
+            "66cbeb71-4e1f-5f78-9df9-e3e4462ab279",
+            "df82b9ef-54c5-5abb-b298-4032c3808d0f",
+            "232f8dc9-f425-5f18-958b-08276c24368b",
+            "52553dca-02e4-5e5a-878f-6ecb29ad4c83",
+            "3d438a40-a944-5b3b-b79d-d93483f7668d"
+          ],
+          "embedding_latency_ms": 138.13064100031625,
+          "retrieval_latency_ms": 108.16780199820641,
+          "end_to_end_latency_ms": 246.29844299852266,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-036",
+          "query": "Trước khi chọn FAISS hay một vector database, cần kiểm tra nhu cầu persistence, metadata filter và CRUD nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "ad7b3bce-82bd-528b-92e1-293284464be8",
+            "3e4b7bea-dba4-5404-a3db-9d2518c60813"
+          ],
+          "acceptable_source_span_ids": [
+            "f2a7648b-e29d-54bf-84df-46360022945a"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "8ce0f4a4-c85e-5b57-ae43-c1feada38568",
+            "bfbe31ba-abd5-5ca8-b3c6-2ee2cf03cff5",
+            "489939f4-08e7-5a74-8882-4f8abd6fdc23",
+            "1be16775-4e96-55e1-b2a8-0e1222048afc",
+            "d33a06de-186c-5e7b-9689-182f29960789",
+            "5e923eb5-c013-513a-987c-5898e390e454",
+            "b75cba89-e2ce-5476-b0ee-9c3f1b80431a",
+            "71dccca2-4a6a-5b8e-ae91-d77b08878428",
+            "2fe459ae-d130-5237-af5a-899aead05e37",
+            "1f8aaf79-1dc6-5227-96f7-c411214fa34d"
+          ],
+          "embedding_latency_ms": 162.42898999917088,
+          "retrieval_latency_ms": 101.09651599850622,
+          "end_to_end_latency_ms": 263.5255059976771,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-043",
+          "query": "Memory retrieval, decay, consolidation và privacy deletion cần phối hợp ra sao để ký ức cũ không lấn át yêu cầu mới?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "965dc7d2-bc55-54df-974c-966274b8a969",
+            "bc44351a-a8df-5e1f-8fa8-81884b9bc7b6",
+            "6144bab3-b09d-5b30-b52c-bd71e987e923"
+          ],
+          "acceptable_source_span_ids": [
+            "85237f6f-f2bb-5a5e-9c9b-517d785874f8"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.6666666666666666,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.7541985434892589,
+          "source_precision_at_k": 0.3,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "965dc7d2-bc55-54df-974c-966274b8a969",
+            "85237f6f-f2bb-5a5e-9c9b-517d785874f8",
+            "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+            "492f7f0d-c7cc-501f-bb50-0e12661a0ba4",
+            "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+            "90d8b682-7cef-5129-abd1-b074b0b0d5b3",
+            "bb46f26d-6db7-5e72-8d02-99bb72337292",
+            "97fb03e5-bfdb-5ec6-8044-803ad3ecd1a6",
+            "bc44351a-a8df-5e1f-8fa8-81884b9bc7b6",
+            "2b0de521-f28e-5aeb-80ea-9a85498f2598"
+          ],
+          "embedding_latency_ms": 168.25482499916689,
+          "retrieval_latency_ms": 143.39727399783442,
+          "end_to_end_latency_ms": 311.6520989970013,
+          "ragas_id_context_precision": 0.3,
+          "ragas_id_context_recall": 0.6666666666666666
+        },
+        {
+          "id": "ret-045",
+          "query": "Vì sao FAISS có thể là search kernel tốt nhưng vẫn chưa đủ cho multi-tenant RAG cần filter và persistence?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "ad7b3bce-82bd-528b-92e1-293284464be8",
+            "3e4b7bea-dba4-5404-a3db-9d2518c60813"
+          ],
+          "acceptable_source_span_ids": [
+            "f2a7648b-e29d-54bf-84df-46360022945a"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "8ce0f4a4-c85e-5b57-ae43-c1feada38568",
+            "dfbe0f29-ad79-5739-a428-7f8c7551603f",
+            "bfbe31ba-abd5-5ca8-b3c6-2ee2cf03cff5",
+            "0d26b27c-8c5e-58ac-ba8d-66576a15e087",
+            "434c0946-da2a-55f7-821f-4a6fb19aa9a0",
+            "72da7059-0724-5932-853d-3dbef3b2062f",
+            "1be16775-4e96-55e1-b2a8-0e1222048afc",
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "854e6623-f556-5dfe-9d69-068583f3234e",
+            "f207a26e-b1aa-5480-8fa6-d095f466bea9"
+          ],
+          "embedding_latency_ms": 143.62947499830625,
+          "retrieval_latency_ms": 111.92148299960536,
+          "end_to_end_latency_ms": 255.5509579979116,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-047",
+          "query": "RAGAS metrics và nested traces bổ trợ nhau thế nào để phân biệt retrieve sai, generation sai và latency bottleneck?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "49b65b10-accd-595b-b39b-367c837249fd",
+            "942e24dd-f256-5413-89f1-45a6dfc3ed96",
+            "80a86af3-4a7d-5bbb-8fd7-7d2bd0ebef39"
+          ],
+          "acceptable_source_span_ids": [
+            "dc6f69a5-aae1-56a0-b005-726610380510"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.3903800499921017,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "dc6f69a5-aae1-56a0-b005-726610380510",
+            "c0f23420-4cc1-5e4c-a3d2-a274acf72850",
+            "70f24f30-ea2e-50c4-9ad5-c0d62a24a79a",
+            "9bcde2ef-b4eb-5e94-84a7-068d29d520c8",
+            "833f5a14-80a3-53e4-96ea-a9a195fffdff",
+            "6a1c573d-f613-5558-b332-dabbc9b14cac",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "a9fbdbe4-48ff-5fe2-9d44-81c4a37104b1",
+            "dfbe0f29-ad79-5739-a428-7f8c7551603f",
+            "37c3f605-1f03-5d30-905a-c3f547b3d221"
+          ],
+          "embedding_latency_ms": 195.81399299931945,
+          "retrieval_latency_ms": 124.15745699763647,
+          "end_to_end_latency_ms": 319.9714499969559,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        }
+      ]
+    },
+    "graph_lite": {
+      "overall": {
+        "cases": 15,
+        "hit_at_k": 0.4666666666666667,
+        "required_recall_at_k": 0.16666666666666666,
+        "mrr_at_k": 0.24841269841269842,
+        "ndcg_at_k": 0.19881688741304177,
+        "source_precision_at_k": 0.08666666666666667,
+        "ragas_id_context_precision": 0.08666666666666667,
+        "ragas_id_context_recall": 0.16666666666666666,
+        "retrieval_latency_p50_ms": 269.52895100112073,
+        "retrieval_latency_p95_ms": 324.66507999924943,
+        "end_to_end_latency_p50_ms": 269.52895100112073,
+        "end_to_end_latency_p95_ms": 324.66507999924943
+      },
+      "by_class": {
+        "direct": {
+          "cases": 5,
+          "hit_at_k": 0.6,
+          "required_recall_at_k": 0.2,
+          "mrr_at_k": 0.2833333333333333,
+          "ndcg_at_k": 0.2552827278865514,
+          "source_precision_at_k": 0.1,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.2,
+          "retrieval_latency_p50_ms": 253.54487699951278,
+          "retrieval_latency_p95_ms": 312.4632510007359,
+          "end_to_end_latency_p50_ms": 253.54487699951278,
+          "end_to_end_latency_p95_ms": 312.4632510007359
+        },
+        "prerequisite": {
+          "cases": 5,
+          "hit_at_k": 0.2,
+          "required_recall_at_k": 0.1,
+          "mrr_at_k": 0.02857142857142857,
+          "ndcg_at_k": 0.05841564308800664,
+          "source_precision_at_k": 0.04,
+          "ragas_id_context_precision": 0.04,
+          "ragas_id_context_recall": 0.1,
+          "retrieval_latency_p50_ms": 251.46746799873654,
+          "retrieval_latency_p95_ms": 309.84563899983186,
+          "end_to_end_latency_p50_ms": 251.46746799873654,
+          "end_to_end_latency_p95_ms": 309.84563899983186
+        },
+        "multi_hop": {
+          "cases": 5,
+          "hit_at_k": 0.6,
+          "required_recall_at_k": 0.2,
+          "mrr_at_k": 0.4333333333333333,
+          "ndcg_at_k": 0.28275229126456736,
+          "source_precision_at_k": 0.12,
+          "ragas_id_context_precision": 0.12,
+          "ragas_id_context_recall": 0.2,
+          "retrieval_latency_p50_ms": 316.70726999800536,
+          "retrieval_latency_p95_ms": 327.2669199977827,
+          "end_to_end_latency_p50_ms": 316.70726999800536,
+          "end_to_end_latency_p95_ms": 327.2669199977827
+        }
+      },
+      "cases": [
+        {
+          "id": "ret-001",
+          "query": "Vì sao RRF gộp thứ hạng thay vì cộng trực tiếp raw score của BM25 và dense retrieval?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "12ae687b-864a-544d-885a-ceb1583457f4"
+          ],
+          "acceptable_source_span_ids": [
+            "64409c3a-addb-58f4-b8bc-3874647b4c6a",
+            "5874d50d-b8e3-5e09-9580-e367eecbee4d"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.16666666666666666,
+          "ndcg_at_k": 0.16716045496620227,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 6,
+          "retrieved_source_span_ids": [
+            "dfd1af46-abc2-5afb-981c-815f6b0dedfb",
+            "e2cea364-f731-5dad-9a91-c8ecd26346c1",
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "711e564d-14fa-51fe-b56d-66ab8b8632c1",
+            "196d7f1f-56f1-5416-8a32-b4513bf90ee1",
+            "64409c3a-addb-58f4-b8bc-3874647b4c6a",
+            "c54b8f84-4b7c-5e47-b9c3-cab7162b9bf4",
+            "56266bb0-f630-582b-b713-466ecb01ca18",
+            "ab1cbf3e-42a6-53ac-8df5-9a077ea27bd9",
+            "151a5add-14ed-579c-b52a-75d4984c6af6"
+          ],
+          "retrieval_latency_ms": 249.05025599946384,
+          "end_to_end_latency_ms": 249.05025599946384,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Vì sao RRF gộp thứ hạng thay vì cộng trực tiếp raw score của BM25 và dense retrieval?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-007",
+          "query": "Context Recall thấp cho biết retriever đang gặp vấn đề gì?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "80cd6dde-bdf8-5afb-a313-bcd30b9c5403"
+          ],
+          "acceptable_source_span_ids": [
+            "a715fda9-515d-5cae-a3bd-1b03a70403ed",
+            "e616b892-38db-5ea9-9b29-0ac6ca1f3cec"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.8451850618939637,
+          "source_precision_at_k": 0.3,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "80cd6dde-bdf8-5afb-a313-bcd30b9c5403",
+            "69476186-af5c-5d83-8b55-0a849d40e8c4",
+            "e616b892-38db-5ea9-9b29-0ac6ca1f3cec",
+            "f71126c1-8bef-5ca3-9a88-e13436d9cb25",
+            "bc3ccb04-f41d-54e8-81bb-1958f44d5a01",
+            "18438e91-32b6-5ee6-a19d-c90c9c845b7f",
+            "a0c83a2c-e7c9-5e6b-a099-3019c6cf57b3",
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "a715fda9-515d-5cae-a3bd-1b03a70403ed",
+            "2fe459ae-d130-5237-af5a-899aead05e37"
+          ],
+          "retrieval_latency_ms": 253.54487699951278,
+          "end_to_end_latency_ms": 253.54487699951278,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Context Recall thấp cho biết retriever đang gặp vấn đề gì?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.3,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-009",
+          "query": "Cần hiểu những thành phần retrieval nào trước khi học công thức RRF?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "156dd3dc-7d49-5fd5-a265-5866c21c6131",
+            "12ae687b-864a-544d-885a-ceb1583457f4"
+          ],
+          "acceptable_source_span_ids": [
+            "7c038496-2887-5717-ace4-b305697ee246"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "8bceb440-ad91-5b10-9d98-742000d1f77a",
+            "639d8042-390e-5685-9bee-c9fbec23106f",
+            "2fe459ae-d130-5237-af5a-899aead05e37",
+            "51baf090-11e9-5a34-83ed-0b6674095dba",
+            "db9822f4-5863-59da-a3d6-1d797683bc60",
+            "80cd6dde-bdf8-5afb-a313-bcd30b9c5403",
+            "196d7f1f-56f1-5416-8a32-b4513bf90ee1",
+            "7e5b360f-64d7-586d-8b15-5fccf6453611",
+            "bf0ca938-9995-537f-9bf3-9273441b94b6",
+            "50f13e5e-cba4-5e07-85b3-f00789b30346"
+          ],
+          "retrieval_latency_ms": 251.46746799873654,
+          "end_to_end_latency_ms": 251.46746799873654,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Cần hiểu những thành phần retrieval nào trước khi học công thức RRF?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-014",
+          "query": "Vì sao phải sửa chunking và candidate retrieval trước khi thêm reranker?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "0cef80c8-9356-5a62-9fd7-f020030a9c49",
+            "e19857c8-3111-5197-a94f-57b1006722b5"
+          ],
+          "acceptable_source_span_ids": [
+            "c7bff788-d0be-5fb0-9978-ecbf66dae8a4",
+            "52275ecd-b8ac-5a27-8974-d53e43d8ec4f"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "48a43aa9-69eb-5f8d-8842-6d127f78fd57",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "62faf079-1e5a-5db7-b012-7563beabe56f",
+            "5e923eb5-c013-513a-987c-5898e390e454",
+            "665c3a8f-0f2e-522d-9c23-d619701877b4",
+            "6d992504-d413-58df-a903-3dcabd64c76d",
+            "cd6600e0-1f7f-5eea-9d8b-35e0af06bc8e",
+            "c313aee0-62cf-541f-a95e-4500b736a897",
+            "c08f7d06-438f-5b36-852d-f45e93ed0f33"
+          ],
+          "retrieval_latency_ms": 269.52895100112073,
+          "end_to_end_latency_ms": 269.52895100112073,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Vì sao phải sửa chunking và candidate retrieval trước khi thêm reranker?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-016",
+          "query": "Citation UX, strict grounding và RAG evaluation phối hợp thế nào để người học kiểm chứng câu trả lời?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "f5461031-4984-5dd2-a497-c2d28a93be42",
+            "88d9b904-3ebf-564e-86cf-84f01ee72fcd",
+            "e616b892-38db-5ea9-9b29-0ac6ca1f3cec"
+          ],
+          "acceptable_source_span_ids": [
+            "8c28fa19-cf5c-565c-98f9-b1c30fec8c56",
+            "34f77842-b9c2-5783-81c4-923a6ac5f897"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "ccd3c1db-8c20-5b00-a236-a72ba0f290f3",
+            "333ad80e-5cfe-556f-bf48-82629fb2c2f6",
+            "f4225677-bafb-54e9-ab61-5043c37cdaaf",
+            "7b53a478-de32-546b-a186-1bdaf80ae149",
+            "aceac01b-3531-55f8-9be9-310d081bf7d6",
+            "3d979105-6237-5099-838d-b4187e7a48e3",
+            "e5fff57e-2bb6-517b-8af6-5b9ae4c62009",
+            "6eaa2ab3-a1b0-598f-913a-aaffa9303c19",
+            "c7f11e79-c58f-5f24-ad5c-48547a847abf",
+            "7e2ffde3-3579-5b21-bf8d-ec4b09ca0ec5"
+          ],
+          "retrieval_latency_ms": 316.70726999800536,
+          "end_to_end_latency_ms": 316.70726999800536,
+          "strategy": "graph_lite_2hop",
+          "subqueries": [
+            "Citation UX, strict grounding và RAG evaluation phối hợp thế nào để người học kiểm chứng câu trả lời?"
+          ],
+          "graph_expanded": true,
+          "graph_sources": [
+            {
+              "source_span_id": "5a428731-92fa-5f79-ac5e-d9e1cc314c7f",
+              "concept_id": "002a3e06-2b41-5db6-bced-e5fe73b5daf9",
+              "depth": 1,
+              "confidence": 0.8377333333333333
+            },
+            {
+              "source_span_id": "7af9bd8c-ccbb-5bb6-a2d2-6cffa1f4f939",
+              "concept_id": "002a3e06-2b41-5db6-bced-e5fe73b5daf9",
+              "depth": 1,
+              "confidence": 0.8377333333333333
+            },
+            {
+              "source_span_id": "f33cb964-5283-54a2-bf97-beb9edf65f82",
+              "concept_id": "002a3e06-2b41-5db6-bced-e5fe73b5daf9",
+              "depth": 1,
+              "confidence": 0.8377333333333333
+            },
+            {
+              "source_span_id": "20eec809-dacd-5af3-a44e-bab90fcaba93",
+              "concept_id": "9abccecd-58ac-5fa9-9bd9-3681061443b4",
+              "depth": 2,
+              "confidence": 0.8525111111111111
+            },
+            {
+              "source_span_id": "5b54439b-b039-5741-974f-2ff03f9ad771",
+              "concept_id": "9abccecd-58ac-5fa9-9bd9-3681061443b4",
+              "depth": 2,
+              "confidence": 0.8525111111111111
+            },
+            {
+              "source_span_id": "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+              "concept_id": "9abccecd-58ac-5fa9-9bd9-3681061443b4",
+              "depth": 2,
+              "confidence": 0.8525111111111111
+            },
+            {
+              "source_span_id": "74b218f8-46b4-59dc-bb70-99bfb7566096",
+              "concept_id": "f3fe3041-ec7b-56fc-a242-1dadbf62eb1d",
+              "depth": 2,
+              "confidence": 0.8475111111111111
+            },
+            {
+              "source_span_id": "a23daecb-032e-574f-86e5-7cab6c7a5bc0",
+              "concept_id": "f3fe3041-ec7b-56fc-a242-1dadbf62eb1d",
+              "depth": 2,
+              "confidence": 0.8475111111111111
+            }
+          ],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-020",
+          "query": "Vì sao vector RAG gặp khó với câu hỏi quan hệ nhiều bước, còn GraphRAG cần nodes, edges và triples để giải quyết?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "48ee7bc1-e3e4-54d8-9b96-f6497ef1d0c5",
+            "f62efc80-1b8e-5b99-98e4-fcd6b3ce95bd",
+            "ffd44b9e-f468-5502-8678-762eb52dff2d"
+          ],
+          "acceptable_source_span_ids": [
+            "7c24ed09-58db-50e0-8c8f-dcd9b4d8eeff"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.3333333333333333,
+          "mrr_at_k": 0.16666666666666666,
+          "ndcg_at_k": 0.2691828628414762,
+          "source_precision_at_k": 0.2,
+          "first_relevant_rank": 6,
+          "retrieved_source_span_ids": [
+            "af0f1602-fa18-5e3c-affd-ab0f12ac3ce8",
+            "c81c1cac-c853-573e-bec9-33332b12a66a",
+            "5e85930e-0b84-51d7-9717-d162705b0031",
+            "bb1a06df-b5ce-55a1-9c2b-0a2e69a61ea1",
+            "6f495b2a-001f-5aca-aa0e-4958508ebd76",
+            "48ee7bc1-e3e4-54d8-9b96-f6497ef1d0c5",
+            "7c24ed09-58db-50e0-8c8f-dcd9b4d8eeff",
+            "063478b1-68d6-5c6f-ac45-93e55a2c888d",
+            "8abf63ca-7c8b-5f4e-af86-498f272514a8",
+            "f20f15b8-f30a-569c-ba7c-8f4f36e0ca25"
+          ],
+          "retrieval_latency_ms": 327.2669199977827,
+          "end_to_end_latency_ms": 327.2669199977827,
+          "strategy": "graph_lite_2hop",
+          "subqueries": [
+            "Vì sao vector RAG gặp khó với câu hỏi quan hệ nhiều bước, còn GraphRAG cần nodes, edges và triples để giải quyết?"
+          ],
+          "graph_expanded": true,
+          "graph_sources": [
+            {
+              "source_span_id": "2cb1c442-6b01-5a93-9465-49a6c68a7e27",
+              "concept_id": "184793d2-eb1b-5932-a4bc-b1068f3761d6",
+              "depth": 1,
+              "confidence": 0.8453555555555555
+            },
+            {
+              "source_span_id": "9145589d-8809-5924-8397-aa5dc63b650c",
+              "concept_id": "184793d2-eb1b-5932-a4bc-b1068f3761d6",
+              "depth": 1,
+              "confidence": 0.8453555555555555
+            },
+            {
+              "source_span_id": "f6241080-36a7-5736-ad6d-8cb813c461f0",
+              "concept_id": "184793d2-eb1b-5932-a4bc-b1068f3761d6",
+              "depth": 1,
+              "confidence": 0.8453555555555555
+            },
+            {
+              "source_span_id": "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+              "concept_id": "ff2f810b-8f45-5757-ae00-214d32c661f0",
+              "depth": 1,
+              "confidence": 0.803711111111111
+            },
+            {
+              "source_span_id": "8ad8d319-1483-5a04-9f28-d0c1c40fdc2a",
+              "concept_id": "ff2f810b-8f45-5757-ae00-214d32c661f0",
+              "depth": 1,
+              "confidence": 0.803711111111111
+            },
+            {
+              "source_span_id": "b16fc70a-f4f1-5b71-a1b7-32be74726a74",
+              "concept_id": "ff2f810b-8f45-5757-ae00-214d32c661f0",
+              "depth": 1,
+              "confidence": 0.803711111111111
+            },
+            {
+              "source_span_id": "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+              "concept_id": "ea00208b-58e2-5a1a-bb0b-9f12a38bac61",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "85237f6f-f2bb-5a5e-9c9b-517d785874f8",
+              "concept_id": "ea00208b-58e2-5a1a-bb0b-9f12a38bac61",
+              "depth": 2,
+              "confidence": 0.86
+            }
+          ],
+          "degraded": false,
+          "ragas_id_context_precision": 0.2,
+          "ragas_id_context_recall": 0.3333333333333333
+        },
+        {
+          "id": "ret-026",
+          "query": "FAISS thiếu những khả năng database nào dù tìm vector rất nhanh?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "ad7b3bce-82bd-528b-92e1-293284464be8"
+          ],
+          "acceptable_source_span_ids": [
+            "f2a7648b-e29d-54bf-84df-46360022945a"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "8ce0f4a4-c85e-5b57-ae43-c1feada38568",
+            "a917bb80-2595-5982-8ec7-79ff54bfa3d6",
+            "bfbe31ba-abd5-5ca8-b3c6-2ee2cf03cff5",
+            "8125d3e7-8165-5ea2-ab41-729ecfaa28ac",
+            "f1d2ab97-e268-5002-90cf-11cb45d84cb2",
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "d33a06de-186c-5e7b-9689-182f29960789",
+            "b2ac59d8-7e6f-5286-b4ed-0c5654e2ff67",
+            "d6d1db65-2f32-578b-adf5-a009ea5c5bb8",
+            "489939f4-08e7-5a74-8882-4f8abd6fdc23"
+          ],
+          "retrieval_latency_ms": 252.37927200214472,
+          "end_to_end_latency_ms": 252.37927200214472,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "FAISS thiếu những khả năng database nào dù tìm vector rất nhanh?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-027",
+          "query": "Corpus poisoning và indirect prompt injection tấn công hệ RAG qua retrieval như thế nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "23cc397e-8173-5726-b3ca-5c68bf2eaa34"
+          ],
+          "acceptable_source_span_ids": [
+            "54f5bbf8-ad86-50fd-832c-7c249ff1bfc4"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "dc86c2f3-feed-52af-aa0c-cb6cefca9064",
+            "f1d2ab97-e268-5002-90cf-11cb45d84cb2",
+            "328c6e95-e086-5840-8996-ade7a5692815",
+            "33529846-471e-5537-9dd0-3fbcbd6a8a02",
+            "140ec0d2-2628-5544-af91-9aee48476843",
+            "010fd20e-a3a7-5e87-8cf2-84d8c6df2756",
+            "521554b8-d9d5-5f77-9ca1-9be6feca3490",
+            "178a511b-b3b3-57d9-91f6-05be3fa5dee6",
+            "e914f3c5-e4ae-54f6-93db-5d544df802e0",
+            "20d8501c-2935-543d-97f6-e0442b93fd3d"
+          ],
+          "retrieval_latency_ms": 312.4632510007359,
+          "end_to_end_latency_ms": 312.4632510007359,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Corpus poisoning và indirect prompt injection tấn công hệ RAG qua retrieval như thế nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-028",
+          "query": "Trace và span khác nhau thế nào trong một request RAG end-to-end?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "80a86af3-4a7d-5bbb-8fd7-7d2bd0ebef39"
+          ],
+          "acceptable_source_span_ids": [
+            "dc6f69a5-aae1-56a0-b005-726610380510"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.25,
+          "ndcg_at_k": 0.2640681225725909,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 4,
+          "retrieved_source_span_ids": [
+            "6a1c573d-f613-5558-b332-dabbc9b14cac",
+            "b78cfb55-4ec2-5313-8431-2b102898285c",
+            "3d6afda4-ffe0-5922-b9b1-bc75da1d3f14",
+            "dc6f69a5-aae1-56a0-b005-726610380510",
+            "0a35221a-c2f3-5823-b004-9c074006439a",
+            "2dd5d9fd-a954-554c-bbc6-8ecd84726e72",
+            "010fd20e-a3a7-5e87-8cf2-84d8c6df2756",
+            "70f24f30-ea2e-50c4-9ad5-c0d62a24a79a",
+            "865e150a-df30-576b-ac51-a2fbef64bd02",
+            "eea03801-a1db-5c6a-ae57-20d6df3623a3"
+          ],
+          "retrieval_latency_ms": 272.7325660016504,
+          "end_to_end_latency_ms": 272.7325660016504,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Trace và span khác nhau thế nào trong một request RAG end-to-end?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-034",
+          "query": "Muốn xây memory consolidation, trước hết phải phân biệt episodic memory và semantic memory ở loại dữ liệu nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "c59733bd-fb17-52a0-b78d-74505e03c861",
+            "191f1df2-e547-53fc-aa41-5e8af2531d68"
+          ],
+          "acceptable_source_span_ids": [
+            "965dc7d2-bc55-54df-974c-966274b8a969"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 0.14285714285714285,
+          "ndcg_at_k": 0.2920782154400332,
+          "source_precision_at_k": 0.2,
+          "first_relevant_rank": 7,
+          "retrieved_source_span_ids": [
+            "89ac7cce-6751-5726-b5b8-21bd23771eeb",
+            "55f2d9bb-7e77-5535-84e8-f412a2e3c61c",
+            "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+            "688c883c-2d8b-5c00-af1c-8aad1a82df19",
+            "e014deb0-6c3e-5354-8d4a-45fff0db2369",
+            "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+            "c59733bd-fb17-52a0-b78d-74505e03c861",
+            "25629367-6382-5f73-8b20-419d8621434e",
+            "7d6dcbad-76ba-5f20-b23c-583f7b58e8c6",
+            "965dc7d2-bc55-54df-974c-966274b8a969"
+          ],
+          "retrieval_latency_ms": 228.86436300177593,
+          "end_to_end_latency_ms": 228.86436300177593,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Muốn xây memory consolidation, trước hết phải phân biệt episodic memory và semantic memory ở loại dữ liệu nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.2,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-035",
+          "query": "Trước khi tune ef và M của HNSW, vì sao phải đo Flat baseline và ANN recall?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "4a694fde-c3ae-56e5-b8ce-46375bd93b2f",
+            "c0efcc4c-48a3-5ca0-a719-8bf2631376b8"
+          ],
+          "acceptable_source_span_ids": [
+            "4f6a01f2-f015-56f5-a89c-0c41a4dd4e53"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "e39d7d42-04d4-585d-b2e0-f809e044fb6e",
+            "3d045669-87e9-5a3d-8726-44e3752d7894",
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "436ccf53-ce54-58b4-ab15-8038154b31a0",
+            "492f7f0d-c7cc-501f-bb50-0e12661a0ba4",
+            "66cbeb71-4e1f-5f78-9df9-e3e4462ab279",
+            "df82b9ef-54c5-5abb-b298-4032c3808d0f",
+            "232f8dc9-f425-5f18-958b-08276c24368b",
+            "52553dca-02e4-5e5a-878f-6ecb29ad4c83",
+            "3d438a40-a944-5b3b-b79d-d93483f7668d"
+          ],
+          "retrieval_latency_ms": 309.84563899983186,
+          "end_to_end_latency_ms": 309.84563899983186,
+          "strategy": "graph_lite_1hop",
+          "subqueries": [
+            "Trước khi tune ef và M của HNSW, vì sao phải đo Flat baseline và ANN recall?"
+          ],
+          "graph_expanded": true,
+          "graph_sources": [
+            {
+              "source_span_id": "58f6a7bd-f875-54fa-887b-14ecca7bc5d0",
+              "concept_id": "d2e5cdbe-3c6c-5e8e-9058-b959476b2250",
+              "depth": 1,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "7f0a9407-4bd9-5181-b3ac-d86ddeba2a34",
+              "concept_id": "d2e5cdbe-3c6c-5e8e-9058-b959476b2250",
+              "depth": 1,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "ea837f1a-fef3-5108-a78a-8c62b70046c0",
+              "concept_id": "d2e5cdbe-3c6c-5e8e-9058-b959476b2250",
+              "depth": 1,
+              "confidence": 0.86
+            }
+          ],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-036",
+          "query": "Trước khi chọn FAISS hay một vector database, cần kiểm tra nhu cầu persistence, metadata filter và CRUD nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "ad7b3bce-82bd-528b-92e1-293284464be8",
+            "3e4b7bea-dba4-5404-a3db-9d2518c60813"
+          ],
+          "acceptable_source_span_ids": [
+            "f2a7648b-e29d-54bf-84df-46360022945a"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "8ce0f4a4-c85e-5b57-ae43-c1feada38568",
+            "bfbe31ba-abd5-5ca8-b3c6-2ee2cf03cff5",
+            "489939f4-08e7-5a74-8882-4f8abd6fdc23",
+            "1be16775-4e96-55e1-b2a8-0e1222048afc",
+            "d33a06de-186c-5e7b-9689-182f29960789",
+            "5e923eb5-c013-513a-987c-5898e390e454",
+            "b75cba89-e2ce-5476-b0ee-9c3f1b80431a",
+            "71dccca2-4a6a-5b8e-ae91-d77b08878428",
+            "2fe459ae-d130-5237-af5a-899aead05e37",
+            "1f8aaf79-1dc6-5227-96f7-c411214fa34d"
+          ],
+          "retrieval_latency_ms": 246.46100199970533,
+          "end_to_end_latency_ms": 246.46100199970533,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Trước khi chọn FAISS hay một vector database, cần kiểm tra nhu cầu persistence, metadata filter và CRUD nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-043",
+          "query": "Memory retrieval, decay, consolidation và privacy deletion cần phối hợp ra sao để ký ức cũ không lấn át yêu cầu mới?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "965dc7d2-bc55-54df-974c-966274b8a969",
+            "bc44351a-a8df-5e1f-8fa8-81884b9bc7b6",
+            "6144bab3-b09d-5b30-b52c-bd71e987e923"
+          ],
+          "acceptable_source_span_ids": [
+            "85237f6f-f2bb-5a5e-9c9b-517d785874f8"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.6666666666666666,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.7541985434892589,
+          "source_precision_at_k": 0.3,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "965dc7d2-bc55-54df-974c-966274b8a969",
+            "85237f6f-f2bb-5a5e-9c9b-517d785874f8",
+            "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+            "492f7f0d-c7cc-501f-bb50-0e12661a0ba4",
+            "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+            "90d8b682-7cef-5129-abd1-b074b0b0d5b3",
+            "bb46f26d-6db7-5e72-8d02-99bb72337292",
+            "97fb03e5-bfdb-5ec6-8044-803ad3ecd1a6",
+            "bc44351a-a8df-5e1f-8fa8-81884b9bc7b6",
+            "2b0de521-f28e-5aeb-80ea-9a85498f2598"
+          ],
+          "retrieval_latency_ms": 324.66507999924943,
+          "end_to_end_latency_ms": 324.66507999924943,
+          "strategy": "graph_lite_2hop",
+          "subqueries": [
+            "Memory retrieval, decay, consolidation và privacy deletion cần phối hợp ra sao để ký ức cũ không lấn át yêu cầu mới?"
+          ],
+          "graph_expanded": true,
+          "graph_sources": [
+            {
+              "source_span_id": "151a5add-14ed-579c-b52a-75d4984c6af6",
+              "concept_id": "21cfeb71-8390-5be2-9070-f9c1b87ef08f",
+              "depth": 1,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "7c038496-2887-5717-ace4-b305697ee246",
+              "concept_id": "21cfeb71-8390-5be2-9070-f9c1b87ef08f",
+              "depth": 1,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "f67b5472-cca0-501d-a2a3-8ec416a41868",
+              "concept_id": "21cfeb71-8390-5be2-9070-f9c1b87ef08f",
+              "depth": 1,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "2cb1c442-6b01-5a93-9465-49a6c68a7e27",
+              "concept_id": "184793d2-eb1b-5932-a4bc-b1068f3761d6",
+              "depth": 1,
+              "confidence": 0.8453555555555555
+            },
+            {
+              "source_span_id": "9145589d-8809-5924-8397-aa5dc63b650c",
+              "concept_id": "184793d2-eb1b-5932-a4bc-b1068f3761d6",
+              "depth": 1,
+              "confidence": 0.8453555555555555
+            },
+            {
+              "source_span_id": "f6241080-36a7-5736-ad6d-8cb813c461f0",
+              "concept_id": "184793d2-eb1b-5932-a4bc-b1068f3761d6",
+              "depth": 1,
+              "confidence": 0.8453555555555555
+            },
+            {
+              "source_span_id": "08ad123e-3afd-5e5c-b622-001af97fa24e",
+              "concept_id": "18b9e279-8c31-5702-bde1-53bb189110eb",
+              "depth": 1,
+              "confidence": 0.8432444444444445
+            },
+            {
+              "source_span_id": "7af9bd8c-ccbb-5bb6-a2d2-6cffa1f4f939",
+              "concept_id": "18b9e279-8c31-5702-bde1-53bb189110eb",
+              "depth": 1,
+              "confidence": 0.8432444444444445
+            }
+          ],
+          "degraded": false,
+          "ragas_id_context_precision": 0.3,
+          "ragas_id_context_recall": 0.6666666666666666
+        },
+        {
+          "id": "ret-045",
+          "query": "Vì sao FAISS có thể là search kernel tốt nhưng vẫn chưa đủ cho multi-tenant RAG cần filter và persistence?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "ad7b3bce-82bd-528b-92e1-293284464be8",
+            "3e4b7bea-dba4-5404-a3db-9d2518c60813"
+          ],
+          "acceptable_source_span_ids": [
+            "f2a7648b-e29d-54bf-84df-46360022945a"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "8ce0f4a4-c85e-5b57-ae43-c1feada38568",
+            "dfbe0f29-ad79-5739-a428-7f8c7551603f",
+            "bfbe31ba-abd5-5ca8-b3c6-2ee2cf03cff5",
+            "0d26b27c-8c5e-58ac-ba8d-66576a15e087",
+            "434c0946-da2a-55f7-821f-4a6fb19aa9a0",
+            "72da7059-0724-5932-853d-3dbef3b2062f",
+            "1be16775-4e96-55e1-b2a8-0e1222048afc",
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "854e6623-f556-5dfe-9d69-068583f3234e",
+            "f207a26e-b1aa-5480-8fa6-d095f466bea9"
+          ],
+          "retrieval_latency_ms": 251.78933500137646,
+          "end_to_end_latency_ms": 251.78933500137646,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Vì sao FAISS có thể là search kernel tốt nhưng vẫn chưa đủ cho multi-tenant RAG cần filter và persistence?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-047",
+          "query": "RAGAS metrics và nested traces bổ trợ nhau thế nào để phân biệt retrieve sai, generation sai và latency bottleneck?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "49b65b10-accd-595b-b39b-367c837249fd",
+            "942e24dd-f256-5413-89f1-45a6dfc3ed96",
+            "80a86af3-4a7d-5bbb-8fd7-7d2bd0ebef39"
+          ],
+          "acceptable_source_span_ids": [
+            "dc6f69a5-aae1-56a0-b005-726610380510"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.3903800499921017,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "dc6f69a5-aae1-56a0-b005-726610380510",
+            "c0f23420-4cc1-5e4c-a3d2-a274acf72850",
+            "70f24f30-ea2e-50c4-9ad5-c0d62a24a79a",
+            "9bcde2ef-b4eb-5e94-84a7-068d29d520c8",
+            "833f5a14-80a3-53e4-96ea-a9a195fffdff",
+            "6a1c573d-f613-5558-b332-dabbc9b14cac",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "a9fbdbe4-48ff-5fe2-9d44-81c4a37104b1",
+            "dfbe0f29-ad79-5739-a428-7f8c7551603f",
+            "37c3f605-1f03-5d30-905a-c3f547b3d221"
+          ],
+          "retrieval_latency_ms": 312.90480800089426,
+          "end_to_end_latency_ms": 312.90480800089426,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "RAGAS metrics và nested traces bổ trợ nhau thế nào để phân biệt retrieve sai, generation sai và latency bottleneck?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        }
+      ]
+    }
+  },
+  "quality_gate": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "dataset_has_expected_cases",
+        "passed": true,
+        "actual": 15,
+        "expected": "= 15"
+      },
+      {
+        "name": "all_cases_have_resolved_source_labels",
+        "passed": true,
+        "actual": 15,
+        "expected": "= 15"
+      },
+      {
+        "name": "retrieval_suite_contains_only_user_questions",
+        "passed": true,
+        "actual": 15,
+        "expected": "= 15"
+      },
+      {
+        "name": "coverage_direct",
+        "passed": true,
+        "actual": 5,
+        "expected": "= 5"
+      },
+      {
+        "name": "coverage_prerequisite",
+        "passed": true,
+        "actual": 5,
+        "expected": "= 5"
+      },
+      {
+        "name": "coverage_multi_hop",
+        "passed": true,
+        "actual": 5,
+        "expected": "= 5"
+      },
+      {
+        "name": "graph_lite_p95_within_budget",
+        "passed": true,
+        "actual": 324.7,
+        "expected": "<= 500 ms"
+      },
+      {
+        "name": "graph_lite_direct_recall_gate",
+        "passed": true,
+        "actual": 0.0,
+        "expected": ">= -0.02 recall delta"
+      },
+      {
+        "name": "graph_lite_prerequisite_recall_gate",
+        "passed": true,
+        "actual": 0.0,
+        "expected": ">= 0 recall delta"
+      },
+      {
+        "name": "graph_lite_multi_hop_recall_gate",
+        "passed": true,
+        "actual": 0.0,
+        "expected": ">= 0 recall delta"
+      }
+    ]
+  }
+}

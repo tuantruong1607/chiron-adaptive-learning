@@ -1,0 +1,19 @@
+{
+  "id": "chunking-strategy",
+  "version": "1.0.0",
+  "title": "Chunking Strategy Workshop",
+  "objective": "Chọn boundary parent-child ổn định và giữ source locator.",
+  "estimated_minutes": 20,
+  "success_threshold": 75,
+  "concept_id": "chunking",
+  "source_span_ids": ["5a51c6c4-07eb-57a2-82ff-7681f1738879"],
+  "events": ["draft_saved", "pipeline_run", "hint_opened", "submitted"],
+  "controls": [
+    {"id": "strategy", "kind": "select", "default": "fixed", "options": ["fixed", "hierarchical", "parent-child"]},
+    {"id": "chunk_size", "kind": "range", "default": 500, "minimum": 200, "maximum": 1200, "step": 50},
+    {"id": "overlap", "kind": "range", "default": 50, "minimum": 0, "maximum": 250, "step": 10},
+    {"id": "preserve_locators", "kind": "toggle", "default": true}
+  ],
+  "transfer_prompts": ["Khi nào boundary theo heading tốt hơn cắt cố định?"],
+  "rubric": {"structure_strategy": 25, "chunk_size": 20, "overlap": 15, "source_locator": 20, "transfer_explanation": 20}
+}

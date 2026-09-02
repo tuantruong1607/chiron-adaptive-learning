@@ -1,0 +1,21 @@
+{
+  "id": "metadata-filtering",
+  "version": "1.0.0",
+  "title": "Metadata and Tenant Filtering",
+  "objective": "Áp dụng authorization và course filters trước retrieval.",
+  "estimated_minutes": 18,
+  "success_threshold": 75,
+  "concept_id": "metadata_filtering",
+  "source_span_ids": ["c30965da-a1a8-5893-a494-dc0bc667531b"],
+  "events": ["draft_saved", "pipeline_run", "hint_opened", "submitted"],
+  "controls": [
+    {"id": "tenant_filter", "kind": "toggle", "default": false},
+    {"id": "course_filter", "kind": "toggle", "default": false},
+    {"id": "filter_stage", "kind": "select", "default": "post", "options": ["post", "pre"]}
+  ],
+  "transfer_prompts": [
+    "Vì sao tenant filter là authorization boundary, không chỉ là ranking hint?",
+    "Pre-filter ảnh hưởng candidate recall và top-k như thế nào?"
+  ],
+  "rubric": {"tenant_filter": 30, "course_filter": 20, "pre_filter": 20, "isolation_reasoning": 20, "recall_transfer": 10}
+}

@@ -1,0 +1,16 @@
+{
+  "graph_version": "graph-lite-candidates-v1",
+  "reviewer": "product_owner",
+  "decisions": [
+    {"kind":"node","id":"hybrid_search","decision":"approved","note":""},
+    {"kind":"node","id":"rag_evaluation","decision":"approved","note":""},
+    {"kind":"node","id":"knowledge_graph","decision":"approved","note":""},
+    {"kind":"node","id":"agent_memory","decision":"approved","note":""},
+    {"kind":"node","id":"circuit_breaker","decision":"approved","note":""},
+    {"kind":"edge","id":"dense_pre_hybrid","decision":"approved","note":""},
+    {"kind":"edge","id":"sparse_pre_hybrid","decision":"approved","note":""},
+    {"kind":"edge","id":"kg_pre_graphrag","decision":"approved","note":""},
+    {"kind":"edge","id":"episodic_pre_consolidation","decision":"approved","note":""},
+    {"kind":"edge","id":"observability_pre_slo","decision":"approved","note":""}
+  ]
+}

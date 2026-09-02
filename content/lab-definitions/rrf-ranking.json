@@ -1,0 +1,21 @@
+{
+  "id": "rrf-ranking",
+  "version": "1.0.0",
+  "title": "RRF Ranking Trade-offs",
+  "objective": "Hợp nhất ranked lists mà không so raw score khác thang đo.",
+  "estimated_minutes": 18,
+  "success_threshold": 75,
+  "concept_id": "reciprocal_rank_fusion",
+  "source_span_ids": ["196d7f1f-56f1-5416-8a32-b4513bf90ee1"],
+  "events": ["draft_saved", "pipeline_run", "hint_opened", "submitted"],
+  "controls": [
+    {"id": "fusion", "kind": "select", "default": "weighted-sum", "options": ["weighted-sum", "rrf"]},
+    {"id": "rrf_k", "kind": "range", "default": 60, "minimum": 10, "maximum": 120, "step": 5},
+    {"id": "candidate_depth", "kind": "range", "default": 20, "minimum": 5, "maximum": 60, "step": 1}
+  ],
+  "transfer_prompts": [
+    "Vì sao raw score của dense và sparse không nên so trực tiếp?",
+    "Exact term hiếm bị bỏ sót thì retriever nào cần giữ tín hiệu?"
+  ],
+  "rubric": {"fusion_method": 25, "rrf_constant": 20, "candidate_depth": 20, "score_reasoning": 20, "rare_term_transfer": 15}
+}

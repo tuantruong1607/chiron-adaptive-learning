@@ -1,0 +1,3100 @@
+{
+  "generated_at": "2026-09-01T15:20:45.524710+00:00",
+  "dataset": "/workspace/eval/rag/golden-local.jsonl",
+  "split": "development",
+  "split_manifest": "/workspace/eval/rag/splits/local-v1.json",
+  "expected_coverage": {
+    "total": 35,
+    "by_class": {
+      "direct": 15,
+      "prerequisite": 10,
+      "multi_hop": 10
+    }
+  },
+  "dataset_coverage": {
+    "total": 35,
+    "by_class": {
+      "direct": 15,
+      "prerequisite": 10,
+      "multi_hop": 10
+    },
+    "by_interaction_type": {
+      "user_question": 35
+    }
+  },
+  "review_status": {
+    "approved": 35
+  },
+  "embedding_model": "intfloat/multilingual-e5-large",
+  "embedding_version": "multilingual-e5-large-mean-batch32-v2",
+  "collection": "chiron_chunks_v1_full",
+  "ragas_version": "0.4.3",
+  "python_version": "3.12.14",
+  "ragas_reference_policy": {
+    "precision": "required + acceptable source spans",
+    "recall": "required source spans only"
+  },
+  "top_k": 10,
+  "candidate_limit": 24,
+  "graph_policy": {
+    "version_status": "draft",
+    "review_statuses": [
+      "approved"
+    ],
+    "max_hops": 2,
+    "expansion_limit": 8
+  },
+  "warmup_policy": {
+    "excluded_from_metrics": true,
+    "case_ids": [
+      "ret-002",
+      "ret-010",
+      "ret-015"
+    ],
+    "reason": "warm long-lived encoder, Qdrant and graph read paths"
+  },
+  "embedding_latency_p50_ms": 163.75889499977347,
+  "modes": {
+    "hybrid": {
+      "overall": {
+        "cases": 35,
+        "hit_at_k": 0.4857142857142857,
+        "required_recall_at_k": 0.28095238095238095,
+        "mrr_at_k": 0.3242857142857143,
+        "ndcg_at_k": 0.23116307133739616,
+        "source_precision_at_k": 0.05714285714285714,
+        "ragas_id_context_precision": 0.05714285714285714,
+        "ragas_id_context_recall": 0.28095238095238095,
+        "retrieval_latency_p50_ms": 124.33705700004793,
+        "retrieval_latency_p95_ms": 205.4589039998973,
+        "end_to_end_latency_p50_ms": 302.8703910003969,
+        "end_to_end_latency_p95_ms": 411.4947699995355
+      },
+      "by_class": {
+        "direct": {
+          "cases": 15,
+          "hit_at_k": 0.6,
+          "required_recall_at_k": 0.4666666666666667,
+          "mrr_at_k": 0.46888888888888886,
+          "ndcg_at_k": 0.37139327001928807,
+          "source_precision_at_k": 0.07333333333333333,
+          "ragas_id_context_precision": 0.07333333333333333,
+          "ragas_id_context_recall": 0.4666666666666667,
+          "retrieval_latency_p50_ms": 128.6476750001384,
+          "retrieval_latency_p95_ms": 206.5534190001017,
+          "end_to_end_latency_p50_ms": 322.05640800020774,
+          "end_to_end_latency_p95_ms": 403.82816700002877
+        },
+        "prerequisite": {
+          "cases": 10,
+          "hit_at_k": 0.5,
+          "required_recall_at_k": 0.2,
+          "mrr_at_k": 0.2866666666666667,
+          "ndcg_at_k": 0.17313825659978657,
+          "source_precision_at_k": 0.06000000000000001,
+          "ragas_id_context_precision": 0.06000000000000001,
+          "ragas_id_context_recall": 0.2,
+          "retrieval_latency_p50_ms": 122.33200400032729,
+          "retrieval_latency_p95_ms": 194.99185999984547,
+          "end_to_end_latency_p50_ms": 303.9994190003199,
+          "end_to_end_latency_p95_ms": 425.9430830002202
+        },
+        "multi_hop": {
+          "cases": 10,
+          "hit_at_k": 0.3,
+          "required_recall_at_k": 0.08333333333333333,
+          "mrr_at_k": 0.145,
+          "ndcg_at_k": 0.07884258805216791,
+          "source_precision_at_k": 0.030000000000000006,
+          "ragas_id_context_precision": 0.030000000000000006,
+          "ragas_id_context_recall": 0.08333333333333333,
+          "retrieval_latency_p50_ms": 120.96875799988993,
+          "retrieval_latency_p95_ms": 141.48780899995472,
+          "end_to_end_latency_p50_ms": 292.11290199964424,
+          "end_to_end_latency_p95_ms": 411.4947699995355
+        }
+      },
+      "cases": [
+        {
+          "id": "ret-002",
+          "query": "Dense retrieval và sparse retrieval khác nhau ở loại tín hiệu tìm kiếm nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "156dd3dc-7d49-5fd5-a265-5866c21c6131"
+          ],
+          "acceptable_source_span_ids": [
+            "1b45856b-93d4-5da3-9509-b6f5a79aae4c"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.6131471927654584,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "1b45856b-93d4-5da3-9509-b6f5a79aae4c",
+            "9e525676-967e-5b70-9f69-8190f3a641f5",
+            "151a5add-14ed-579c-b52a-75d4984c6af6",
+            "37c3f605-1f03-5d30-905a-c3f547b3d221",
+            "dfd1af46-abc2-5afb-981c-815f6b0dedfb",
+            "3a8b9b50-0eb7-50d0-b8e0-1ac59b81ace9",
+            "7bb8ee30-345b-5d5b-9e04-28712433ce6d",
+            "3b9542de-72d7-5ce4-9b97-aa7f9ffa6d80",
+            "62faf079-1e5a-5db7-b012-7563beabe56f",
+            "e09ccc2f-15bc-54c8-8b08-5b47c094b5d0"
+          ],
+          "embedding_latency_ms": 213.8683849998415,
+          "retrieval_latency_ms": 149.93029300012495,
+          "end_to_end_latency_ms": 363.79867799996646,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-003",
+          "query": "Vì sao embedding model tốt không thể cứu một chiến lược chunking tồi?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "0cef80c8-9356-5a62-9fd7-f020030a9c49"
+          ],
+          "acceptable_source_span_ids": [
+            "c7bff788-d0be-5fb0-9978-ecbf66dae8a4"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "f22da771-c78c-5b18-b296-aa9b0424afd3",
+            "da2d0b0b-dba3-52ab-a14e-f5927f1a195a",
+            "97fb03e5-bfdb-5ec6-8044-803ad3ecd1a6",
+            "846f544c-de1c-5c50-9d0e-c226b0222f3c",
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "9b09db49-249b-502a-9841-6daed6205484",
+            "6a1c573d-f613-5558-b332-dabbc9b14cac",
+            "09fc0659-aff9-52b5-891a-ce7831cc9b43",
+            "5b8726cd-4425-5a7f-bc29-add49cb91856",
+            "c08f7d06-438f-5b36-852d-f45e93ed0f33"
+          ],
+          "embedding_latency_ms": 198.36926300013147,
+          "retrieval_latency_ms": 205.4589039998973,
+          "end_to_end_latency_ms": 403.82816700002877,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-004",
+          "query": "Tại sao cross-encoder reranker chỉ nên chạy trên một danh sách candidates nhỏ?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "e19857c8-3111-5197-a94f-57b1006722b5"
+          ],
+          "acceptable_source_span_ids": [
+            "52275ecd-b8ac-5a27-8974-d53e43d8ec4f"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 0.2,
+          "ndcg_at_k": 0.23719771276929622,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 5,
+          "retrieved_source_span_ids": [
+            "6b010839-e748-58cf-b581-0cf6570d16e8",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "30e59329-4dcf-5361-a9c4-3ac9c05de4f1",
+            "4338f38d-bb31-5cba-95b8-807b93c9868b",
+            "e19857c8-3111-5197-a94f-57b1006722b5",
+            "747f22b7-dc5b-545c-b17e-81630f0c5551",
+            "492f7f0d-c7cc-501f-bb50-0e12661a0ba4",
+            "328c6e95-e086-5840-8996-ade7a5692815",
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "f09bcb93-ef3d-510e-bb58-d6cd8886d379"
+          ],
+          "embedding_latency_ms": 122.20799099986834,
+          "retrieval_latency_ms": 100.7412439998916,
+          "end_to_end_latency_ms": 222.94923499975994,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-005",
+          "query": "False-hit trong semantic cache xảy ra như thế nào và cần theo dõi metric gì?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "360a11db-5464-5332-8aad-364a03c1b67c"
+          ],
+          "acceptable_source_span_ids": [
+            "4090f69a-a543-5d78-861f-d1ac9cd0ed11"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "74e7d052-a825-5cbd-9b01-af600d180ebb",
+            "dc56e77c-fe6b-5f19-b51b-5a6fd62eb717",
+            "2890e586-151b-5a69-a67a-972ef1f171c9",
+            "acbe46a1-04d3-5879-befc-703c68e4fbee",
+            "172c60a2-0f31-519a-8332-081f78453f63",
+            "d728544e-5c0b-5214-a077-3fd2b8b72c78",
+            "88660e1c-4a0c-598c-b2bb-e54ec1a30849",
+            "b5664704-e936-506a-9b32-83015f84b94f",
+            "edf09602-911b-5a59-9a12-228de1ba1478",
+            "c97aa690-2b7d-5dbc-82a4-97a48b965f60"
+          ],
+          "embedding_latency_ms": 153.19823500021812,
+          "retrieval_latency_ms": 168.85817299998962,
+          "end_to_end_latency_ms": 322.05640800020774,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-006",
+          "query": "Circuit breaker và fallback chain đảm nhiệm hai vai trò khác nhau nào khi provider hỏng?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "c9fd281d-b049-5b31-8138-9be844bad5e5"
+          ],
+          "acceptable_source_span_ids": [
+            "43087f7a-1528-542a-a356-3a20c3a17080"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "fee28308-52a9-5daa-9f5d-1c82e17133bf",
+            "85b69bf2-9f2c-592d-bcaf-074ca963c736",
+            "9f4b9067-9604-5ef6-8b3e-32f1c3244662",
+            "acbe46a1-04d3-5879-befc-703c68e4fbee",
+            "95784a59-9240-5453-bdfd-7586f99221ba",
+            "74e7d052-a825-5cbd-9b01-af600d180ebb",
+            "40e375e3-5378-5955-8e29-029853a788cf",
+            "4aeb0709-7d06-5106-af77-080738303bf3",
+            "2890e586-151b-5a69-a67a-972ef1f171c9",
+            "7006a92b-8aea-52de-81ae-e124f21c90ba"
+          ],
+          "embedding_latency_ms": 130.35604400010925,
+          "retrieval_latency_ms": 206.5534190001017,
+          "end_to_end_latency_ms": 336.90946300021096,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-008",
+          "query": "Tại sao similarity search đơn thuần chưa đủ và metadata filter đặt sai có thể làm recall giảm âm thầm?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "d67640e0-122a-5532-a861-4a93c701d87c"
+          ],
+          "acceptable_source_span_ids": [
+            "b01380ea-d55a-59b3-8346-e59600327ce8",
+            "52275ecd-b8ac-5a27-8974-d53e43d8ec4f"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.46927872602275644,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "d67640e0-122a-5532-a861-4a93c701d87c",
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "c08f7d06-438f-5b36-852d-f45e93ed0f33",
+            "15873c55-2eb7-56d8-a0b5-befa7a2559f6",
+            "cf0be574-dce6-5894-950c-5b37feec40b0",
+            "b0b547a6-9585-5f99-91f9-43f2ba79e44c",
+            "b2ac59d8-7e6f-5286-b4ed-0c5654e2ff67",
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "7521da4d-22b2-5270-a31f-5ec334c2a7bc",
+            "328c6e95-e086-5840-8996-ade7a5692815"
+          ],
+          "embedding_latency_ms": 166.16109200003848,
+          "retrieval_latency_ms": 263.92602499981876,
+          "end_to_end_latency_ms": 430.08711699985724,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-010",
+          "query": "Để xây agent có loop, retry, human approval và resume sau crash, cần hai khái niệm orchestration nền tảng nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "9feb026d-c545-56ce-8330-5736c5030b21",
+            "e0493d45-cd57-5353-a91d-61e0abfaaf10"
+          ],
+          "acceptable_source_span_ids": [
+            "2ed3636d-f12e-56b6-b419-90b407cc23c3"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "af443167-6ae7-5579-8e27-dbc8634a5280",
+            "4fac6c46-aa89-5b40-ab1d-cc3d64358ec0",
+            "bf0ca938-9995-537f-9bf3-9273441b94b6",
+            "cb45434d-1972-5818-8a38-048a04ad8041",
+            "bbd7aaee-6b6d-561d-98bf-bd62f7dd553c",
+            "e7907eb1-0c3b-53f1-95bb-21bb34ea579a",
+            "cea83185-4cd7-5ed8-8f40-21c5f5f2a90b",
+            "7e1c6569-8866-53f0-bf8b-9e4c7d14df5f",
+            "f98dad4a-c9ef-5d73-8523-accc568ea461",
+            "8ec4804c-0405-52d1-b0ba-99c9561f34e5"
+          ],
+          "embedding_latency_ms": 145.5650359998799,
+          "retrieval_latency_ms": 101.1209839998628,
+          "end_to_end_latency_ms": 246.6860199997427,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-011",
+          "query": "Trước khi chọn mô hình HITL, cần đánh giá cost of error và khả năng hoàn tác như thế nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "eede4ef2-9f19-55dd-b3aa-0c59516a68d5",
+            "49877454-b611-54ca-8196-e467abc553db"
+          ],
+          "acceptable_source_span_ids": [
+            "2e1c697a-eda5-5b3f-806c-da4c3f66a22d",
+            "940bed7d-ac5e-5d89-93f9-746b291503c1"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "474133cd-1771-58a2-acae-3e3ac0565b8e",
+            "6317a5d6-f044-5c78-827a-7ab920e3c493",
+            "3a5a32a3-adbe-5d40-866b-1b85fc1ef08e",
+            "5bd702d6-db96-5969-b56f-7ab1be476c54",
+            "78150bdd-6cbd-52b8-80ed-ba327a0adbcc",
+            "db2d135c-f720-52e0-b2b3-92bda3e2e4f2",
+            "f22df3b0-e305-51b8-8938-d173bb69eab0",
+            "f6a5f7fd-396b-5c3e-967e-26a5f70dfe94",
+            "64176b03-7595-5657-83c1-2e5de92056a2",
+            "bc7d8dce-c70b-54e6-bdcd-25bfda8ae54c"
+          ],
+          "embedding_latency_ms": 159.274570999969,
+          "retrieval_latency_ms": 171.81108299973857,
+          "end_to_end_latency_ms": 331.0856539997076,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-012",
+          "query": "Muốn chẩn đoán một RAG pipeline trả lời kém, cần phân biệt bốn metric nền tảng nào trước?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "e616b892-38db-5ea9-9b29-0ac6ca1f3cec",
+            "a715fda9-515d-5cae-a3bd-1b03a70403ed"
+          ],
+          "acceptable_source_span_ids": [
+            "34f77842-b9c2-5783-81c4-923a6ac5f897"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "c313aee0-62cf-541f-a95e-4500b736a897",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "70f24f30-ea2e-50c4-9ad5-c0d62a24a79a",
+            "010fd20e-a3a7-5e87-8cf2-84d8c6df2756",
+            "ac9acde3-871c-5238-84c1-fae72795f99e",
+            "f916aed6-4041-5ce8-b91d-1c3fe9dfcf72",
+            "28de003b-ca87-5fab-8e3f-a1e21ee265a0",
+            "cf485a95-9178-5d7c-b85a-2892d55127f1",
+            "1eb8342f-7a99-5da3-9299-d8013de2d722",
+            "7ac30747-cf7f-510a-997a-0f6be3611259"
+          ],
+          "embedding_latency_ms": 245.65151200022228,
+          "retrieval_latency_ms": 180.29157099999793,
+          "end_to_end_latency_ms": 425.9430830002202,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-013",
+          "query": "Trước khi dùng GraphRAG cho câu hỏi multi-hop, cần nắm primitives nào của knowledge graph và entity-relation retrieval?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "ffd44b9e-f468-5502-8678-762eb52dff2d",
+            "48ee7bc1-e3e4-54d8-9b96-f6497ef1d0c5"
+          ],
+          "acceptable_source_span_ids": [
+            "7c24ed09-58db-50e0-8c8f-dcd9b4d8eeff"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 0.16666666666666666,
+          "ndcg_at_k": 0.16716045496620227,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 6,
+          "retrieved_source_span_ids": [
+            "acf06198-aff2-5b7d-84a8-cbc2dc0c5984",
+            "9190082d-1ec2-5eb3-9ef2-6ba66ad6d948",
+            "d33a06de-186c-5e7b-9689-182f29960789",
+            "c81c1cac-c853-573e-bec9-33332b12a66a",
+            "bb1a06df-b5ce-55a1-9c2b-0a2e69a61ea1",
+            "ffd44b9e-f468-5502-8678-762eb52dff2d",
+            "d3a4cf8b-a964-50a1-8088-53095d3c09b0",
+            "af0f1602-fa18-5e3c-affd-ab0f12ac3ce8",
+            "98700e73-442e-5ed2-bc3d-cc6f7a27d2ed",
+            "2625dde2-2f55-55b6-8cae-4e8c6541ccdc"
+          ],
+          "embedding_latency_ms": 181.66741499999262,
+          "retrieval_latency_ms": 122.33200400032729,
+          "end_to_end_latency_ms": 303.9994190003199,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-015",
+          "query": "Hãy nối chuỗi provider timeout → retry storm → circuit breaker → fallback và nêu evidence cần thấy trong chaos test.",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "404d7f4d-fa03-518c-a4e5-a0f3c055d0a9",
+            "c9fd281d-b049-5b31-8138-9be844bad5e5",
+            "dcc90d98-769d-57d5-b70d-ada71eb32010"
+          ],
+          "acceptable_source_span_ids": [
+            "4090f69a-a543-5d78-861f-d1ac9cd0ed11"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "2aa5d5de-c0bd-58e5-93ca-011c2951c6d4",
+            "bbd9c2c5-a12f-5ee9-90f9-c687956a9d6c",
+            "b5664704-e936-506a-9b32-83015f84b94f",
+            "40e375e3-5378-5955-8e29-029853a788cf",
+            "323c71aa-72dc-53b6-98a9-2adbc1b42237",
+            "74e7d052-a825-5cbd-9b01-af600d180ebb",
+            "a4493d36-af27-5de7-9d9c-3a62d10307a9",
+            "4aeb0709-7d06-5106-af77-080738303bf3",
+            "fee28308-52a9-5daa-9f5d-1c82e17133bf",
+            "edf09602-911b-5a59-9a12-228de1ba1478"
+          ],
+          "embedding_latency_ms": 270.00696099958077,
+          "retrieval_latency_ms": 141.48780899995472,
+          "end_to_end_latency_ms": 411.4947699995355,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-017",
+          "query": "Vì sao error rate bằng 0 vẫn có thể che giấu silent degradation, và SLI/SLO nào phải bổ sung cho LLM agent?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "bfab2d0e-f243-54ab-9bc7-6597000683a9",
+            "b2584a4f-98c1-543a-9942-7ce692320fb3",
+            "7308c1ec-10f5-5581-82db-fceecfcf2d0f"
+          ],
+          "acceptable_source_span_ids": [],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "edf09602-911b-5a59-9a12-228de1ba1478",
+            "40e375e3-5378-5955-8e29-029853a788cf",
+            "3cb697bf-be80-5961-be4e-9537b58c42eb",
+            "73c69027-0cba-560e-ab0f-1f94d9e23f7b",
+            "4090f69a-a543-5d78-861f-d1ac9cd0ed11",
+            "2890e586-151b-5a69-a67a-972ef1f171c9",
+            "49acef92-68ba-56b0-898c-98409431f59f",
+            "acbe46a1-04d3-5879-befc-703c68e4fbee",
+            "4c509777-b6ab-5101-89f3-cea0dbbdc682",
+            "0897d557-4bbd-5679-8651-803d5e1b1491"
+          ],
+          "embedding_latency_ms": 166.09798499985118,
+          "retrieval_latency_ms": 140.06886100014526,
+          "end_to_end_latency_ms": 306.16684599999644,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-018",
+          "query": "Từ tài liệu thô đến top-k chính xác, chunking, hybrid retrieval và reranking tác động nối tiếp nhau ra sao?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "0cef80c8-9356-5a62-9fd7-f020030a9c49",
+            "5874d50d-b8e3-5e09-9580-e367eecbee4d",
+            "e19857c8-3111-5197-a94f-57b1006722b5"
+          ],
+          "acceptable_source_span_ids": [
+            "c7bff788-d0be-5fb0-9978-ecbf66dae8a4",
+            "52275ecd-b8ac-5a27-8974-d53e43d8ec4f"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "30e59329-4dcf-5361-a9c4-3ac9c05de4f1",
+            "ab1cbf3e-42a6-53ac-8df5-9a077ea27bd9",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "5807c951-a732-589f-92f7-b0d548fb61d3",
+            "b9b71e4b-c2a6-5e6e-96ca-78889448817a",
+            "f916aed6-4041-5ce8-b91d-1c3fe9dfcf72",
+            "cd6600e0-1f7f-5eea-9d8b-35e0af06bc8e",
+            "c2e5f74c-d159-587e-8e37-3d16290172f6",
+            "bb3e4846-c01a-5abe-983e-5f856a64bc73"
+          ],
+          "embedding_latency_ms": 155.18504900001062,
+          "retrieval_latency_ms": 113.37279400004263,
+          "end_to_end_latency_ms": 268.55784300005325,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-019",
+          "query": "Context Recall và Context Precision thấp biểu hiện hai lỗi khác nhau nào, và thứ tự sửa pipeline nên ra sao?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "a715fda9-515d-5cae-a3bd-1b03a70403ed",
+            "18438e91-32b6-5ee6-a19d-c90c9c845b7f"
+          ],
+          "acceptable_source_span_ids": [
+            "e616b892-38db-5ea9-9b29-0ac6ca1f3cec"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.46927872602275644,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "18438e91-32b6-5ee6-a19d-c90c9c845b7f",
+            "0c334382-2ded-5115-a62b-b83afddc8365",
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "69476186-af5c-5d83-8b55-0a849d40e8c4",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "a0c83a2c-e7c9-5e6b-a099-3019c6cf57b3",
+            "1bd7295f-50d4-5643-a4ce-e729868f25dc",
+            "492f7f0d-c7cc-501f-bb50-0e12661a0ba4",
+            "0d9a661c-19a2-5e02-bc47-cb9b268df0b7",
+            "2fe459ae-d130-5237-af5a-899aead05e37"
+          ],
+          "embedding_latency_ms": 159.97631399977763,
+          "retrieval_latency_ms": 124.33705700004793,
+          "end_to_end_latency_ms": 284.31337099982557,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-021",
+          "query": "Ba chiến lược quản lý short-term memory trong context window khác nhau như thế nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "6144bab3-b09d-5b30-b52c-bd71e987e923"
+          ],
+          "acceptable_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.6131471927654584,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041",
+            "c9ab58ae-f615-52ee-84c0-7a0eab47516f",
+            "e014deb0-6c3e-5354-8d4a-45fff0db2369",
+            "13c18224-2e79-521c-8f69-c1918d4d7d99",
+            "b621f3f6-75cc-5588-afbe-beb6fc4f182c",
+            "688c883c-2d8b-5c00-af1c-8aad1a82df19",
+            "fef47107-1872-5225-a4c4-d8b6d2889cde",
+            "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+            "25629367-6382-5f73-8b20-419d8621434e",
+            "97fb03e5-bfdb-5ec6-8044-803ad3ecd1a6"
+          ],
+          "embedding_latency_ms": 192.44926300007137,
+          "retrieval_latency_ms": 143.26469299976452,
+          "end_to_end_latency_ms": 335.7139559998359,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-022",
+          "query": "Một episodic memory nên lưu những thành phần nào của lần giải quyết nhiệm vụ trước?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "c59733bd-fb17-52a0-b78d-74505e03c861"
+          ],
+          "acceptable_source_span_ids": [
+            "0cfeae2e-684b-5dd1-884a-1cb34c70ee1b"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 0.5,
+          "ndcg_at_k": 0.38685280723454163,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 2,
+          "retrieved_source_span_ids": [
+            "25629367-6382-5f73-8b20-419d8621434e",
+            "c59733bd-fb17-52a0-b78d-74505e03c861",
+            "89ac7cce-6751-5726-b5b8-21bd23771eeb",
+            "a1d66758-0803-5261-8f13-f109e464dbc8",
+            "e014deb0-6c3e-5354-8d4a-45fff0db2369",
+            "33360d60-0c1b-5de7-8468-a92a670b1713",
+            "90d8b682-7cef-5129-abd1-b074b0b0d5b3",
+            "85237f6f-f2bb-5a5e-9c9b-517d785874f8",
+            "bb46f26d-6db7-5e72-8d02-99bb72337292",
+            "fa2a2536-959e-585d-bb04-236e01812bfa"
+          ],
+          "embedding_latency_ms": 216.43638900013684,
+          "retrieval_latency_ms": 117.94533800002682,
+          "end_to_end_latency_ms": 334.38172700016366,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-023",
+          "query": "Semantic memory dùng vector database để truy xuất knowledge theo cơ chế nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "191f1df2-e547-53fc-aa41-5e8af2531d68"
+          ],
+          "acceptable_source_span_ids": [
+            "89ac7cce-6751-5726-b5b8-21bd23771eeb"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.9197207891481876,
+          "source_precision_at_k": 0.2,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "191f1df2-e547-53fc-aa41-5e8af2531d68",
+            "9e525676-967e-5b70-9f69-8190f3a641f5",
+            "89ac7cce-6751-5726-b5b8-21bd23771eeb",
+            "1f8aaf79-1dc6-5227-96f7-c411214fa34d",
+            "7c24ed09-58db-50e0-8c8f-dcd9b4d8eeff",
+            "d33a06de-186c-5e7b-9689-182f29960789",
+            "663022dc-14ad-5a66-a2a3-d208d2481e3a",
+            "2d5e7cb1-1033-5600-bb14-4b081fbc92f7",
+            "688c883c-2d8b-5c00-af1c-8aad1a82df19",
+            "44d62b81-eee8-5784-89cb-e7129dc18811"
+          ],
+          "embedding_latency_ms": 150.78592100007882,
+          "retrieval_latency_ms": 128.6476750001384,
+          "end_to_end_latency_ms": 279.4335960002172,
+          "ragas_id_context_precision": 0.2,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-024",
+          "query": "HNSW tổ chức graph nhiều tầng như thế nào và hai tham số ef, M điều khiển điều gì?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "c0efcc4c-48a3-5ca0-a719-8bf2631376b8"
+          ],
+          "acceptable_source_span_ids": [
+            "4034c3e1-531d-52d7-9000-e327abb0bc40"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "8beba9a5-4f59-5ce8-b60d-3b9af0859117",
+            "b1b13fcc-638b-5342-8ee9-fcc4a077b1cc",
+            "3f08f15d-5d6f-5d23-9294-1f37d79176ad",
+            "9dfd8cb5-aa17-5dc1-aa47-0c93169bb662",
+            "7373c45b-f4b0-5abe-aba4-d1e700d5b608",
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "e39d7d42-04d4-585d-b2e0-f809e044fb6e",
+            "33529846-471e-5537-9dd0-3fbcbd6a8a02",
+            "783100c4-ec32-5b36-89b9-e6b85c02e984"
+          ],
+          "embedding_latency_ms": 253.9230239999597,
+          "retrieval_latency_ms": 133.20561799991992,
+          "end_to_end_latency_ms": 387.1286419998796,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-025",
+          "query": "Vì sao Flat brute-force phải được dùng làm ground truth khi đánh giá ANN index?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "4a694fde-c3ae-56e5-b8ce-46375bd93b2f"
+          ],
+          "acceptable_source_span_ids": [
+            "4f6a01f2-f015-56f5-a89c-0c41a4dd4e53"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "52553dca-02e4-5e5a-878f-6ecb29ad4c83",
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "328c6e95-e086-5840-8996-ade7a5692815",
+            "e39d7d42-04d4-585d-b2e0-f809e044fb6e",
+            "aefcf666-316c-5b63-a840-63bac0b58099",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "b0b547a6-9585-5f99-91f9-43f2ba79e44c",
+            "66cbeb71-4e1f-5f78-9df9-e3e4462ab279",
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "70f24f30-ea2e-50c4-9ad5-c0d62a24a79a"
+          ],
+          "embedding_latency_ms": 147.4347969997325,
+          "retrieval_latency_ms": 120.39827499984312,
+          "end_to_end_latency_ms": 267.8330719995756,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-029",
+          "query": "Pipeline monitoring và data observability trả lời hai nhóm câu hỏi khác nhau nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "b121e65a-3ab0-57ae-9541-a899536643ee"
+          ],
+          "acceptable_source_span_ids": [],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "b121e65a-3ab0-57ae-9541-a899536643ee",
+            "097be622-a2b5-5cdf-a6ba-007b9bbdef16",
+            "cd4516fe-4b96-52a6-bd9f-0c609dc60277",
+            "410f03b5-86e3-5f8f-bb62-fe3530179e45",
+            "62c1399e-143d-57f0-b2ab-9ca1c3244d2f",
+            "0eaf9309-85c4-552b-8c3e-5db7b5dfba35",
+            "bbb4c3ae-85b1-55ca-ac6d-29db3bac48b8",
+            "2b0de521-f28e-5aeb-80ea-9a85498f2598",
+            "ac431e02-fed4-5f7f-b484-7cffa0645538",
+            "5ebbb1dd-81d7-53b5-9d3e-332fbf4045c2"
+          ],
+          "embedding_latency_ms": 178.49991000002774,
+          "retrieval_latency_ms": 114.67642100024023,
+          "end_to_end_latency_ms": 293.17633100026796,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-030",
+          "query": "RAGAS tách lỗi retriever và generator bằng các trục đánh giá nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "49b65b10-accd-595b-b39b-367c837249fd"
+          ],
+          "acceptable_source_span_ids": [
+            "c0f23420-4cc1-5e4c-a3d2-a274acf72850"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.8315546295836225,
+          "source_precision_at_k": 0.2,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "49b65b10-accd-595b-b39b-367c837249fd",
+            "e09ccc2f-15bc-54c8-8b08-5b47c094b5d0",
+            "151a5add-14ed-579c-b52a-75d4984c6af6",
+            "dfbe0f29-ad79-5739-a428-7f8c7551603f",
+            "6f4705ec-140a-56e4-9d7a-3a747ca4db56",
+            "c0f23420-4cc1-5e4c-a3d2-a274acf72850",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "833f5a14-80a3-53e4-96ea-a9a195fffdff",
+            "69476186-af5c-5d83-8b55-0a849d40e8c4",
+            "70f24f30-ea2e-50c4-9ad5-c0d62a24a79a"
+          ],
+          "embedding_latency_ms": 141.75514699991254,
+          "retrieval_latency_ms": 113.80593700005193,
+          "end_to_end_latency_ms": 255.56108399996447,
+          "ragas_id_context_precision": 0.2,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-031",
+          "query": "Trong agent infrastructure, workload nào cần GPU và workload nào chỉ cần CPU hoặc serverless?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "eb081049-ea39-5d11-8db5-5d7139a52f3a"
+          ],
+          "acceptable_source_span_ids": [],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 0.3333333333333333,
+          "ndcg_at_k": 0.5,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 3,
+          "retrieved_source_span_ids": [
+            "0a0cb261-acd1-51bc-a489-d4328abff108",
+            "f98dad4a-c9ef-5d73-8523-accc568ea461",
+            "eb081049-ea39-5d11-8db5-5d7139a52f3a",
+            "59e88204-24d6-5edb-89d7-1e441d7242aa",
+            "b9f679e8-6cf7-53e7-8a6e-b090f2514f5e",
+            "cb5faf9f-0c04-5244-b5b8-2436e92a0d8b",
+            "7e70d41e-1ed9-513c-92fc-65c7a8611a92",
+            "b66a587a-0a48-5cf6-8e9d-06f0e1261def",
+            "c6697c06-d96f-536b-b4d7-16e8e5f65178",
+            "f7710d9d-0914-550e-a3c7-6c592832f5da"
+          ],
+          "embedding_latency_ms": 157.49007299973528,
+          "retrieval_latency_ms": 114.39909399996395,
+          "end_to_end_latency_ms": 271.8891669996992,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-032",
+          "query": "PagedAttention giảm lãng phí KV cache so với cấp phát contiguous như thế nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "f8c077c2-33f9-5c2b-ba7a-2aabc6b2e128"
+          ],
+          "acceptable_source_span_ids": [
+            "5ecc9435-0518-54b5-af81-0954da9a7e8c"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "2e53a31b-c549-5c5f-a79b-2275c2bea0a1",
+            "a3e9fb4f-8913-5c44-9c54-8f2e92a42743",
+            "42b83c0f-fabb-5dd0-ad22-6451bf84d6b4",
+            "8c71b9fb-cdfb-5037-8a15-3a8efd120a04",
+            "2a2fe7c3-52ee-5267-aab9-1a8bc03e0a87",
+            "0f56fe03-2128-5845-b9b1-cd2040b9983a",
+            "c9cd9055-0753-537b-a4e0-88821298c1a9",
+            "5195d686-a189-5769-b464-da4bca8c9cba",
+            "156fad13-112c-5dc0-8643-12fb6fa3c649",
+            "1e712d5f-ee73-5953-94db-13f9a694c9d8"
+          ],
+          "embedding_latency_ms": 159.5955769998909,
+          "retrieval_latency_ms": 116.07785699970918,
+          "end_to_end_latency_ms": 275.6734339996001,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-033",
+          "query": "Trước khi thiết kế long-term memory cho agent, cần hiểu giới hạn context window và các chiến lược short-term memory nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "37422db2-294b-55dc-aefd-713055b25d34",
+            "6144bab3-b09d-5b30-b52c-bd71e987e923"
+          ],
+          "acceptable_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.617319681505689,
+          "source_precision_at_k": 0.2,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041",
+            "13c18224-2e79-521c-8f69-c1918d4d7d99",
+            "2bd5ede5-c9e5-52a8-9c6d-992c5324b5b2",
+            "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+            "e014deb0-6c3e-5354-8d4a-45fff0db2369",
+            "fef47107-1872-5225-a4c4-d8b6d2889cde",
+            "c9ab58ae-f615-52ee-84c0-7a0eab47516f",
+            "37422db2-294b-55dc-aefd-713055b25d34",
+            "688c883c-2d8b-5c00-af1c-8aad1a82df19",
+            "ff5293ad-00a9-5d8f-8cab-edbdbb4c9862"
+          ],
+          "embedding_latency_ms": 258.6769849999655,
+          "retrieval_latency_ms": 142.08047900001475,
+          "end_to_end_latency_ms": 400.75746399998025,
+          "ragas_id_context_precision": 0.2,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-037",
+          "query": "Trước khi đọc một điểm RAGAS tổng hợp, cần phân biệt metric retrieval và metric generation nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "49b65b10-accd-595b-b39b-367c837249fd",
+            "c0f23420-4cc1-5e4c-a3d2-a274acf72850"
+          ],
+          "acceptable_source_span_ids": [
+            "d306ba80-dc90-50be-95f3-c0aee448ff68"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 0.2,
+          "ndcg_at_k": 0.18154179253735267,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 5,
+          "retrieved_source_span_ids": [
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "dfbe0f29-ad79-5739-a428-7f8c7551603f",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "bc4a41c5-3fa4-5610-b34f-39f85332cc59",
+            "c0f23420-4cc1-5e4c-a3d2-a274acf72850",
+            "69476186-af5c-5d83-8b55-0a849d40e8c4",
+            "833f5a14-80a3-53e4-96ea-a9a195fffdff",
+            "06587490-6e78-5cfd-9068-ab096c4d22fe",
+            "6f4705ec-140a-56e4-9d7a-3a747ca4db56",
+            "1b16adbc-5787-5da3-b008-1cdc857f6d47"
+          ],
+          "embedding_latency_ms": 182.19746800014036,
+          "retrieval_latency_ms": 98.4325690001242,
+          "end_to_end_latency_ms": 280.63003700026456,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-038",
+          "query": "Trước khi deploy RAG, cần mô hình hóa retrieval poisoning và xây adversarial test set cho những attack class nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "23cc397e-8173-5726-b3ca-5c68bf2eaa34",
+            "b6e8cff6-3823-54a2-8f13-255704983453"
+          ],
+          "acceptable_source_span_ids": [
+            "1f136d64-248f-5474-9405-e8cd97d8ff0c"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "f1d2ab97-e268-5002-90cf-11cb45d84cb2",
+            "bddb0740-37aa-55a9-92b4-3c74a84375fd",
+            "0e316dba-8566-581e-aec1-3b26c4958a46",
+            "e914f3c5-e4ae-54f6-93db-5d544df802e0",
+            "67f0f64b-bbf1-5034-9851-cd000a1dfb83",
+            "69476186-af5c-5d83-8b55-0a849d40e8c4",
+            "bc4a41c5-3fa4-5610-b34f-39f85332cc59",
+            "0d26b27c-8c5e-58ac-ba8d-66576a15e087",
+            "dc86c2f3-feed-52af-aa0c-cb6cefca9064",
+            "55fabe9a-520c-5904-a40a-9d5b4ff8f4d3"
+          ],
+          "embedding_latency_ms": 145.59545399970375,
+          "retrieval_latency_ms": 118.99505800010957,
+          "end_to_end_latency_ms": 264.5905119998133,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-039",
+          "query": "Để debug một câu trả lời RAG sai, cần hiểu data observability và trace/span trước khi xem từng retrieval step ra sao?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "b121e65a-3ab0-57ae-9541-a899536643ee",
+            "80a86af3-4a7d-5bbb-8fd7-7d2bd0ebef39"
+          ],
+          "acceptable_source_span_ids": [
+            "dc6f69a5-aae1-56a0-b005-726610380510"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.46927872602275644,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "dc6f69a5-aae1-56a0-b005-726610380510",
+            "cc2dc562-c4c1-578c-aff3-05707bdcb7b5",
+            "e7f3f314-c24d-5fd4-8f6c-c8493d8d3081",
+            "f916aed6-4041-5ce8-b91d-1c3fe9dfcf72",
+            "6a1c573d-f613-5558-b332-dabbc9b14cac",
+            "ee2959dc-91c4-5135-aa26-5e0e10c04e79",
+            "0d26b27c-8c5e-58ac-ba8d-66576a15e087",
+            "9fba3584-1778-5239-81aa-fdfbe6b218ac",
+            "ac9acde3-871c-5238-84c1-fae72795f99e",
+            "86aab89c-bce7-5c5e-9f56-db721b71b93e"
+          ],
+          "embedding_latency_ms": 140.5270410000412,
+          "retrieval_latency_ms": 101.25816100025986,
+          "end_to_end_latency_ms": 241.78520200030107,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-040",
+          "query": "Trước khi tối ưu throughput model serving, cần hiểu KV cache và storage tier cho active state như thế nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "f8c077c2-33f9-5c2b-ba7a-2aabc6b2e128",
+            "dd67e1d6-da97-5c63-b669-5799ee25d8c1"
+          ],
+          "acceptable_source_span_ids": [
+            "5ecc9435-0518-54b5-af81-0954da9a7e8c"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 0.5,
+          "ndcg_at_k": 0.2960819109658652,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 2,
+          "retrieved_source_span_ids": [
+            "b9f679e8-6cf7-53e7-8a6e-b090f2514f5e",
+            "dd67e1d6-da97-5c63-b669-5799ee25d8c1",
+            "8c71b9fb-cdfb-5037-8a15-3a8efd120a04",
+            "2a2fe7c3-52ee-5267-aab9-1a8bc03e0a87",
+            "42b83c0f-fabb-5dd0-ad22-6451bf84d6b4",
+            "156fad13-112c-5dc0-8643-12fb6fa3c649",
+            "6d60526d-0e3f-5cae-84e8-c4142652d97c",
+            "0f56fe03-2128-5845-b9b1-cd2040b9983a",
+            "91650897-61bf-5e90-a742-3fe8c0778c45",
+            "a3e9fb4f-8913-5c44-9c54-8f2e92a42743"
+          ],
+          "embedding_latency_ms": 144.37083000029816,
+          "retrieval_latency_ms": 194.99185999984547,
+          "end_to_end_latency_ms": 339.36269000014363,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-041",
+          "query": "Trước khi thêm tools và workflow phức tạp, cần nắm vòng lặp agent và giới hạn memory trong context nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "55403b9f-5a3c-5359-aaac-4e5c776bf61d",
+            "37422db2-294b-55dc-aefd-713055b25d34"
+          ],
+          "acceptable_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "6bdefc9d-8610-5d61-84e7-147bd37d229a",
+            "ff5293ad-00a9-5d8f-8cab-edbdbb4c9862",
+            "2bd5ede5-c9e5-52a8-9c6d-992c5324b5b2",
+            "1164ce12-72d9-5498-82f2-9b4b15448668",
+            "f98dad4a-c9ef-5d73-8523-accc568ea461",
+            "e7907eb1-0c3b-53f1-95bb-21bb34ea579a",
+            "a460882f-8880-5290-8b70-613c009d409e",
+            "5a1bc07f-1905-5672-96ab-c47e977787c6",
+            "ea08255f-e7c6-5bbd-bf9e-79a6bd05ca67",
+            "a25d7023-d023-5851-8434-36514ff879dc"
+          ],
+          "embedding_latency_ms": 185.9483429998363,
+          "retrieval_latency_ms": 125.3500019997773,
+          "end_to_end_latency_ms": 311.2983449996136,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-042",
+          "query": "Short-term, episodic và semantic memory phối hợp thành một vòng học từ hội thoại đến tri thức lâu dài như thế nào?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "6144bab3-b09d-5b30-b52c-bd71e987e923",
+            "c59733bd-fb17-52a0-b78d-74505e03c861",
+            "191f1df2-e547-53fc-aa41-5e8af2531d68"
+          ],
+          "acceptable_source_span_ids": [
+            "26ce08ea-8a76-583a-9d3d-3c49930092a9"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "688c883c-2d8b-5c00-af1c-8aad1a82df19",
+            "e014deb0-6c3e-5354-8d4a-45fff0db2369",
+            "1bf3f68b-741d-5bb7-8be3-f7d6c06de354",
+            "5b4cd340-be4a-5cd5-9992-fb9e6fb8b65c",
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041",
+            "89ac7cce-6751-5726-b5b8-21bd23771eeb",
+            "fef47107-1872-5225-a4c4-d8b6d2889cde",
+            "13c18224-2e79-521c-8f69-c1918d4d7d99",
+            "25629367-6382-5f73-8b20-419d8621434e",
+            "7d6dcbad-76ba-5f20-b23c-583f7b58e8c6"
+          ],
+          "embedding_latency_ms": 162.31704800020452,
+          "retrieval_latency_ms": 120.96875799988993,
+          "end_to_end_latency_ms": 283.28580600009445,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-044",
+          "query": "Từ Flat ground truth đến HNSW production, recall, latency và memory được đánh đổi qua các bước nào?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "4a694fde-c3ae-56e5-b8ce-46375bd93b2f",
+            "c0efcc4c-48a3-5ca0-a719-8bf2631376b8",
+            "4f6a01f2-f015-56f5-a89c-0c41a4dd4e53"
+          ],
+          "acceptable_source_span_ids": [
+            "f219afd7-689b-5362-9710-37cb1c097f9c"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "57463e14-0186-5d8e-8e95-d9c673a08055",
+            "e39d7d42-04d4-585d-b2e0-f809e044fb6e",
+            "52553dca-02e4-5e5a-878f-6ecb29ad4c83",
+            "09fc0659-aff9-52b5-891a-ce7831cc9b43",
+            "66cbeb71-4e1f-5f78-9df9-e3e4462ab279",
+            "ca9d48e0-c703-573f-bb2b-a88563fcbfc7",
+            "aaa4540d-c227-5585-b83a-e7d51e82f4da",
+            "72e52c48-06a6-51a0-b730-bd1639583bc3"
+          ],
+          "embedding_latency_ms": 163.75889499977347,
+          "retrieval_latency_ms": 128.35400699987076,
+          "end_to_end_latency_ms": 292.11290199964424,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-046",
+          "query": "Hãy nối chuỗi corpus poisoning → adversarial evaluation → trace inspection để phát hiện và điều tra một retrieval attack.",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "23cc397e-8173-5726-b3ca-5c68bf2eaa34",
+            "b6e8cff6-3823-54a2-8f13-255704983453",
+            "dc6f69a5-aae1-56a0-b005-726610380510"
+          ],
+          "acceptable_source_span_ids": [
+            "1f136d64-248f-5474-9405-e8cd97d8ff0c"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "dc86c2f3-feed-52af-aa0c-cb6cefca9064",
+            "f1d2ab97-e268-5002-90cf-11cb45d84cb2",
+            "7c5a73bd-9109-5e95-af61-c9a94f054a04",
+            "328c6e95-e086-5840-8996-ade7a5692815",
+            "d09a1d7d-5ba1-58ab-b217-a8cfa0d58d10",
+            "b6ed1c5d-ae5e-5d8f-8986-0274b065517b",
+            "9fba3584-1778-5239-81aa-fdfbe6b218ac",
+            "dc56e77c-fe6b-5f19-b51b-5a6fd62eb717",
+            "bb3e4846-c01a-5abe-983e-5f856a64bc73",
+            "e3d39f13-9f8c-59fb-bde7-c118040b3159"
+          ],
+          "embedding_latency_ms": 138.87587299996085,
+          "retrieval_latency_ms": 101.81621800029461,
+          "end_to_end_latency_ms": 240.69209100025546,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-048",
+          "query": "Trong serving agent, CPU orchestration, GPU inference, KV cache và hot/warm storage nối thành kiến trúc runtime ra sao?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "eb081049-ea39-5d11-8db5-5d7139a52f3a",
+            "f8c077c2-33f9-5c2b-ba7a-2aabc6b2e128",
+            "dd67e1d6-da97-5c63-b669-5799ee25d8c1"
+          ],
+          "acceptable_source_span_ids": [
+            "5ecc9435-0518-54b5-af81-0954da9a7e8c"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.3333333333333333,
+          "mrr_at_k": 0.25,
+          "ndcg_at_k": 0.16812753627111746,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 4,
+          "retrieved_source_span_ids": [
+            "2a2fe7c3-52ee-5267-aab9-1a8bc03e0a87",
+            "b9f679e8-6cf7-53e7-8a6e-b090f2514f5e",
+            "b66a587a-0a48-5cf6-8e9d-06f0e1261def",
+            "dd67e1d6-da97-5c63-b669-5799ee25d8c1",
+            "0a0cb261-acd1-51bc-a489-d4328abff108",
+            "0f56fe03-2128-5845-b9b1-cd2040b9983a",
+            "cb5faf9f-0c04-5244-b5b8-2436e92a0d8b",
+            "c27cd030-91fb-5f6b-91a7-b46e2045b1d3",
+            "59e88204-24d6-5edb-89d7-1e441d7242aa",
+            "2bf87006-2877-5b30-be2d-1dc875433465"
+          ],
+          "embedding_latency_ms": 173.3074620001389,
+          "retrieval_latency_ms": 129.562929000258,
+          "end_to_end_latency_ms": 302.8703910003969,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.3333333333333333
+        },
+        {
+          "id": "ret-049",
+          "query": "Vòng lặp goal-reason-act-observe sử dụng context window và short-term memory qua nhiều bước như thế nào?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "55403b9f-5a3c-5359-aaac-4e5c776bf61d",
+            "37422db2-294b-55dc-aefd-713055b25d34",
+            "6144bab3-b09d-5b30-b52c-bd71e987e923"
+          ],
+          "acceptable_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.2,
+          "ndcg_at_k": 0.15101961822780524,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 5,
+          "retrieved_source_span_ids": [
+            "ff5293ad-00a9-5d8f-8cab-edbdbb4c9862",
+            "13c18224-2e79-521c-8f69-c1918d4d7d99",
+            "8470e499-4120-5a8b-ac94-9b950d39d8da",
+            "e7907eb1-0c3b-53f1-95bb-21bb34ea579a",
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041",
+            "6259e399-c407-51bd-ba50-c3595828394d",
+            "2ccb4218-bd3c-5f5f-910f-b29e8e3a10b4",
+            "d2babb16-f0b1-58b1-a1ec-a6c321a98cf3",
+            "5a1bc07f-1905-5672-96ab-c47e977787c6",
+            "fef47107-1872-5225-a4c4-d8b6d2889cde"
+          ],
+          "embedding_latency_ms": 181.41038299972934,
+          "retrieval_latency_ms": 120.41680299989821,
+          "end_to_end_latency_ms": 301.82718599962755,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-050",
+          "query": "Từ DPO bỏ reward model đến GRPO bỏ value model, alignment pipeline đã đơn giản hóa những thành phần nào?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "35c9e009-f451-56cb-be72-407b6e5a1eb8",
+            "15257377-9ba6-5f91-8f22-c2102e7a90ce",
+            "fef8871a-5e47-51bf-82e3-c3be072cabf4"
+          ],
+          "acceptable_source_span_ids": [],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "94857a80-0762-5c7b-b2c8-d53cc529403e",
+            "138262f7-96ae-51e7-9814-9e8005a5c8e0",
+            "333fcd7c-ace5-577a-a624-5da1fffb6500",
+            "82ae597b-3aea-5c79-ab98-afc1095a7058",
+            "e7bb569d-3554-5c46-aeb0-89a28798323e",
+            "adc666c0-9302-57dc-a31a-c2aaef41ca8a",
+            "5d54f52b-b9f0-5b17-be68-ef21d1fca5b4",
+            "97f61adf-d958-5ba9-aae8-28e121717bb6",
+            "12c2e9d4-55b5-557d-ad17-daa6cc9d4fd5",
+            "f442cea2-6f69-5df3-99bc-4ca8dede71cd"
+          ],
+          "embedding_latency_ms": 205.7176459998118,
+          "retrieval_latency_ms": 112.65271599995685,
+          "end_to_end_latency_ms": 318.37036199976865,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        }
+      ]
+    },
+    "graph_lite": {
+      "overall": {
+        "cases": 35,
+        "hit_at_k": 0.4857142857142857,
+        "required_recall_at_k": 0.28095238095238095,
+        "mrr_at_k": 0.3242857142857143,
+        "ndcg_at_k": 0.23116307133739616,
+        "source_precision_at_k": 0.05714285714285714,
+        "ragas_id_context_precision": 0.05714285714285714,
+        "ragas_id_context_recall": 0.28095238095238095,
+        "retrieval_latency_p50_ms": 329.19825600038166,
+        "retrieval_latency_p95_ms": 442.5017119997392,
+        "end_to_end_latency_p50_ms": 329.19825600038166,
+        "end_to_end_latency_p95_ms": 442.5017119997392
+      },
+      "by_class": {
+        "direct": {
+          "cases": 15,
+          "hit_at_k": 0.6,
+          "required_recall_at_k": 0.4666666666666667,
+          "mrr_at_k": 0.46888888888888886,
+          "ndcg_at_k": 0.37139327001928807,
+          "source_precision_at_k": 0.07333333333333333,
+          "ragas_id_context_precision": 0.07333333333333333,
+          "ragas_id_context_recall": 0.4666666666666667,
+          "retrieval_latency_p50_ms": 292.72153800002343,
+          "retrieval_latency_p95_ms": 378.0852730001243,
+          "end_to_end_latency_p50_ms": 292.72153800002343,
+          "end_to_end_latency_p95_ms": 378.0852730001243
+        },
+        "prerequisite": {
+          "cases": 10,
+          "hit_at_k": 0.5,
+          "required_recall_at_k": 0.2,
+          "mrr_at_k": 0.2866666666666667,
+          "ndcg_at_k": 0.17313825659978657,
+          "source_precision_at_k": 0.06000000000000001,
+          "ragas_id_context_precision": 0.06000000000000001,
+          "ragas_id_context_recall": 0.2,
+          "retrieval_latency_p50_ms": 306.270535999829,
+          "retrieval_latency_p95_ms": 442.5017119997392,
+          "end_to_end_latency_p50_ms": 306.270535999829,
+          "end_to_end_latency_p95_ms": 442.5017119997392
+        },
+        "multi_hop": {
+          "cases": 10,
+          "hit_at_k": 0.3,
+          "required_recall_at_k": 0.08333333333333333,
+          "mrr_at_k": 0.145,
+          "ndcg_at_k": 0.07884258805216791,
+          "source_precision_at_k": 0.030000000000000006,
+          "ragas_id_context_precision": 0.030000000000000006,
+          "ragas_id_context_recall": 0.08333333333333333,
+          "retrieval_latency_p50_ms": 338.5379300002569,
+          "retrieval_latency_p95_ms": 550.8522529999027,
+          "end_to_end_latency_p50_ms": 338.5379300002569,
+          "end_to_end_latency_p95_ms": 550.8522529999027
+        }
+      },
+      "cases": [
+        {
+          "id": "ret-002",
+          "query": "Dense retrieval và sparse retrieval khác nhau ở loại tín hiệu tìm kiếm nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "156dd3dc-7d49-5fd5-a265-5866c21c6131"
+          ],
+          "acceptable_source_span_ids": [
+            "1b45856b-93d4-5da3-9509-b6f5a79aae4c"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.6131471927654584,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "1b45856b-93d4-5da3-9509-b6f5a79aae4c",
+            "9e525676-967e-5b70-9f69-8190f3a641f5",
+            "151a5add-14ed-579c-b52a-75d4984c6af6",
+            "37c3f605-1f03-5d30-905a-c3f547b3d221",
+            "dfd1af46-abc2-5afb-981c-815f6b0dedfb",
+            "3a8b9b50-0eb7-50d0-b8e0-1ac59b81ace9",
+            "7bb8ee30-345b-5d5b-9e04-28712433ce6d",
+            "3b9542de-72d7-5ce4-9b97-aa7f9ffa6d80",
+            "62faf079-1e5a-5db7-b012-7563beabe56f",
+            "e09ccc2f-15bc-54c8-8b08-5b47c094b5d0"
+          ],
+          "retrieval_latency_ms": 310.7515249998869,
+          "end_to_end_latency_ms": 310.7515249998869,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Dense retrieval và sparse retrieval khác nhau ở loại tín hiệu tìm kiếm nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-003",
+          "query": "Vì sao embedding model tốt không thể cứu một chiến lược chunking tồi?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "0cef80c8-9356-5a62-9fd7-f020030a9c49"
+          ],
+          "acceptable_source_span_ids": [
+            "c7bff788-d0be-5fb0-9978-ecbf66dae8a4"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "f22da771-c78c-5b18-b296-aa9b0424afd3",
+            "da2d0b0b-dba3-52ab-a14e-f5927f1a195a",
+            "97fb03e5-bfdb-5ec6-8044-803ad3ecd1a6",
+            "846f544c-de1c-5c50-9d0e-c226b0222f3c",
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "9b09db49-249b-502a-9841-6daed6205484",
+            "6a1c573d-f613-5558-b332-dabbc9b14cac",
+            "09fc0659-aff9-52b5-891a-ce7831cc9b43",
+            "5b8726cd-4425-5a7f-bc29-add49cb91856",
+            "c08f7d06-438f-5b36-852d-f45e93ed0f33"
+          ],
+          "retrieval_latency_ms": 378.0852730001243,
+          "end_to_end_latency_ms": 378.0852730001243,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Vì sao embedding model tốt không thể cứu một chiến lược chunking tồi?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-004",
+          "query": "Tại sao cross-encoder reranker chỉ nên chạy trên một danh sách candidates nhỏ?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "e19857c8-3111-5197-a94f-57b1006722b5"
+          ],
+          "acceptable_source_span_ids": [
+            "52275ecd-b8ac-5a27-8974-d53e43d8ec4f"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 0.2,
+          "ndcg_at_k": 0.23719771276929622,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 5,
+          "retrieved_source_span_ids": [
+            "6b010839-e748-58cf-b581-0cf6570d16e8",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "30e59329-4dcf-5361-a9c4-3ac9c05de4f1",
+            "4338f38d-bb31-5cba-95b8-807b93c9868b",
+            "e19857c8-3111-5197-a94f-57b1006722b5",
+            "747f22b7-dc5b-545c-b17e-81630f0c5551",
+            "492f7f0d-c7cc-501f-bb50-0e12661a0ba4",
+            "328c6e95-e086-5840-8996-ade7a5692815",
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "f09bcb93-ef3d-510e-bb58-d6cd8886d379"
+          ],
+          "retrieval_latency_ms": 292.72153800002343,
+          "end_to_end_latency_ms": 292.72153800002343,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Tại sao cross-encoder reranker chỉ nên chạy trên một danh sách candidates nhỏ?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-005",
+          "query": "False-hit trong semantic cache xảy ra như thế nào và cần theo dõi metric gì?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "360a11db-5464-5332-8aad-364a03c1b67c"
+          ],
+          "acceptable_source_span_ids": [
+            "4090f69a-a543-5d78-861f-d1ac9cd0ed11"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "74e7d052-a825-5cbd-9b01-af600d180ebb",
+            "dc56e77c-fe6b-5f19-b51b-5a6fd62eb717",
+            "2890e586-151b-5a69-a67a-972ef1f171c9",
+            "acbe46a1-04d3-5879-befc-703c68e4fbee",
+            "172c60a2-0f31-519a-8332-081f78453f63",
+            "d728544e-5c0b-5214-a077-3fd2b8b72c78",
+            "88660e1c-4a0c-598c-b2bb-e54ec1a30849",
+            "b5664704-e936-506a-9b32-83015f84b94f",
+            "edf09602-911b-5a59-9a12-228de1ba1478",
+            "c97aa690-2b7d-5dbc-82a4-97a48b965f60"
+          ],
+          "retrieval_latency_ms": 379.60403199986104,
+          "end_to_end_latency_ms": 379.60403199986104,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "False-hit trong semantic cache xảy ra như thế nào và cần theo dõi metric gì?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-006",
+          "query": "Circuit breaker và fallback chain đảm nhiệm hai vai trò khác nhau nào khi provider hỏng?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "c9fd281d-b049-5b31-8138-9be844bad5e5"
+          ],
+          "acceptable_source_span_ids": [
+            "43087f7a-1528-542a-a356-3a20c3a17080"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "fee28308-52a9-5daa-9f5d-1c82e17133bf",
+            "85b69bf2-9f2c-592d-bcaf-074ca963c736",
+            "9f4b9067-9604-5ef6-8b3e-32f1c3244662",
+            "acbe46a1-04d3-5879-befc-703c68e4fbee",
+            "95784a59-9240-5453-bdfd-7586f99221ba",
+            "74e7d052-a825-5cbd-9b01-af600d180ebb",
+            "40e375e3-5378-5955-8e29-029853a788cf",
+            "4aeb0709-7d06-5106-af77-080738303bf3",
+            "2890e586-151b-5a69-a67a-972ef1f171c9",
+            "7006a92b-8aea-52de-81ae-e124f21c90ba"
+          ],
+          "retrieval_latency_ms": 234.51794599986897,
+          "end_to_end_latency_ms": 234.51794599986897,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Circuit breaker và fallback chain đảm nhiệm hai vai trò khác nhau nào khi provider hỏng?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-008",
+          "query": "Tại sao similarity search đơn thuần chưa đủ và metadata filter đặt sai có thể làm recall giảm âm thầm?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "d67640e0-122a-5532-a861-4a93c701d87c"
+          ],
+          "acceptable_source_span_ids": [
+            "b01380ea-d55a-59b3-8346-e59600327ce8",
+            "52275ecd-b8ac-5a27-8974-d53e43d8ec4f"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.46927872602275644,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "d67640e0-122a-5532-a861-4a93c701d87c",
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "c08f7d06-438f-5b36-852d-f45e93ed0f33",
+            "15873c55-2eb7-56d8-a0b5-befa7a2559f6",
+            "cf0be574-dce6-5894-950c-5b37feec40b0",
+            "b0b547a6-9585-5f99-91f9-43f2ba79e44c",
+            "b2ac59d8-7e6f-5286-b4ed-0c5654e2ff67",
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "7521da4d-22b2-5270-a31f-5ec334c2a7bc",
+            "328c6e95-e086-5840-8996-ade7a5692815"
+          ],
+          "retrieval_latency_ms": 275.4642330000934,
+          "end_to_end_latency_ms": 275.4642330000934,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Tại sao similarity search đơn thuần chưa đủ và metadata filter đặt sai có thể làm recall giảm âm thầm?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-010",
+          "query": "Để xây agent có loop, retry, human approval và resume sau crash, cần hai khái niệm orchestration nền tảng nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "9feb026d-c545-56ce-8330-5736c5030b21",
+            "e0493d45-cd57-5353-a91d-61e0abfaaf10"
+          ],
+          "acceptable_source_span_ids": [
+            "2ed3636d-f12e-56b6-b419-90b407cc23c3"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "af443167-6ae7-5579-8e27-dbc8634a5280",
+            "4fac6c46-aa89-5b40-ab1d-cc3d64358ec0",
+            "bf0ca938-9995-537f-9bf3-9273441b94b6",
+            "cb45434d-1972-5818-8a38-048a04ad8041",
+            "bbd7aaee-6b6d-561d-98bf-bd62f7dd553c",
+            "e7907eb1-0c3b-53f1-95bb-21bb34ea579a",
+            "cea83185-4cd7-5ed8-8f40-21c5f5f2a90b",
+            "7e1c6569-8866-53f0-bf8b-9e4c7d14df5f",
+            "f98dad4a-c9ef-5d73-8523-accc568ea461",
+            "8ec4804c-0405-52d1-b0ba-99c9561f34e5"
+          ],
+          "retrieval_latency_ms": 283.61598600031357,
+          "end_to_end_latency_ms": 283.61598600031357,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Để xây agent có loop, retry, human approval và resume sau crash, cần hai khái niệm orchestration nền tảng nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-011",
+          "query": "Trước khi chọn mô hình HITL, cần đánh giá cost of error và khả năng hoàn tác như thế nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "eede4ef2-9f19-55dd-b3aa-0c59516a68d5",
+            "49877454-b611-54ca-8196-e467abc553db"
+          ],
+          "acceptable_source_span_ids": [
+            "2e1c697a-eda5-5b3f-806c-da4c3f66a22d",
+            "940bed7d-ac5e-5d89-93f9-746b291503c1"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "474133cd-1771-58a2-acae-3e3ac0565b8e",
+            "6317a5d6-f044-5c78-827a-7ab920e3c493",
+            "3a5a32a3-adbe-5d40-866b-1b85fc1ef08e",
+            "5bd702d6-db96-5969-b56f-7ab1be476c54",
+            "78150bdd-6cbd-52b8-80ed-ba327a0adbcc",
+            "db2d135c-f720-52e0-b2b3-92bda3e2e4f2",
+            "f22df3b0-e305-51b8-8938-d173bb69eab0",
+            "f6a5f7fd-396b-5c3e-967e-26a5f70dfe94",
+            "64176b03-7595-5657-83c1-2e5de92056a2",
+            "bc7d8dce-c70b-54e6-bdcd-25bfda8ae54c"
+          ],
+          "retrieval_latency_ms": 423.3829150002748,
+          "end_to_end_latency_ms": 423.3829150002748,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Trước khi chọn mô hình HITL, cần đánh giá cost of error và khả năng hoàn tác như thế nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-012",
+          "query": "Muốn chẩn đoán một RAG pipeline trả lời kém, cần phân biệt bốn metric nền tảng nào trước?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "e616b892-38db-5ea9-9b29-0ac6ca1f3cec",
+            "a715fda9-515d-5cae-a3bd-1b03a70403ed"
+          ],
+          "acceptable_source_span_ids": [
+            "34f77842-b9c2-5783-81c4-923a6ac5f897"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "c313aee0-62cf-541f-a95e-4500b736a897",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "70f24f30-ea2e-50c4-9ad5-c0d62a24a79a",
+            "010fd20e-a3a7-5e87-8cf2-84d8c6df2756",
+            "ac9acde3-871c-5238-84c1-fae72795f99e",
+            "f916aed6-4041-5ce8-b91d-1c3fe9dfcf72",
+            "28de003b-ca87-5fab-8e3f-a1e21ee265a0",
+            "cf485a95-9178-5d7c-b85a-2892d55127f1",
+            "1eb8342f-7a99-5da3-9299-d8013de2d722",
+            "7ac30747-cf7f-510a-997a-0f6be3611259"
+          ],
+          "retrieval_latency_ms": 294.04097599990564,
+          "end_to_end_latency_ms": 294.04097599990564,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Muốn chẩn đoán một RAG pipeline trả lời kém, cần phân biệt bốn metric nền tảng nào trước?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-013",
+          "query": "Trước khi dùng GraphRAG cho câu hỏi multi-hop, cần nắm primitives nào của knowledge graph và entity-relation retrieval?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "ffd44b9e-f468-5502-8678-762eb52dff2d",
+            "48ee7bc1-e3e4-54d8-9b96-f6497ef1d0c5"
+          ],
+          "acceptable_source_span_ids": [
+            "7c24ed09-58db-50e0-8c8f-dcd9b4d8eeff"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 0.16666666666666666,
+          "ndcg_at_k": 0.16716045496620227,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 6,
+          "retrieved_source_span_ids": [
+            "acf06198-aff2-5b7d-84a8-cbc2dc0c5984",
+            "9190082d-1ec2-5eb3-9ef2-6ba66ad6d948",
+            "d33a06de-186c-5e7b-9689-182f29960789",
+            "c81c1cac-c853-573e-bec9-33332b12a66a",
+            "bb1a06df-b5ce-55a1-9c2b-0a2e69a61ea1",
+            "ffd44b9e-f468-5502-8678-762eb52dff2d",
+            "d3a4cf8b-a964-50a1-8088-53095d3c09b0",
+            "af0f1602-fa18-5e3c-affd-ab0f12ac3ce8",
+            "98700e73-442e-5ed2-bc3d-cc6f7a27d2ed",
+            "2625dde2-2f55-55b6-8cae-4e8c6541ccdc"
+          ],
+          "retrieval_latency_ms": 391.4468719999604,
+          "end_to_end_latency_ms": 391.4468719999604,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Trước khi dùng GraphRAG cho câu hỏi multi-hop, cần nắm primitives nào của knowledge graph và entity-relation retrieval?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-015",
+          "query": "Hãy nối chuỗi provider timeout → retry storm → circuit breaker → fallback và nêu evidence cần thấy trong chaos test.",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "404d7f4d-fa03-518c-a4e5-a0f3c055d0a9",
+            "c9fd281d-b049-5b31-8138-9be844bad5e5",
+            "dcc90d98-769d-57d5-b70d-ada71eb32010"
+          ],
+          "acceptable_source_span_ids": [
+            "4090f69a-a543-5d78-861f-d1ac9cd0ed11"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "2aa5d5de-c0bd-58e5-93ca-011c2951c6d4",
+            "bbd9c2c5-a12f-5ee9-90f9-c687956a9d6c",
+            "b5664704-e936-506a-9b32-83015f84b94f",
+            "40e375e3-5378-5955-8e29-029853a788cf",
+            "323c71aa-72dc-53b6-98a9-2adbc1b42237",
+            "74e7d052-a825-5cbd-9b01-af600d180ebb",
+            "a4493d36-af27-5de7-9d9c-3a62d10307a9",
+            "4aeb0709-7d06-5106-af77-080738303bf3",
+            "fee28308-52a9-5daa-9f5d-1c82e17133bf",
+            "edf09602-911b-5a59-9a12-228de1ba1478"
+          ],
+          "retrieval_latency_ms": 329.19825600038166,
+          "end_to_end_latency_ms": 329.19825600038166,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Hãy nối chuỗi provider timeout → retry storm → circuit breaker → fallback và nêu evidence cần thấy trong chaos test."
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-017",
+          "query": "Vì sao error rate bằng 0 vẫn có thể che giấu silent degradation, và SLI/SLO nào phải bổ sung cho LLM agent?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "bfab2d0e-f243-54ab-9bc7-6597000683a9",
+            "b2584a4f-98c1-543a-9942-7ce692320fb3",
+            "7308c1ec-10f5-5581-82db-fceecfcf2d0f"
+          ],
+          "acceptable_source_span_ids": [],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "edf09602-911b-5a59-9a12-228de1ba1478",
+            "40e375e3-5378-5955-8e29-029853a788cf",
+            "3cb697bf-be80-5961-be4e-9537b58c42eb",
+            "73c69027-0cba-560e-ab0f-1f94d9e23f7b",
+            "4090f69a-a543-5d78-861f-d1ac9cd0ed11",
+            "2890e586-151b-5a69-a67a-972ef1f171c9",
+            "49acef92-68ba-56b0-898c-98409431f59f",
+            "acbe46a1-04d3-5879-befc-703c68e4fbee",
+            "4c509777-b6ab-5101-89f3-cea0dbbdc682",
+            "0897d557-4bbd-5679-8651-803d5e1b1491"
+          ],
+          "retrieval_latency_ms": 550.8522529999027,
+          "end_to_end_latency_ms": 550.8522529999027,
+          "strategy": "graph_lite_2hop",
+          "subqueries": [
+            "Vì sao error rate bằng 0 vẫn có thể che giấu silent degradation, và SLI/SLO nào phải bổ sung cho LLM agent?"
+          ],
+          "graph_expanded": true,
+          "graph_sources": [
+            {
+              "source_span_id": "9bd83dc9-c10f-548c-8972-021b0d39d75e",
+              "concept_id": "e5d6e285-1a20-5d50-8ab1-bb2bd258d59d",
+              "depth": 1,
+              "confidence": 0.8198666666666666
+            },
+            {
+              "source_span_id": "d68fd663-d711-533d-84df-1c89068f23ee",
+              "concept_id": "e5d6e285-1a20-5d50-8ab1-bb2bd258d59d",
+              "depth": 1,
+              "confidence": 0.8198666666666666
+            },
+            {
+              "source_span_id": "ee2959dc-91c4-5135-aa26-5e0e10c04e79",
+              "concept_id": "e5d6e285-1a20-5d50-8ab1-bb2bd258d59d",
+              "depth": 1,
+              "confidence": 0.8198666666666666
+            }
+          ],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-018",
+          "query": "Từ tài liệu thô đến top-k chính xác, chunking, hybrid retrieval và reranking tác động nối tiếp nhau ra sao?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "0cef80c8-9356-5a62-9fd7-f020030a9c49",
+            "5874d50d-b8e3-5e09-9580-e367eecbee4d",
+            "e19857c8-3111-5197-a94f-57b1006722b5"
+          ],
+          "acceptable_source_span_ids": [
+            "c7bff788-d0be-5fb0-9978-ecbf66dae8a4",
+            "52275ecd-b8ac-5a27-8974-d53e43d8ec4f"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "30e59329-4dcf-5361-a9c4-3ac9c05de4f1",
+            "ab1cbf3e-42a6-53ac-8df5-9a077ea27bd9",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "5807c951-a732-589f-92f7-b0d548fb61d3",
+            "b9b71e4b-c2a6-5e6e-96ca-78889448817a",
+            "f916aed6-4041-5ce8-b91d-1c3fe9dfcf72",
+            "cd6600e0-1f7f-5eea-9d8b-35e0af06bc8e",
+            "c2e5f74c-d159-587e-8e37-3d16290172f6",
+            "bb3e4846-c01a-5abe-983e-5f856a64bc73"
+          ],
+          "retrieval_latency_ms": 354.29425799975434,
+          "end_to_end_latency_ms": 354.29425799975434,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Từ tài liệu thô đến top-k chính xác, chunking, hybrid retrieval và reranking tác động nối tiếp nhau ra sao?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-019",
+          "query": "Context Recall và Context Precision thấp biểu hiện hai lỗi khác nhau nào, và thứ tự sửa pipeline nên ra sao?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "a715fda9-515d-5cae-a3bd-1b03a70403ed",
+            "18438e91-32b6-5ee6-a19d-c90c9c845b7f"
+          ],
+          "acceptable_source_span_ids": [
+            "e616b892-38db-5ea9-9b29-0ac6ca1f3cec"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.46927872602275644,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "18438e91-32b6-5ee6-a19d-c90c9c845b7f",
+            "0c334382-2ded-5115-a62b-b83afddc8365",
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "69476186-af5c-5d83-8b55-0a849d40e8c4",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "a0c83a2c-e7c9-5e6b-a099-3019c6cf57b3",
+            "1bd7295f-50d4-5643-a4ce-e729868f25dc",
+            "492f7f0d-c7cc-501f-bb50-0e12661a0ba4",
+            "0d9a661c-19a2-5e02-bc47-cb9b268df0b7",
+            "2fe459ae-d130-5237-af5a-899aead05e37"
+          ],
+          "retrieval_latency_ms": 338.5379300002569,
+          "end_to_end_latency_ms": 338.5379300002569,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Context Recall và Context Precision thấp biểu hiện hai lỗi khác nhau nào, và thứ tự sửa pipeline nên ra sao?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-021",
+          "query": "Ba chiến lược quản lý short-term memory trong context window khác nhau như thế nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "6144bab3-b09d-5b30-b52c-bd71e987e923"
+          ],
+          "acceptable_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.6131471927654584,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041",
+            "c9ab58ae-f615-52ee-84c0-7a0eab47516f",
+            "e014deb0-6c3e-5354-8d4a-45fff0db2369",
+            "13c18224-2e79-521c-8f69-c1918d4d7d99",
+            "b621f3f6-75cc-5588-afbe-beb6fc4f182c",
+            "688c883c-2d8b-5c00-af1c-8aad1a82df19",
+            "fef47107-1872-5225-a4c4-d8b6d2889cde",
+            "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+            "25629367-6382-5f73-8b20-419d8621434e",
+            "97fb03e5-bfdb-5ec6-8044-803ad3ecd1a6"
+          ],
+          "retrieval_latency_ms": 356.4247650001562,
+          "end_to_end_latency_ms": 356.4247650001562,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Ba chiến lược quản lý short-term memory trong context window khác nhau như thế nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-022",
+          "query": "Một episodic memory nên lưu những thành phần nào của lần giải quyết nhiệm vụ trước?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "c59733bd-fb17-52a0-b78d-74505e03c861"
+          ],
+          "acceptable_source_span_ids": [
+            "0cfeae2e-684b-5dd1-884a-1cb34c70ee1b"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 0.5,
+          "ndcg_at_k": 0.38685280723454163,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 2,
+          "retrieved_source_span_ids": [
+            "25629367-6382-5f73-8b20-419d8621434e",
+            "c59733bd-fb17-52a0-b78d-74505e03c861",
+            "89ac7cce-6751-5726-b5b8-21bd23771eeb",
+            "a1d66758-0803-5261-8f13-f109e464dbc8",
+            "e014deb0-6c3e-5354-8d4a-45fff0db2369",
+            "33360d60-0c1b-5de7-8468-a92a670b1713",
+            "90d8b682-7cef-5129-abd1-b074b0b0d5b3",
+            "85237f6f-f2bb-5a5e-9c9b-517d785874f8",
+            "bb46f26d-6db7-5e72-8d02-99bb72337292",
+            "fa2a2536-959e-585d-bb04-236e01812bfa"
+          ],
+          "retrieval_latency_ms": 345.523607999894,
+          "end_to_end_latency_ms": 345.523607999894,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Một episodic memory nên lưu những thành phần nào của lần giải quyết nhiệm vụ trước?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-023",
+          "query": "Semantic memory dùng vector database để truy xuất knowledge theo cơ chế nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "191f1df2-e547-53fc-aa41-5e8af2531d68"
+          ],
+          "acceptable_source_span_ids": [
+            "89ac7cce-6751-5726-b5b8-21bd23771eeb"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.9197207891481876,
+          "source_precision_at_k": 0.2,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "191f1df2-e547-53fc-aa41-5e8af2531d68",
+            "9e525676-967e-5b70-9f69-8190f3a641f5",
+            "89ac7cce-6751-5726-b5b8-21bd23771eeb",
+            "1f8aaf79-1dc6-5227-96f7-c411214fa34d",
+            "7c24ed09-58db-50e0-8c8f-dcd9b4d8eeff",
+            "d33a06de-186c-5e7b-9689-182f29960789",
+            "663022dc-14ad-5a66-a2a3-d208d2481e3a",
+            "2d5e7cb1-1033-5600-bb14-4b081fbc92f7",
+            "688c883c-2d8b-5c00-af1c-8aad1a82df19",
+            "44d62b81-eee8-5784-89cb-e7129dc18811"
+          ],
+          "retrieval_latency_ms": 344.7394310001073,
+          "end_to_end_latency_ms": 344.7394310001073,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Semantic memory dùng vector database để truy xuất knowledge theo cơ chế nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.2,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-024",
+          "query": "HNSW tổ chức graph nhiều tầng như thế nào và hai tham số ef, M điều khiển điều gì?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "c0efcc4c-48a3-5ca0-a719-8bf2631376b8"
+          ],
+          "acceptable_source_span_ids": [
+            "4034c3e1-531d-52d7-9000-e327abb0bc40"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "8beba9a5-4f59-5ce8-b60d-3b9af0859117",
+            "b1b13fcc-638b-5342-8ee9-fcc4a077b1cc",
+            "3f08f15d-5d6f-5d23-9294-1f37d79176ad",
+            "9dfd8cb5-aa17-5dc1-aa47-0c93169bb662",
+            "7373c45b-f4b0-5abe-aba4-d1e700d5b608",
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "e39d7d42-04d4-585d-b2e0-f809e044fb6e",
+            "33529846-471e-5537-9dd0-3fbcbd6a8a02",
+            "783100c4-ec32-5b36-89b9-e6b85c02e984"
+          ],
+          "retrieval_latency_ms": 249.76822099961282,
+          "end_to_end_latency_ms": 249.76822099961282,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "HNSW tổ chức graph nhiều tầng như thế nào và hai tham số ef, M điều khiển điều gì?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-025",
+          "query": "Vì sao Flat brute-force phải được dùng làm ground truth khi đánh giá ANN index?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "4a694fde-c3ae-56e5-b8ce-46375bd93b2f"
+          ],
+          "acceptable_source_span_ids": [
+            "4f6a01f2-f015-56f5-a89c-0c41a4dd4e53"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "52553dca-02e4-5e5a-878f-6ecb29ad4c83",
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "328c6e95-e086-5840-8996-ade7a5692815",
+            "e39d7d42-04d4-585d-b2e0-f809e044fb6e",
+            "aefcf666-316c-5b63-a840-63bac0b58099",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "b0b547a6-9585-5f99-91f9-43f2ba79e44c",
+            "66cbeb71-4e1f-5f78-9df9-e3e4462ab279",
+            "15fa4773-cfc1-50ac-a29e-2cb4ef234353",
+            "70f24f30-ea2e-50c4-9ad5-c0d62a24a79a"
+          ],
+          "retrieval_latency_ms": 286.56969099984053,
+          "end_to_end_latency_ms": 286.56969099984053,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Vì sao Flat brute-force phải được dùng làm ground truth khi đánh giá ANN index?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-029",
+          "query": "Pipeline monitoring và data observability trả lời hai nhóm câu hỏi khác nhau nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "b121e65a-3ab0-57ae-9541-a899536643ee"
+          ],
+          "acceptable_source_span_ids": [],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "b121e65a-3ab0-57ae-9541-a899536643ee",
+            "097be622-a2b5-5cdf-a6ba-007b9bbdef16",
+            "cd4516fe-4b96-52a6-bd9f-0c609dc60277",
+            "410f03b5-86e3-5f8f-bb62-fe3530179e45",
+            "62c1399e-143d-57f0-b2ab-9ca1c3244d2f",
+            "0eaf9309-85c4-552b-8c3e-5db7b5dfba35",
+            "bbb4c3ae-85b1-55ca-ac6d-29db3bac48b8",
+            "2b0de521-f28e-5aeb-80ea-9a85498f2598",
+            "ac431e02-fed4-5f7f-b484-7cffa0645538",
+            "5ebbb1dd-81d7-53b5-9d3e-332fbf4045c2"
+          ],
+          "retrieval_latency_ms": 280.72322299976804,
+          "end_to_end_latency_ms": 280.72322299976804,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Pipeline monitoring và data observability trả lời hai nhóm câu hỏi khác nhau nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-030",
+          "query": "RAGAS tách lỗi retriever và generator bằng các trục đánh giá nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "49b65b10-accd-595b-b39b-367c837249fd"
+          ],
+          "acceptable_source_span_ids": [
+            "c0f23420-4cc1-5e4c-a3d2-a274acf72850"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.8315546295836225,
+          "source_precision_at_k": 0.2,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "49b65b10-accd-595b-b39b-367c837249fd",
+            "e09ccc2f-15bc-54c8-8b08-5b47c094b5d0",
+            "151a5add-14ed-579c-b52a-75d4984c6af6",
+            "dfbe0f29-ad79-5739-a428-7f8c7551603f",
+            "6f4705ec-140a-56e4-9d7a-3a747ca4db56",
+            "c0f23420-4cc1-5e4c-a3d2-a274acf72850",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "833f5a14-80a3-53e4-96ea-a9a195fffdff",
+            "69476186-af5c-5d83-8b55-0a849d40e8c4",
+            "70f24f30-ea2e-50c4-9ad5-c0d62a24a79a"
+          ],
+          "retrieval_latency_ms": 289.5669810000072,
+          "end_to_end_latency_ms": 289.5669810000072,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "RAGAS tách lỗi retriever và generator bằng các trục đánh giá nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.2,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-031",
+          "query": "Trong agent infrastructure, workload nào cần GPU và workload nào chỉ cần CPU hoặc serverless?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "eb081049-ea39-5d11-8db5-5d7139a52f3a"
+          ],
+          "acceptable_source_span_ids": [],
+          "hit_at_k": true,
+          "required_recall_at_k": 1.0,
+          "mrr_at_k": 0.3333333333333333,
+          "ndcg_at_k": 0.5,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 3,
+          "retrieved_source_span_ids": [
+            "0a0cb261-acd1-51bc-a489-d4328abff108",
+            "f98dad4a-c9ef-5d73-8523-accc568ea461",
+            "eb081049-ea39-5d11-8db5-5d7139a52f3a",
+            "59e88204-24d6-5edb-89d7-1e441d7242aa",
+            "b9f679e8-6cf7-53e7-8a6e-b090f2514f5e",
+            "cb5faf9f-0c04-5244-b5b8-2436e92a0d8b",
+            "7e70d41e-1ed9-513c-92fc-65c7a8611a92",
+            "b66a587a-0a48-5cf6-8e9d-06f0e1261def",
+            "c6697c06-d96f-536b-b4d7-16e8e5f65178",
+            "f7710d9d-0914-550e-a3c7-6c592832f5da"
+          ],
+          "retrieval_latency_ms": 274.52732300025673,
+          "end_to_end_latency_ms": 274.52732300025673,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "Trong agent infrastructure, workload nào cần GPU và workload nào chỉ cần CPU hoặc serverless?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 1.0
+        },
+        {
+          "id": "ret-032",
+          "query": "PagedAttention giảm lãng phí KV cache so với cấp phát contiguous như thế nào?",
+          "query_class": "direct",
+          "required_source_span_ids": [
+            "f8c077c2-33f9-5c2b-ba7a-2aabc6b2e128"
+          ],
+          "acceptable_source_span_ids": [
+            "5ecc9435-0518-54b5-af81-0954da9a7e8c"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "2e53a31b-c549-5c5f-a79b-2275c2bea0a1",
+            "a3e9fb4f-8913-5c44-9c54-8f2e92a42743",
+            "42b83c0f-fabb-5dd0-ad22-6451bf84d6b4",
+            "8c71b9fb-cdfb-5037-8a15-3a8efd120a04",
+            "2a2fe7c3-52ee-5267-aab9-1a8bc03e0a87",
+            "0f56fe03-2128-5845-b9b1-cd2040b9983a",
+            "c9cd9055-0753-537b-a4e0-88821298c1a9",
+            "5195d686-a189-5769-b464-da4bca8c9cba",
+            "156fad13-112c-5dc0-8643-12fb6fa3c649",
+            "1e712d5f-ee73-5953-94db-13f9a694c9d8"
+          ],
+          "retrieval_latency_ms": 362.81548399983876,
+          "end_to_end_latency_ms": 362.81548399983876,
+          "strategy": "single_hybrid",
+          "subqueries": [
+            "PagedAttention giảm lãng phí KV cache so với cấp phát contiguous như thế nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-033",
+          "query": "Trước khi thiết kế long-term memory cho agent, cần hiểu giới hạn context window và các chiến lược short-term memory nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "37422db2-294b-55dc-aefd-713055b25d34",
+            "6144bab3-b09d-5b30-b52c-bd71e987e923"
+          ],
+          "acceptable_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.617319681505689,
+          "source_precision_at_k": 0.2,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041",
+            "13c18224-2e79-521c-8f69-c1918d4d7d99",
+            "2bd5ede5-c9e5-52a8-9c6d-992c5324b5b2",
+            "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+            "e014deb0-6c3e-5354-8d4a-45fff0db2369",
+            "fef47107-1872-5225-a4c4-d8b6d2889cde",
+            "c9ab58ae-f615-52ee-84c0-7a0eab47516f",
+            "37422db2-294b-55dc-aefd-713055b25d34",
+            "688c883c-2d8b-5c00-af1c-8aad1a82df19",
+            "ff5293ad-00a9-5d8f-8cab-edbdbb4c9862"
+          ],
+          "retrieval_latency_ms": 442.5017119997392,
+          "end_to_end_latency_ms": 442.5017119997392,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Trước khi thiết kế long-term memory cho agent, cần hiểu giới hạn context window và các chiến lược short-term memory nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.2,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-037",
+          "query": "Trước khi đọc một điểm RAGAS tổng hợp, cần phân biệt metric retrieval và metric generation nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "49b65b10-accd-595b-b39b-367c837249fd",
+            "c0f23420-4cc1-5e4c-a3d2-a274acf72850"
+          ],
+          "acceptable_source_span_ids": [
+            "d306ba80-dc90-50be-95f3-c0aee448ff68"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 0.2,
+          "ndcg_at_k": 0.18154179253735267,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 5,
+          "retrieved_source_span_ids": [
+            "cc101340-bc09-5a94-b44c-4c4194591547",
+            "dfbe0f29-ad79-5739-a428-7f8c7551603f",
+            "0c900a2f-570d-5b46-941f-0f05523a869d",
+            "bc4a41c5-3fa4-5610-b34f-39f85332cc59",
+            "c0f23420-4cc1-5e4c-a3d2-a274acf72850",
+            "69476186-af5c-5d83-8b55-0a849d40e8c4",
+            "833f5a14-80a3-53e4-96ea-a9a195fffdff",
+            "06587490-6e78-5cfd-9068-ab096c4d22fe",
+            "6f4705ec-140a-56e4-9d7a-3a747ca4db56",
+            "1b16adbc-5787-5da3-b008-1cdc857f6d47"
+          ],
+          "retrieval_latency_ms": 274.86815400015985,
+          "end_to_end_latency_ms": 274.86815400015985,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Trước khi đọc một điểm RAGAS tổng hợp, cần phân biệt metric retrieval và metric generation nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-038",
+          "query": "Trước khi deploy RAG, cần mô hình hóa retrieval poisoning và xây adversarial test set cho những attack class nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "23cc397e-8173-5726-b3ca-5c68bf2eaa34",
+            "b6e8cff6-3823-54a2-8f13-255704983453"
+          ],
+          "acceptable_source_span_ids": [
+            "1f136d64-248f-5474-9405-e8cd97d8ff0c"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "f1d2ab97-e268-5002-90cf-11cb45d84cb2",
+            "bddb0740-37aa-55a9-92b4-3c74a84375fd",
+            "0e316dba-8566-581e-aec1-3b26c4958a46",
+            "e914f3c5-e4ae-54f6-93db-5d544df802e0",
+            "67f0f64b-bbf1-5034-9851-cd000a1dfb83",
+            "69476186-af5c-5d83-8b55-0a849d40e8c4",
+            "bc4a41c5-3fa4-5610-b34f-39f85332cc59",
+            "0d26b27c-8c5e-58ac-ba8d-66576a15e087",
+            "dc86c2f3-feed-52af-aa0c-cb6cefca9064",
+            "55fabe9a-520c-5904-a40a-9d5b4ff8f4d3"
+          ],
+          "retrieval_latency_ms": 394.40106700021715,
+          "end_to_end_latency_ms": 394.40106700021715,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Trước khi deploy RAG, cần mô hình hóa retrieval poisoning và xây adversarial test set cho những attack class nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-039",
+          "query": "Để debug một câu trả lời RAG sai, cần hiểu data observability và trace/span trước khi xem từng retrieval step ra sao?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "b121e65a-3ab0-57ae-9541-a899536643ee",
+            "80a86af3-4a7d-5bbb-8fd7-7d2bd0ebef39"
+          ],
+          "acceptable_source_span_ids": [
+            "dc6f69a5-aae1-56a0-b005-726610380510"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.46927872602275644,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 1,
+          "retrieved_source_span_ids": [
+            "dc6f69a5-aae1-56a0-b005-726610380510",
+            "cc2dc562-c4c1-578c-aff3-05707bdcb7b5",
+            "e7f3f314-c24d-5fd4-8f6c-c8493d8d3081",
+            "f916aed6-4041-5ce8-b91d-1c3fe9dfcf72",
+            "6a1c573d-f613-5558-b332-dabbc9b14cac",
+            "ee2959dc-91c4-5135-aa26-5e0e10c04e79",
+            "0d26b27c-8c5e-58ac-ba8d-66576a15e087",
+            "9fba3584-1778-5239-81aa-fdfbe6b218ac",
+            "ac9acde3-871c-5238-84c1-fae72795f99e",
+            "86aab89c-bce7-5c5e-9f56-db721b71b93e"
+          ],
+          "retrieval_latency_ms": 306.270535999829,
+          "end_to_end_latency_ms": 306.270535999829,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Để debug một câu trả lời RAG sai, cần hiểu data observability và trace/span trước khi xem từng retrieval step ra sao?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-040",
+          "query": "Trước khi tối ưu throughput model serving, cần hiểu KV cache và storage tier cho active state như thế nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "f8c077c2-33f9-5c2b-ba7a-2aabc6b2e128",
+            "dd67e1d6-da97-5c63-b669-5799ee25d8c1"
+          ],
+          "acceptable_source_span_ids": [
+            "5ecc9435-0518-54b5-af81-0954da9a7e8c"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.5,
+          "mrr_at_k": 0.5,
+          "ndcg_at_k": 0.2960819109658652,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 2,
+          "retrieved_source_span_ids": [
+            "b9f679e8-6cf7-53e7-8a6e-b090f2514f5e",
+            "dd67e1d6-da97-5c63-b669-5799ee25d8c1",
+            "8c71b9fb-cdfb-5037-8a15-3a8efd120a04",
+            "2a2fe7c3-52ee-5267-aab9-1a8bc03e0a87",
+            "42b83c0f-fabb-5dd0-ad22-6451bf84d6b4",
+            "156fad13-112c-5dc0-8643-12fb6fa3c649",
+            "6d60526d-0e3f-5cae-84e8-c4142652d97c",
+            "0f56fe03-2128-5845-b9b1-cd2040b9983a",
+            "91650897-61bf-5e90-a742-3fe8c0778c45",
+            "a3e9fb4f-8913-5c44-9c54-8f2e92a42743"
+          ],
+          "retrieval_latency_ms": 303.3019350000359,
+          "end_to_end_latency_ms": 303.3019350000359,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Trước khi tối ưu throughput model serving, cần hiểu KV cache và storage tier cho active state như thế nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.5
+        },
+        {
+          "id": "ret-041",
+          "query": "Trước khi thêm tools và workflow phức tạp, cần nắm vòng lặp agent và giới hạn memory trong context nào?",
+          "query_class": "prerequisite",
+          "required_source_span_ids": [
+            "55403b9f-5a3c-5359-aaac-4e5c776bf61d",
+            "37422db2-294b-55dc-aefd-713055b25d34"
+          ],
+          "acceptable_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "6bdefc9d-8610-5d61-84e7-147bd37d229a",
+            "ff5293ad-00a9-5d8f-8cab-edbdbb4c9862",
+            "2bd5ede5-c9e5-52a8-9c6d-992c5324b5b2",
+            "1164ce12-72d9-5498-82f2-9b4b15448668",
+            "f98dad4a-c9ef-5d73-8523-accc568ea461",
+            "e7907eb1-0c3b-53f1-95bb-21bb34ea579a",
+            "a460882f-8880-5290-8b70-613c009d409e",
+            "5a1bc07f-1905-5672-96ab-c47e977787c6",
+            "ea08255f-e7c6-5bbd-bf9e-79a6bd05ca67",
+            "a25d7023-d023-5851-8434-36514ff879dc"
+          ],
+          "retrieval_latency_ms": 314.2418440002075,
+          "end_to_end_latency_ms": 314.2418440002075,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Trước khi thêm tools và workflow phức tạp, cần nắm vòng lặp agent và giới hạn memory trong context nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-042",
+          "query": "Short-term, episodic và semantic memory phối hợp thành một vòng học từ hội thoại đến tri thức lâu dài như thế nào?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "6144bab3-b09d-5b30-b52c-bd71e987e923",
+            "c59733bd-fb17-52a0-b78d-74505e03c861",
+            "191f1df2-e547-53fc-aa41-5e8af2531d68"
+          ],
+          "acceptable_source_span_ids": [
+            "26ce08ea-8a76-583a-9d3d-3c49930092a9"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "688c883c-2d8b-5c00-af1c-8aad1a82df19",
+            "e014deb0-6c3e-5354-8d4a-45fff0db2369",
+            "1bf3f68b-741d-5bb7-8be3-f7d6c06de354",
+            "5b4cd340-be4a-5cd5-9992-fb9e6fb8b65c",
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041",
+            "89ac7cce-6751-5726-b5b8-21bd23771eeb",
+            "fef47107-1872-5225-a4c4-d8b6d2889cde",
+            "13c18224-2e79-521c-8f69-c1918d4d7d99",
+            "25629367-6382-5f73-8b20-419d8621434e",
+            "7d6dcbad-76ba-5f20-b23c-583f7b58e8c6"
+          ],
+          "retrieval_latency_ms": 354.3066040001577,
+          "end_to_end_latency_ms": 354.3066040001577,
+          "strategy": "graph_lite_2hop",
+          "subqueries": [
+            "Short-term, episodic và semantic memory phối hợp thành một vòng học từ hội thoại đến tri thức lâu dài như thế nào?"
+          ],
+          "graph_expanded": true,
+          "graph_sources": [
+            {
+              "source_span_id": "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+              "concept_id": "b90de16f-3b50-5efb-9d45-f3abf5ed7645",
+              "depth": 1,
+              "confidence": 0.8191777777777778
+            },
+            {
+              "source_span_id": "8fee206e-5e87-5583-9edf-a7d7b4dd32dc",
+              "concept_id": "b90de16f-3b50-5efb-9d45-f3abf5ed7645",
+              "depth": 1,
+              "confidence": 0.8191777777777778
+            },
+            {
+              "source_span_id": "95013d19-1d9b-536a-9913-3dced4665438",
+              "concept_id": "b90de16f-3b50-5efb-9d45-f3abf5ed7645",
+              "depth": 1,
+              "confidence": 0.8191777777777778
+            },
+            {
+              "source_span_id": "191f1df2-e547-53fc-aa41-5e8af2531d68",
+              "concept_id": "7b585747-4c56-5493-b5f8-97edec8027f3",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+              "concept_id": "1487d923-e00a-550f-9954-05d7b90a9f3c",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+              "concept_id": "7b585747-4c56-5493-b5f8-97edec8027f3",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+              "concept_id": "1487d923-e00a-550f-9954-05d7b90a9f3c",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+              "concept_id": "7b585747-4c56-5493-b5f8-97edec8027f3",
+              "depth": 2,
+              "confidence": 0.86
+            }
+          ],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-044",
+          "query": "Từ Flat ground truth đến HNSW production, recall, latency và memory được đánh đổi qua các bước nào?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "4a694fde-c3ae-56e5-b8ce-46375bd93b2f",
+            "c0efcc4c-48a3-5ca0-a719-8bf2631376b8",
+            "4f6a01f2-f015-56f5-a89c-0c41a4dd4e53"
+          ],
+          "acceptable_source_span_ids": [
+            "f219afd7-689b-5362-9710-37cb1c097f9c"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "4f9929ad-829e-5c9f-82fb-723e218c13cc",
+            "57463e14-0186-5d8e-8e95-d9c673a08055",
+            "e39d7d42-04d4-585d-b2e0-f809e044fb6e",
+            "52553dca-02e4-5e5a-878f-6ecb29ad4c83",
+            "09fc0659-aff9-52b5-891a-ce7831cc9b43",
+            "66cbeb71-4e1f-5f78-9df9-e3e4462ab279",
+            "ca9d48e0-c703-573f-bb2b-a88563fcbfc7",
+            "aaa4540d-c227-5585-b83a-e7d51e82f4da",
+            "72e52c48-06a6-51a0-b730-bd1639583bc3",
+            "0c900a2f-570d-5b46-941f-0f05523a869d"
+          ],
+          "retrieval_latency_ms": 337.55890600014027,
+          "end_to_end_latency_ms": 337.55890600014027,
+          "strategy": "graph_lite_2hop",
+          "subqueries": [
+            "Từ Flat ground truth đến HNSW production, recall, latency và memory được đánh đổi qua các bước nào?"
+          ],
+          "graph_expanded": true,
+          "graph_sources": [
+            {
+              "source_span_id": "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+              "concept_id": "fdfb53fc-be06-5773-950d-b5a327cc429d",
+              "depth": 1,
+              "confidence": 0.8191777777777778
+            },
+            {
+              "source_span_id": "7a0516df-ccb3-5d31-8942-fa5a154742d8",
+              "concept_id": "fdfb53fc-be06-5773-950d-b5a327cc429d",
+              "depth": 1,
+              "confidence": 0.8191777777777778
+            },
+            {
+              "source_span_id": "8ea331dd-93c9-5e54-8db5-4a7db90f106b",
+              "concept_id": "fdfb53fc-be06-5773-950d-b5a327cc429d",
+              "depth": 1,
+              "confidence": 0.8191777777777778
+            },
+            {
+              "source_span_id": "2a36c626-ec8e-5c98-8a94-caba9aee3f24",
+              "concept_id": "348522d3-416a-58a8-9de3-53cede7b9cf7",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "316c4a1f-a2b7-54eb-8c5d-4c42d57e0431",
+              "concept_id": "348522d3-416a-58a8-9de3-53cede7b9cf7",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "3b9542de-72d7-5ce4-9b97-aa7f9ffa6d80",
+              "concept_id": "348522d3-416a-58a8-9de3-53cede7b9cf7",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "833f5a14-80a3-53e4-96ea-a9a195fffdff",
+              "concept_id": "2ddd8eb7-ff5b-5504-aaa7-3eb778e7f865",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "84a585dd-fcce-5217-ab4b-98ef3238fa7a",
+              "concept_id": "2ddd8eb7-ff5b-5504-aaa7-3eb778e7f865",
+              "depth": 2,
+              "confidence": 0.86
+            }
+          ],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-046",
+          "query": "Hãy nối chuỗi corpus poisoning → adversarial evaluation → trace inspection để phát hiện và điều tra một retrieval attack.",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "23cc397e-8173-5726-b3ca-5c68bf2eaa34",
+            "b6e8cff6-3823-54a2-8f13-255704983453",
+            "dc6f69a5-aae1-56a0-b005-726610380510"
+          ],
+          "acceptable_source_span_ids": [
+            "1f136d64-248f-5474-9405-e8cd97d8ff0c"
+          ],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "dc86c2f3-feed-52af-aa0c-cb6cefca9064",
+            "f1d2ab97-e268-5002-90cf-11cb45d84cb2",
+            "7c5a73bd-9109-5e95-af61-c9a94f054a04",
+            "328c6e95-e086-5840-8996-ade7a5692815",
+            "d09a1d7d-5ba1-58ab-b217-a8cfa0d58d10",
+            "b6ed1c5d-ae5e-5d8f-8986-0274b065517b",
+            "9fba3584-1778-5239-81aa-fdfbe6b218ac",
+            "dc56e77c-fe6b-5f19-b51b-5a6fd62eb717",
+            "bb3e4846-c01a-5abe-983e-5f856a64bc73",
+            "e3d39f13-9f8c-59fb-bde7-c118040b3159"
+          ],
+          "retrieval_latency_ms": 368.97298999974737,
+          "end_to_end_latency_ms": 368.97298999974737,
+          "strategy": "graph_lite_2hop",
+          "subqueries": [
+            "Hãy nối chuỗi corpus poisoning → adversarial evaluation → trace inspection để phát hiện và điều tra một retrieval attack."
+          ],
+          "graph_expanded": true,
+          "graph_sources": [
+            {
+              "source_span_id": "b2584a4f-98c1-543a-9942-7ce692320fb3",
+              "concept_id": "b07fad3c-ef2a-53c5-8e66-a3d140961082",
+              "depth": 1,
+              "confidence": 0.58
+            },
+            {
+              "source_span_id": "d70ba399-86fb-5b6b-886a-32c4541ce203",
+              "concept_id": "b07fad3c-ef2a-53c5-8e66-a3d140961082",
+              "depth": 1,
+              "confidence": 0.58
+            },
+            {
+              "source_span_id": "f1522cea-e412-58a3-a699-949c463af6f6",
+              "concept_id": "b07fad3c-ef2a-53c5-8e66-a3d140961082",
+              "depth": 1,
+              "confidence": 0.58
+            },
+            {
+              "source_span_id": "2eb76d5d-40d2-597d-9e17-a743c5d1608b",
+              "concept_id": "88c6ed01-1fa5-57e9-81e1-a2684c7ec51a",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "3ac6e3cd-eaff-585f-ab44-bdb005838260",
+              "concept_id": "88c6ed01-1fa5-57e9-81e1-a2684c7ec51a",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "99a0a5ba-7214-5ee7-b566-fcb9f2163a73",
+              "concept_id": "88c6ed01-1fa5-57e9-81e1-a2684c7ec51a",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "8ce8a07d-9246-5355-8a7f-b07e6dcd89f1",
+              "concept_id": "94498fb0-4d8e-550d-b3ba-50500dec7618",
+              "depth": 2,
+              "confidence": 0.8529333333333333
+            },
+            {
+              "source_span_id": "cf876f54-c166-55da-a0b1-fc9b941b239b",
+              "concept_id": "94498fb0-4d8e-550d-b3ba-50500dec7618",
+              "depth": 2,
+              "confidence": 0.8529333333333333
+            }
+          ],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-048",
+          "query": "Trong serving agent, CPU orchestration, GPU inference, KV cache và hot/warm storage nối thành kiến trúc runtime ra sao?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "eb081049-ea39-5d11-8db5-5d7139a52f3a",
+            "f8c077c2-33f9-5c2b-ba7a-2aabc6b2e128",
+            "dd67e1d6-da97-5c63-b669-5799ee25d8c1"
+          ],
+          "acceptable_source_span_ids": [
+            "5ecc9435-0518-54b5-af81-0954da9a7e8c"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.3333333333333333,
+          "mrr_at_k": 0.25,
+          "ndcg_at_k": 0.16812753627111746,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 4,
+          "retrieved_source_span_ids": [
+            "2a2fe7c3-52ee-5267-aab9-1a8bc03e0a87",
+            "b9f679e8-6cf7-53e7-8a6e-b090f2514f5e",
+            "b66a587a-0a48-5cf6-8e9d-06f0e1261def",
+            "dd67e1d6-da97-5c63-b669-5799ee25d8c1",
+            "0a0cb261-acd1-51bc-a489-d4328abff108",
+            "0f56fe03-2128-5845-b9b1-cd2040b9983a",
+            "cb5faf9f-0c04-5244-b5b8-2436e92a0d8b",
+            "c27cd030-91fb-5f6b-91a7-b46e2045b1d3",
+            "59e88204-24d6-5edb-89d7-1e441d7242aa",
+            "2bf87006-2877-5b30-be2d-1dc875433465"
+          ],
+          "retrieval_latency_ms": 313.25884399984716,
+          "end_to_end_latency_ms": 313.25884399984716,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Trong serving agent, CPU orchestration, GPU inference, KV cache và hot/warm storage nối thành kiến trúc runtime ra sao?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.3333333333333333
+        },
+        {
+          "id": "ret-049",
+          "query": "Vòng lặp goal-reason-act-observe sử dụng context window và short-term memory qua nhiều bước như thế nào?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "55403b9f-5a3c-5359-aaac-4e5c776bf61d",
+            "37422db2-294b-55dc-aefd-713055b25d34",
+            "6144bab3-b09d-5b30-b52c-bd71e987e923"
+          ],
+          "acceptable_source_span_ids": [
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041"
+          ],
+          "hit_at_k": true,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.2,
+          "ndcg_at_k": 0.15101961822780524,
+          "source_precision_at_k": 0.1,
+          "first_relevant_rank": 5,
+          "retrieved_source_span_ids": [
+            "ff5293ad-00a9-5d8f-8cab-edbdbb4c9862",
+            "13c18224-2e79-521c-8f69-c1918d4d7d99",
+            "8470e499-4120-5a8b-ac94-9b950d39d8da",
+            "e7907eb1-0c3b-53f1-95bb-21bb34ea579a",
+            "5cbfbf5a-64c1-599a-ab0a-f466a5b45041",
+            "6259e399-c407-51bd-ba50-c3595828394d",
+            "2ccb4218-bd3c-5f5f-910f-b29e8e3a10b4",
+            "d2babb16-f0b1-58b1-a1ec-a6c321a98cf3",
+            "5a1bc07f-1905-5672-96ab-c47e977787c6",
+            "fef47107-1872-5225-a4c4-d8b6d2889cde"
+          ],
+          "retrieval_latency_ms": 502.9278640004122,
+          "end_to_end_latency_ms": 502.9278640004122,
+          "strategy": "graph_lite_2hop",
+          "subqueries": [
+            "Vòng lặp goal-reason-act-observe sử dụng context window và short-term memory qua nhiều bước như thế nào?"
+          ],
+          "graph_expanded": true,
+          "graph_sources": [
+            {
+              "source_span_id": "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+              "concept_id": "b90de16f-3b50-5efb-9d45-f3abf5ed7645",
+              "depth": 1,
+              "confidence": 0.8191777777777778
+            },
+            {
+              "source_span_id": "8fee206e-5e87-5583-9edf-a7d7b4dd32dc",
+              "concept_id": "b90de16f-3b50-5efb-9d45-f3abf5ed7645",
+              "depth": 1,
+              "confidence": 0.8191777777777778
+            },
+            {
+              "source_span_id": "95013d19-1d9b-536a-9913-3dced4665438",
+              "concept_id": "b90de16f-3b50-5efb-9d45-f3abf5ed7645",
+              "depth": 1,
+              "confidence": 0.8191777777777778
+            },
+            {
+              "source_span_id": "191f1df2-e547-53fc-aa41-5e8af2531d68",
+              "concept_id": "7b585747-4c56-5493-b5f8-97edec8027f3",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+              "concept_id": "1487d923-e00a-550f-9954-05d7b90a9f3c",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+              "concept_id": "7b585747-4c56-5493-b5f8-97edec8027f3",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+              "concept_id": "1487d923-e00a-550f-9954-05d7b90a9f3c",
+              "depth": 2,
+              "confidence": 0.86
+            },
+            {
+              "source_span_id": "62f11aca-0046-595f-945c-cdb1f2f8da9d",
+              "concept_id": "7b585747-4c56-5493-b5f8-97edec8027f3",
+              "depth": 2,
+              "confidence": 0.86
+            }
+          ],
+          "degraded": false,
+          "ragas_id_context_precision": 0.1,
+          "ragas_id_context_recall": 0.0
+        },
+        {
+          "id": "ret-050",
+          "query": "Từ DPO bỏ reward model đến GRPO bỏ value model, alignment pipeline đã đơn giản hóa những thành phần nào?",
+          "query_class": "multi_hop",
+          "required_source_span_ids": [
+            "35c9e009-f451-56cb-be72-407b6e5a1eb8",
+            "15257377-9ba6-5f91-8f22-c2102e7a90ce",
+            "fef8871a-5e47-51bf-82e3-c3be072cabf4"
+          ],
+          "acceptable_source_span_ids": [],
+          "hit_at_k": false,
+          "required_recall_at_k": 0.0,
+          "mrr_at_k": 0.0,
+          "ndcg_at_k": 0.0,
+          "source_precision_at_k": 0.0,
+          "first_relevant_rank": 0,
+          "retrieved_source_span_ids": [
+            "94857a80-0762-5c7b-b2c8-d53cc529403e",
+            "138262f7-96ae-51e7-9814-9e8005a5c8e0",
+            "333fcd7c-ace5-577a-a624-5da1fffb6500",
+            "82ae597b-3aea-5c79-ab98-afc1095a7058",
+            "e7bb569d-3554-5c46-aeb0-89a28798323e",
+            "adc666c0-9302-57dc-a31a-c2aaef41ca8a",
+            "5d54f52b-b9f0-5b17-be68-ef21d1fca5b4",
+            "97f61adf-d958-5ba9-aae8-28e121717bb6",
+            "12c2e9d4-55b5-557d-ad17-daa6cc9d4fd5",
+            "f442cea2-6f69-5df3-99bc-4ca8dede71cd"
+          ],
+          "retrieval_latency_ms": 323.82691500015426,
+          "end_to_end_latency_ms": 323.82691500015426,
+          "strategy": "graph_lite_no_expansion",
+          "subqueries": [
+            "Từ DPO bỏ reward model đến GRPO bỏ value model, alignment pipeline đã đơn giản hóa những thành phần nào?"
+          ],
+          "graph_expanded": false,
+          "graph_sources": [],
+          "degraded": false,
+          "ragas_id_context_precision": 0.0,
+          "ragas_id_context_recall": 0.0
+        }
+      ]
+    }
+  },
+  "quality_gate": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "dataset_has_expected_cases",
+        "passed": true,
+        "actual": 35,
+        "expected": "= 35"
+      },
+      {
+        "name": "all_cases_have_resolved_source_labels",
+        "passed": true,
+        "actual": 35,
+        "expected": "= 35"
+      },
+      {
+        "name": "retrieval_suite_contains_only_user_questions",
+        "passed": true,
+        "actual": 35,
+        "expected": "= 35"
+      },
+      {
+        "name": "coverage_direct",
+        "passed": true,
+        "actual": 15,
+        "expected": "= 15"
+      },
+      {
+        "name": "coverage_prerequisite",
+        "passed": true,
+        "actual": 10,
+        "expected": "= 10"
+      },
+      {
+        "name": "coverage_multi_hop",
+        "passed": true,
+        "actual": 10,
+        "expected": "= 10"
+      },
+      {
+        "name": "graph_lite_p95_within_budget",
+        "passed": true,
+        "actual": 442.5,
+        "expected": "<= 500 ms"
+      },
+      {
+        "name": "graph_lite_direct_recall_gate",
+        "passed": true,
+        "actual": 0.0,
+        "expected": ">= -0.02 recall delta"
+      },
+      {
+        "name": "graph_lite_prerequisite_recall_gate",
+        "passed": true,
+        "actual": 0.0,
+        "expected": ">= 0 recall delta"
+      },
+      {
+        "name": "graph_lite_multi_hop_recall_gate",
+        "passed": true,
+        "actual": 0.0,
+        "expected": ">= 0 recall delta"
+      }
+    ]
+  }
+}

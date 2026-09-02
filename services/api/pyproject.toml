@@ -1,0 +1,43 @@
+[project]
+name = "chiron-api"
+version = "0.1.0"
+description = "Typed API boundary for the Chiron adaptive-learning vertical slice"
+requires-python = ">=3.12"
+dependencies = [
+  "alembic>=1.16.4,<2",
+  "celery[redis]>=5.5.3,<6",
+  "fastapi>=0.116.1,<1",
+  "httpx>=0.28.1,<1",
+  "psycopg[binary]>=3.2.9,<4",
+  "pwdlib[argon2]>=0.3,<1",
+  "pydantic-settings>=2.10.1,<3",
+  "pyjwt[crypto]>=2.10,<3",
+  "redis>=5.2,<7",
+  "sqlalchemy>=2.0.43,<3",
+  "uvicorn[standard]>=0.35.0,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.4.1,<9",
+  "ruff>=0.12.9,<1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]

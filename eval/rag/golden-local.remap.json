@@ -1,0 +1,1022 @@
+{
+  "source_dataset": "/workspace/eval/rag/golden.jsonl",
+  "output_dataset": "/workspace/eval/rag/golden-local.jsonl",
+  "labels": 78,
+  "cases": 50,
+  "mappings": [
+    {
+      "source_id": "3d6afda4-ffe0-5922-b9b1-bc75da1d3f14",
+      "target_id": "80a86af3-4a7d-5bbb-8fd7-7d2bd0ebef39",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\day 13.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 44,
+        "label": "Slide 44",
+        "section_title": "Trace, Span, Parent–Child",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "c0f23420-4cc1-5e4c-a3d2-a274acf72850",
+      "target_id": "c0f23420-4cc1-5e4c-a3d2-a274acf72850",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\day14.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 44,
+        "label": "Slide 44",
+        "section_title": "RAGAS Framework",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "e616b892-38db-5ea9-9b29-0ac6ca1f3cec",
+      "target_id": "e616b892-38db-5ea9-9b29-0ac6ca1f3cec",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\day14.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 18,
+        "label": "Slide 18",
+        "section_title": "RAG Metrics — Bức Tranh T oàn Cảnh",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "b6e8cff6-3823-54a2-8f13-255704983453",
+      "target_id": "b6e8cff6-3823-54a2-8f13-255704983453",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\day14.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 30,
+        "label": "Slide 30",
+        "section_title": "Adversarial Inputs — 7 Kiểu Cần T est",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "a715fda9-515d-5cae-a3bd-1b03a70403ed",
+      "target_id": "a715fda9-515d-5cae-a3bd-1b03a70403ed",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\day14.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 45,
+        "label": "Slide 45",
+        "section_title": "4 RAGAS Metrics",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "18438e91-32b6-5ee6-a19d-c90c9c845b7f",
+      "target_id": "18438e91-32b6-5ee6-a19d-c90c9c845b7f",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\day14.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 49,
+        "label": "Slide 49",
+        "section_title": "Diagnostic Flowchart — Score Thấp, Fix Ở Đâu?",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "1f136d64-248f-5474-9405-e8cd97d8ff0c",
+      "target_id": "1f136d64-248f-5474-9405-e8cd97d8ff0c",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\day14.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 62,
+        "label": "Slide 62",
+        "section_title": "Safety Eval — Adversarial T est Suite",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "5cbfbf5a-64c1-599a-ab0a-f466a5b45041",
+      "target_id": "5cbfbf5a-64c1-599a-ab0a-f466a5b45041",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide buổi 3.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 18,
+        "label": "Slide 18",
+        "section_title": "Memory: Short-term vs Long-term",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "55403b9f-5a3c-5359-aaac-4e5c776bf61d",
+      "target_id": "55403b9f-5a3c-5359-aaac-4e5c776bf61d",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\Day 1 - AI & LLM Foundation.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 53,
+        "label": "Slide 53",
+        "section_title": "Giải phẫu một agent: 5 bộ phận là một vòng lặp",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "3a5a32a3-adbe-5d40-866b-1b85fc1ef08e",
+      "target_id": "49877454-b611-54ca-8196-e467abc553db",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\DAY 11.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 58,
+        "label": "Slide 58",
+        "section_title": "3 Mô Hình HITL",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "70a83b3d-ad09-5cad-8f4c-f3ec19ac278f",
+      "target_id": "2e1c697a-eda5-5b3f-806c-da4c3f66a22d",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\DAY 11.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 59,
+        "label": "Slide 59",
+        "section_title": "Khi Nào Cần Human?",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "a8f844b0-7b57-5c24-9329-10165fcf267b",
+      "target_id": "8c28fa19-cf5c-565c-98f9-b1c30fec8c56",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\DAY 11.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 104,
+        "label": "Slide 104",
+        "section_title": "Trust UX Trong Thực Tế",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "dc6f69a5-aae1-56a0-b005-726610380510",
+      "target_id": "dc6f69a5-aae1-56a0-b005-726610380510",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day10.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 36,
+        "label": "Slide 36",
+        "section_title": "Demo: Trace Một RAG Call Với Langfuse",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "942e24dd-f256-5413-89f1-45a6dfc3ed96",
+      "target_id": "942e24dd-f256-5413-89f1-45a6dfc3ed96",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day10.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 37,
+        "label": "Slide 37",
+        "section_title": "Đo Faithfulness Với RAGAS & Vector Store Health",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "dd67e1d6-da97-5c63-b669-5799ee25d8c1",
+      "target_id": "dd67e1d6-da97-5c63-b669-5799ee25d8c1",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 16.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 25,
+        "label": "Slide 25",
+        "section_title": "Storage Strategy cho AI Systems",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "eb081049-ea39-5d11-8db5-5d7139a52f3a",
+      "target_id": "eb081049-ea39-5d11-8db5-5d7139a52f3a",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 16.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 28,
+        "label": "Slide 28",
+        "section_title": "Agent Infra: Chi Tiết Chọn Công Nghệ",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "5ecc9435-0518-54b5-af81-0954da9a7e8c",
+      "target_id": "5ecc9435-0518-54b5-af81-0954da9a7e8c",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 16.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 29,
+        "label": "Slide 29",
+        "section_title": "8 AI Serving Stack: vLLM, SGLang & More",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "c54b8f84-4b7c-5e47-b9c3-cab7162b9bf4",
+      "target_id": "64409c3a-addb-58f4-b8bc-3874647b4c6a",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 19.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 18,
+        "label": "Slide 18",
+        "section_title": "Hybrid Search: BM25 + Vector + RRF",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "995e871b-ce71-5b47-abc7-54b1be7e9c03",
+      "target_id": "b01380ea-d55a-59b3-8346-e59600327ce8",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 19.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 21,
+        "label": "Slide 21",
+        "section_title": "RAG Pipeline: End-to-End Flow",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "af0f1602-fa18-5e3c-affd-ab0f12ac3ce8",
+      "target_id": "48ee7bc1-e3e4-54d8-9b96-f6497ef1d0c5",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 19.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 26,
+        "label": "Slide 26",
+        "section_title": "GraphRAG: Khi Quan Hệ Quan Trọng Hơn Đoạn Văn",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "d8df6a99-afec-5772-9101-b1183aff9dc1",
+      "target_id": "3e4b7bea-dba4-5404-a3db-9d2518c60813",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 19.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 12,
+        "label": "Slide 12",
+        "section_title": "Vector DB So Sánh",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "8125d3e7-8165-5ea2-ab41-729ecfaa28ac",
+      "target_id": "f2a7648b-e29d-54bf-84df-46360022945a",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 19.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 13,
+        "label": "Slide 13",
+        "section_title": "FAISS & Pre-LLM Vector Applications",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "b1b13fcc-638b-5342-8ee9-fcc4a077b1cc",
+      "target_id": "c0efcc4c-48a3-5ca0-a719-8bf2631376b8",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 19.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 15,
+        "label": "Slide 15",
+        "section_title": "HNSW: Hierarchical Navigable Small World",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "2e53a31b-c549-5c5f-a79b-2275c2bea0a1",
+      "target_id": "f8c077c2-33f9-5c2b-ba7a-2aabc6b2e128",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 20.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 10,
+        "label": "Slide 10",
+        "section_title": "KV Cache & PagedAttention",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "f22da771-c78c-5b18-b296-aa9b0424afd3",
+      "target_id": "0cef80c8-9356-5a62-9fd7-f020030a9c49",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\SLIDE DAY07.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 41,
+        "label": "Slide 41",
+        "section_title": "Chunking & Chuẩn Bị Tài Liệu",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "52553dca-02e4-5e5a-878f-6ecb29ad4c83",
+      "target_id": "4a694fde-c3ae-56e5-b8ce-46375bd93b2f",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\SLIDE DAY07.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 51,
+        "label": "Slide 51",
+        "section_title": "Flat (Brute Force) — Baseline Bắt Buộc Phải Đo",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "8beba9a5-4f59-5ce8-b60d-3b9af0859117",
+      "target_id": "4034c3e1-531d-52d7-9000-e327abb0bc40",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\SLIDE DAY07.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 54,
+        "label": "Slide 54",
+        "section_title": "HNSW — Graph Nhiều Lớp Đằng Sau Hầu Hết Vector DB",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "57463e14-0186-5d8e-8e95-d9c673a08055",
+      "target_id": "f219afd7-689b-5362-9710-37cb1c097f9c",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\SLIDE DAY07.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 55,
+        "label": "Slide 55",
+        "section_title": "Recall vs Latency vs Memory — So Sánh Các Họ Index",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "e39d7d42-04d4-585d-b2e0-f809e044fb6e",
+      "target_id": "4f6a01f2-f015-56f5-a89c-0c41a4dd4e53",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\SLIDE DAY07.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 56,
+        "label": "Slide 56",
+        "section_title": "Cheatsheet: Chỉnh Tham Số ANN (Lưu Lại Slide Này)",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "bfbe31ba-abd5-5ca8-b3c6-2ee2cf03cff5",
+      "target_id": "ad7b3bce-82bd-528b-92e1-293284464be8",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\SLIDE DAY07.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 58,
+        "label": "Slide 58",
+        "section_title": "FAISS Là Một Library, Không Phải Database",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "d67640e0-122a-5532-a861-4a93c701d87c",
+      "target_id": "d67640e0-122a-5532-a861-4a93c701d87c",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\SLIDE DAY07.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 64,
+        "label": "Slide 64",
+        "section_title": "Metadata Filtering & Hybrid",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "dc86c2f3-feed-52af-aa0c-cb6cefca9064",
+      "target_id": "23cc397e-8173-5726-b3ca-5c68bf2eaa34",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\SLIDE DAY07.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 83,
+        "label": "Slide 83",
+        "section_title": "Tấn Công Qua Kênh Retrieval: Poisoning & Indirect Injection",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "f5461031-4984-5dd2-a497-c2d28a93be42",
+      "target_id": "f5461031-4984-5dd2-a497-c2d28a93be42",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day08.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 92,
+        "label": "Slide 92",
+        "section_title": "3.2 Prompt Engineering for Strict Grounding",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "156dd3dc-7d49-5fd5-a265-5866c21c6131",
+      "target_id": "156dd3dc-7d49-5fd5-a265-5866c21c6131",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day08.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 54,
+        "label": "Slide 54",
+        "section_title": "2.2 Dense vs. Sparse Retrieval",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "1b45856b-93d4-5da3-9509-b6f5a79aae4c",
+      "target_id": "1b45856b-93d4-5da3-9509-b6f5a79aae4c",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day08.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 55,
+        "label": "Slide 55",
+        "section_title": "Hai Trường Phái Tìm Kiếm Cốt Lõi",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "7c038496-2887-5717-ace4-b305697ee246",
+      "target_id": "7c038496-2887-5717-ace4-b305697ee246",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day08.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 63,
+        "label": "Slide 63",
+        "section_title": "2.3 Hybrid Search Deep Dive",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "51baf090-11e9-5a34-83ed-0b6674095dba",
+      "target_id": "12ae687b-864a-544d-885a-ceb1583457f4",
+      "score": 1280,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day08.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 66,
+        "label": "Slide 66",
+        "section_title": "Thuật Toán Giải Quyết: RRF (Reciprocal Rank Fusion)",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "e19857c8-3111-5197-a94f-57b1006722b5",
+      "target_id": "e19857c8-3111-5197-a94f-57b1006722b5",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day08.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 77,
+        "label": "Slide 77",
+        "section_title": "Hiệu Năng vs. Độ Chính Xác",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "88d9b904-3ebf-564e-86cf-84f01ee72fcd",
+      "target_id": "88d9b904-3ebf-564e-86cf-84f01ee72fcd",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day08.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 102,
+        "label": "Slide 102",
+        "section_title": "Inline Citations (Trích Dẫn Trong Dòng)",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "34f77842-b9c2-5783-81c4-923a6ac5f897",
+      "target_id": "34f77842-b9c2-5783-81c4-923a6ac5f897",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day08.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 113,
+        "label": "Slide 113",
+        "section_title": "4.1 The RAG Evaluation Triad",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "49b65b10-accd-595b-b39b-367c837249fd",
+      "target_id": "49b65b10-accd-595b-b39b-367c837249fd",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day08.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 115,
+        "label": "Slide 115",
+        "section_title": "Khung Đánh Giá RAGAS (RAG Assessment)",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "80cd6dde-bdf8-5afb-a313-bcd30b9c5403",
+      "target_id": "80cd6dde-bdf8-5afb-a313-bcd30b9c5403",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\slide day08.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 116,
+        "label": "Slide 116",
+        "section_title": "Context Recall (Độ Phủ Ngữ Cảnh)",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "b121e65a-3ab0-57ae-9541-a899536643ee",
+      "target_id": "b121e65a-3ab0-57ae-9541-a899536643ee",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 2 - day 27.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 7,
+        "label": "Slide 7",
+        "section_title": "Pipeline Monitoring vs Data Observability",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "3c3c4ab7-23cc-5813-a443-60fccb5f55d6",
+      "target_id": "0cfeae2e-684b-5dd1-884a-1cb34c70ee1b",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 16.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 18,
+        "label": "Slide 18",
+        "section_title": "Reflexion cải thiện đáng kể",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "c9ab58ae-f615-52ee-84c0-7a0eab47516f",
+      "target_id": "6144bab3-b09d-5b30-b52c-bd71e987e923",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 17.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 12,
+        "label": "Slide 12",
+        "section_title": "Short-term Memory — Context Window Management",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "c59733bd-fb17-52a0-b78d-74505e03c861",
+      "target_id": "c59733bd-fb17-52a0-b78d-74505e03c861",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 17.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 17,
+        "label": "Slide 17",
+        "section_title": "Episodic Memory — Learning từ Past Trajectories",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "191f1df2-e547-53fc-aa41-5e8af2531d68",
+      "target_id": "191f1df2-e547-53fc-aa41-5e8af2531d68",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 17.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 18,
+        "label": "Slide 18",
+        "section_title": "Semantic Memory — Vector DB cho Knowledge Retrieval",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "37422db2-294b-55dc-aefd-713055b25d34",
+      "target_id": "37422db2-294b-55dc-aefd-713055b25d34",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 17.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 6,
+        "label": "Slide 6",
+        "section_title": "Analogy: Bộ nhớ Agent giống não người",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "c7bff788-d0be-5fb0-9978-ecbf66dae8a4",
+      "target_id": "c7bff788-d0be-5fb0-9978-ecbf66dae8a4",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 18.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 10,
+        "label": "Slide 10",
+        "section_title": "Fix OFFLINE — Ingestion",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "52275ecd-b8ac-5a27-8974-d53e43d8ec4f",
+      "target_id": "52275ecd-b8ac-5a27-8974-d53e43d8ec4f",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 18.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 23,
+        "label": "Slide 23",
+        "section_title": "Fix ONLINE — Retrieval & Aug",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "711e564d-14fa-51fe-b56d-66ab8b8632c1",
+      "target_id": "5874d50d-b8e3-5e09-9580-e367eecbee4d",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 18.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 24,
+        "label": "Slide 24",
+        "section_title": "Hybrid Search — BM25 + Dense Vector Fusion",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "333fcd7c-ace5-577a-a624-5da1fffb6500",
+      "target_id": "fef8871a-5e47-51bf-82e3-c3be072cabf4",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 22.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 18,
+        "label": "Slide 18",
+        "section_title": "Alignment timeline 2022 → 2026 — từ PPO đến RLVR",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "a26a0b1f-bae3-501f-ad0e-8843fdef8062",
+      "target_id": "15257377-9ba6-5f91-8f22-c2102e7a90ce",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 22.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 23,
+        "label": "Slide 23",
+        "section_title": "GRPO — PPO không có value model",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "35c9e009-f451-56cb-be72-407b6e5a1eb8",
+      "target_id": "35c9e009-f451-56cb-be72-407b6e5a1eb8",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 22.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 11,
+        "label": "Slide 11",
+        "section_title": "DPO — Direct Preference Opti",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "4fac6c46-aa89-5b40-ab1d-cc3d64358ec0",
+      "target_id": "2ed3636d-f12e-56b6-b419-90b407cc23c3",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 23.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 2,
+        "label": "Slide 2",
+        "section_title": "HÃ Y SUY NGHĨ...",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "55a18c4e-4f7f-52a0-8d15-0c141fda1bd9",
+      "target_id": "9feb026d-c545-56ce-8330-5736c5030b21",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 23.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 13,
+        "label": "Slide 13",
+        "section_title": "State Machine: khái niệm cốt lõi",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "cb113eb2-9c5a-5af3-936a-5affd816e40f",
+      "target_id": "e0493d45-cd57-5353-a91d-61e0abfaaf10",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 23.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 19,
+        "label": "Slide 19",
+        "section_title": "Persistence & Time T ravel",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "f62efc80-1b8e-5b99-98e4-fcd6b3ce95bd",
+      "target_id": "f62efc80-1b8e-5b99-98e4-fcd6b3ce95bd",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 day 19.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 26,
+        "label": "Slide 26",
+        "section_title": "Pipeline GraphRAG Tiêu",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "ffd44b9e-f468-5502-8678-762eb52dff2d",
+      "target_id": "ffd44b9e-f468-5502-8678-762eb52dff2d",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 day 19.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 12,
+        "label": "Slide 12",
+        "section_title": "Knowledge Graph",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "54f5bbf8-ad86-50fd-832c-7c249ff1bfc4",
+      "target_id": "54f5bbf8-ad86-50fd-832c-7c249ff1bfc4",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\Multi Agent\\ontap\\out\\day-11.html",
+      "locator": {
+        "kind": "html_section",
+        "order": 21,
+        "heading": "▣ Cheat sheet ôn thi",
+        "section_id": "cheat",
+        "source_file": "day-11.html"
+      }
+    },
+    {
+      "source_id": "dc56e77c-fe6b-5f19-b51b-5a6fd62eb717",
+      "target_id": "360a11db-5464-5332-8aad-364a03c1b67c",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 25.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 18,
+        "label": "Slide 18",
+        "section_title": "Semantic cache flow",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "73c69027-0cba-560e-ab0f-1f94d9e23f7b",
+      "target_id": "b2584a4f-98c1-543a-9942-7ce692320fb3",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 25.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 22,
+        "label": "Slide 22",
+        "section_title": "SLI, SLO, SLA cho LLM agent",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "2aa5d5de-c0bd-58e5-93ca-011c2951c6d4",
+      "target_id": "dcc90d98-769d-57d5-b70d-ada71eb32010",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 25.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 24,
+        "label": "Slide 24",
+        "section_title": "Chaos testing: cố tình làm hỏng",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "bbd9c2c5-a12f-5ee9-90f9-c687956a9d6c",
+      "target_id": "43087f7a-1528-542a-a356-3a20c3a17080",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 25.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 4,
+        "label": "Slide 4",
+        "section_title": "Mục tiêu & timeline 2 giờ",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "3cb697bf-be80-5961-be4e-9537b58c42eb",
+      "target_id": "bfab2d0e-f243-54ab-9bc7-6597000683a9",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 25.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 10,
+        "label": "Slide 10",
+        "section_title": "Silent degradation: không lỗi nhưng chất lượng giảm",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "fee28308-52a9-5daa-9f5d-1c82e17133bf",
+      "target_id": "c9fd281d-b049-5b31-8138-9be844bad5e5",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 25.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 11,
+        "label": "Slide 11",
+        "section_title": "Circuit Breaker & Fallback",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "a4493d36-af27-5de7-9d9c-3a62d10307a9",
+      "target_id": "404d7f4d-fa03-518c-a4e5-a0f3c055d0a9",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 25.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 9,
+        "label": "Slide 9",
+        "section_title": "Case: cascading failure từ retry vô tội vạ",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "448e2003-d150-5c77-975e-c0c6da0f74a5",
+      "target_id": "7308c1ec-10f5-5581-82db-fceecfcf2d0f",
+      "score": 980,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 25.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 21,
+        "label": "Slide 21",
+        "section_title": "Observability & SLO",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "eede4ef2-9f19-55dd-b3aa-0c59516a68d5",
+      "target_id": "eede4ef2-9f19-55dd-b3aa-0c59516a68d5",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 26.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 12,
+        "label": "Slide 12",
+        "section_title": "Nguyên tắc: Cost of Interrupt vs Cost of Error",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "940bed7d-ac5e-5d89-93f9-746b291503c1",
+      "target_id": "940bed7d-ac5e-5d89-93f9-746b291503c1",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 26.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 5,
+        "label": "Slide 5",
+        "section_title": "Agent tự ý hành động — chuyện gì xảy ra?",
+        "extraction_method": "pdf-text-layer"
+      }
+    },
+    {
+      "source_id": "4090f69a-a543-5d78-861f-d1ac9cd0ed11",
+      "target_id": "4090f69a-a543-5d78-861f-d1ac9cd0ed11",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\Multi Agent\\ontap\\out\\track-3-day-25.html",
+      "locator": {
+        "kind": "html_section",
+        "order": 14,
+        "heading": "A–Z Từ điển thuật ngữ",
+        "section_id": "gloss",
+        "source_file": "track-3-day-25.html"
+      }
+    },
+    {
+      "source_id": "7c24ed09-58db-50e0-8c8f-dcd9b4d8eeff",
+      "target_id": "7c24ed09-58db-50e0-8c8f-dcd9b4d8eeff",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\Multi Agent\\ontap\\out\\track-3-day-19.html",
+      "locator": {
+        "kind": "html_section",
+        "order": 18,
+        "heading": "☰ Từ điển thuật ngữ",
+        "section_id": "gloss",
+        "source_file": "track-3-day-19.html"
+      }
+    },
+    {
+      "source_id": "bc44351a-a8df-5e1f-8fa8-81884b9bc7b6",
+      "target_id": "bc44351a-a8df-5e1f-8fa8-81884b9bc7b6",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\Multi Agent\\ontap\\out\\track-3-day-17.html",
+      "locator": {
+        "kind": "html_section",
+        "order": 10,
+        "heading": "08 Privacy, deletion & Lab",
+        "section_id": "c7",
+        "source_file": "track-3-day-17.html"
+      }
+    },
+    {
+      "source_id": "85237f6f-f2bb-5a5e-9c9b-517d785874f8",
+      "target_id": "85237f6f-f2bb-5a5e-9c9b-517d785874f8",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\Multi Agent\\ontap\\out\\track-3-day-17.html",
+      "locator": {
+        "kind": "html_section",
+        "order": 14,
+        "heading": "◆ Áp dụng vào SmartCheck AI",
+        "section_id": "apply",
+        "source_file": "track-3-day-17.html"
+      }
+    },
+    {
+      "source_id": "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+      "target_id": "26ce08ea-8a76-583a-9d3d-3c49930092a9",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\Multi Agent\\ontap\\out\\track-3-day-17.html",
+      "locator": {
+        "kind": "html_section",
+        "order": 16,
+        "heading": "▣ Cheat sheet ôn thi",
+        "section_id": "cheat",
+        "source_file": "track-3-day-17.html"
+      }
+    },
+    {
+      "source_id": "89ac7cce-6751-5726-b5b8-21bd23771eeb",
+      "target_id": "89ac7cce-6751-5726-b5b8-21bd23771eeb",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\Multi Agent\\ontap\\out\\track-3-day-17.html",
+      "locator": {
+        "kind": "html_section",
+        "order": 7,
+        "heading": "05 Semantic memory",
+        "section_id": "c4",
+        "source_file": "track-3-day-17.html"
+      }
+    },
+    {
+      "source_id": "965dc7d2-bc55-54df-974c-966274b8a969",
+      "target_id": "965dc7d2-bc55-54df-974c-966274b8a969",
+      "score": 1000,
+      "source_path": "C:\\Users\\banka\\Documents\\Multi Agent\\ontap\\out\\track-3-day-17.html",
+      "locator": {
+        "kind": "html_section",
+        "order": 8,
+        "heading": "06 Retrieval, decay & consolidation",
+        "section_id": "c5",
+        "source_file": "track-3-day-17.html"
+      }
+    },
+    {
+      "source_id": "3e65c8ae-84bd-5bec-af1a-70cba9ca9d0f",
+      "target_id": "d306ba80-dc90-50be-95f3-c0aee448ff68",
+      "score": 950,
+      "source_path": "C:\\Users\\banka\\Documents\\slide bài học\\track 3 - day 24.pdf",
+      "locator": {
+        "kind": "page",
+        "page": 26,
+        "label": "Slide 26",
+        "section_title": "■ L1 Smoke: 10 golden queries, format/schema check. Cost $0.05.",
+        "extraction_method": "pdf-text-layer"
+      }
+    }
+  ]
+}
